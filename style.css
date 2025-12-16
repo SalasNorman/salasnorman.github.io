@@ -40,16 +40,19 @@ body {
 .body {
   display: flex;
   flex: 1;
+  flex-wrap: wrap;
 }
 
 /* Sidebar */
 .sidebar {
   display: flex;
   flex-direction: column;
+  flex: 1 1;
+  min-width: 270px;
+  align-self: flex-start;
   align-items: center;
-  width: 400px;
   background: #1f1f1f;
-  padding-top: 50px;
+  padding: 50px 50px;
 }
 
 .sidebar img {
@@ -94,7 +97,8 @@ body {
 .main-content {
   display: flex;
   flex-direction: column;
-  flex: 1;
+  flex: 2 0 500px;
+  min-width: 500px;
   flex-wrap: wrap;
   background-color: #515151;
 }
@@ -104,13 +108,10 @@ body {
   flex-direction: column;
   flex: 1;
   background-color: #1f1f1f;
-  margin: 10px;
-}
-
-.card {
   padding: 10px 10px;
   margin: 20px;
 }
+
 .ed {
   max-height: 150px;
 }
