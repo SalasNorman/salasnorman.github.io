@@ -11,27 +11,28 @@
     />
   </head>
   <body>
+    <!-- Header -->
     <div class="header">
       <div class="logo">SalasNorman Porfolio</div>
       <div class="navbar">
-        <ul>
-          <li><a href="#">Home</a></li>
-          <li><a href="#">Resume</a></li>
+        <ul class="removeBullet">
           <li><a href="#">Projects</a></li>
-          <li><a href="#">Contacts</a></li>
+          <li><a href="#">Blog</a></li>
         </ul>
       </div>
     </div>
 
     <div class="body">
+      <!-- Sidebar -->
       <div class="sidebar">
         <img
           src="/images/profile-pic.jpg"
           alt="SalasNorman picture"
-          height="200 px"
+          height="200"
         />
-        <h1>Norman Salas</h1>
-        <ul class="contacts">
+        <h1 class="h1">Norman Salas</h1>
+        <p class="position">Web Developer | Machine Learning</p>
+        <ul class="contacts removeBullet">
           <li>
             <a
               href="mailto:s&#97;lasnorman015&#64;gma&#105;l&#46;com"
@@ -57,8 +58,8 @@
           </li>
         </ul>
 
-        <div class="card">
-          <h2>Skills</h2>
+        <div class="sidebar-card">
+          <h2 class="h2">Skills</h2>
           <div class="line"></div>
           <div>Programming Languages & Web Technologies:</div>
           <ul class="skills">
@@ -85,9 +86,11 @@
         </div>
       </div>
 
+      <!-- Main Content -->
       <div class="main-content">
+        <!-- Summary -->
         <div class="card">
-          <h2>Professional Summary</h2>
+          <h2 class="h2">Professional Summary</h2>
           <div class="line"></div>
           <p>
             Graduated with a Bachelor of Science in Computer Science with
@@ -97,29 +100,33 @@
           </p>
         </div>
 
-        <div class="card ed">
-          <h2>Education</h2>
+        <!-- Education -->
+        <div class="card">
+          <h2 class="h2">Education</h2>
           <div class="line"></div>
           <div class="row">
-            <span class="degree">Bachelor of Science in Computer Science</span>
+            <span class="title">Bachelor of Science in Computer Science</span>
             <span class="year">2018–2022</span>
           </div>
-          <span class="dept">Biliran Province State University(BIPSU)</span>
-          <ul class="list">
+          <span class="title-desc"
+            >Biliran Province State University(BIPSU)</span
+          >
+          <ul class="summary">
             <li>GPA: 1.72</li>
             <li>Passer of the ICT Proficiency Diagnostic Exam</li>
           </ul>
         </div>
 
+        <!-- Work Experience -->
         <div class="card">
-          <h2>Work Experience</h2>
+          <h2 class="h2">Work Experience</h2>
           <div class="line"></div>
-          <div class="row">
-            <span class="degree">AI.clife</span>
+          <div class="row-wrapper">
+            <span class="title">AI.clife</span>
             <span class="year">August 2024 - Present</span>
           </div>
           <span class="job">Assistant</span>
-          <ul class="list">
+          <ul class="summary">
             <li>
               Facilitated in organizing the Machine Learning workshop and Zoom
               meeting.
@@ -138,13 +145,12 @@
             <li>Provided general household assistance as needed.</li>
           </ul>
 
-          <div class="space"></div>
-          <span class="degree">Self-Employed</span>
+          <span class="title">Self-Employed</span>
           <span class="year">August 2024 - August 2024</span>
-          <div class="row">
+          <div class="row-wrapper">
             <span class="job">Food Vendor</span>
           </div>
-          <ul class="list">
+          <ul class="summary">
             <li>
               Prepared and sold homemade snacks such as puto cheese, banana cue
               and pop rice, ensuring quality.
@@ -159,13 +165,12 @@
             </li>
           </ul>
 
-          <div class="space"></div>
-          <span class="degree">RAPID Program</span>
+          <span class="title">RAPID Program</span>
           <span class="year">April 2019 - June 2019</span>
-          <div class="row">
+          <div class="row-wrapper">
             <span class="job">Enumerator</span>
           </div>
-          <ul class="list">
+          <ul class="summary">
             <li>
               One-week workshop training, enhancing interviewer skills for
               efficient data collection.
@@ -176,15 +181,14 @@
             </li>
           </ul>
 
-          <div class="space"></div>
-          <div class="row">
-            <span class="degree">Culaba LGU</span>
+          <div class="row-wrapper">
+            <span class="title">Culaba LGU</span>
             <span class="year">1 month</span>
           </div>
-          <div class="row">
+          <div class="row-wrapper">
             <span class="job">Summer Job / Assistant</span>
           </div>
-          <ul class="list">
+          <ul class="summary">
             <li>
               Assisted with office errands such as delivering documents and
               organizing files.
@@ -192,15 +196,14 @@
             <li>Helped maintain a neat and clean workplace.</li>
           </ul>
 
-          <div class="space"></div>
-          <div class="row">
-            <span class="degree">Culaba BFP</span>
+          <div class="row-wrapper">
+            <span class="title">Culaba BFP</span>
             <span class="year">Dec 11 - 29 2017</span>
           </div>
-          <div class="row">
+          <div class="row-wrapper">
             <span class="job">Senior High School / On-the-Job Training</span>
           </div>
-          <ul class="list">
+          <ul class="summary">
             <li>
               Assisted with office errands such as delivering documents and
               organizing files.
@@ -211,6 +214,6 @@
       </div>
     </div>
 
-    <div class="footer">SalasNorman</div>
+    <div class="footer">©️ SalasNorman</div>
   </body>
 </html>

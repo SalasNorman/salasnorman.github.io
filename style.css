@@ -8,29 +8,34 @@ body {
   color: white;
 }
 
+a {
+  text-decoration: none;
+  color: white;
+}
+
+.removeBullet {
+  list-style: none;
+}
+
+.h2 {
+  margin: 0;
+}
+
 /* Header */
 .header {
   display: flex;
   justify-content: space-between;
   align-items: center;
   background-color: #393939;
-  padding: 12px;
+  padding: 12px 24px;
 }
+
 .logo {
   font-size: 24px;
   font-weight: 800;
 }
 
-.header li {
-  list-style: none;
-}
-
-.header a {
-  text-decoration: none;
-  color: white;
-}
-
-.header ul {
+.header .removeBullet {
   display: flex;
   padding: 0;
   gap: 20px;
@@ -65,24 +70,21 @@ body {
   width: 200px;
 }
 
-.sidebar h1 {
+.h1 {
   font-size: 40px;
   margin: 0;
 }
+.position {
+  margin: 0;
+}
 
-.sidebar li a {
+.sidebar a {
   display: flex;
   flex-direction: column;
-  text-decoration: none;
   text-align: center;
-  color: white;
 }
 
-.sidebar .contacts li {
-  list-style: none;
-}
-
-.sidebar .contacts li i {
+.sidebar i {
   font-size: 34px;
 }
 
@@ -90,18 +92,16 @@ body {
   display: flex;
   gap: 24px;
   padding: 0;
-  padding-top: 24px;
+  padding-top: 20px;
+  padding-bottom: 50px;
 }
 
-.sidebar .skills {
+.sidebar-card .skills {
   display: flex;
   flex-direction: column;
   margin: 2px 0;
 }
 
-.sidebar .card div {
-  margin-top: 12px;
-}
 
 /* Main Content */
 .main-content {
@@ -111,6 +111,8 @@ body {
   min-width: 500px;
   flex-wrap: wrap;
   background-color: #515151;
+  gap: 20px;
+  padding: 20px 0;
 }
 
 .card {
@@ -119,11 +121,7 @@ body {
   flex: 1;
   background-color: #1f1f1f;
   padding: 10px 10px;
-  margin: 20px;
-}
-
-.ed {
-  max-height: 150px;
+  margin: 0 20px;
 }
 
 .card .row {
@@ -131,19 +129,18 @@ body {
   justify-content: space-between;
 }
 
-.card .space{
-  margin: 12px 0;
-}
-
-.card h2 {
-  margin: 0;
-}
-.card .line {
+.line {
   border: 1px solid #a6a6a6;
   margin: 8px 0;
 }
-.card .list {
-  margin: 8px 0;
+
+.card .summary {
+  margin: 0;
+  margin-top: 8px;
+}
+
+.card p{
+  margin: 0;
 }
 
 /* Footer */
