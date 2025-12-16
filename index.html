@@ -4,58 +4,94 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>SalasNorman Porfolio</title>
+    <link rel="stylesheet" href="style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css"
+    />
   </head>
   <body>
-    <div class="aboutMe-section">
-      <img src="" alt="" />
-      <ul>
+    <div class="header">
+      <div class="logo">SalasNorman Porfolio</div>
+      <div class="navbar">
+        <ul>
+          <li><a href="#">Home</a></li>
+          <li><a href="#">Resume</a></li>
+          <li><a href="#">Projects</a></li>
+          <li><a href="#">Contacts</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="body">
+      <div class="sidebar">
+        <img
+          src="/images/profile-pic.jpg"
+          alt="SalasNorman picture"
+          height="200 px"
+        />
         <h1>Norman Salas</h1>
-        <li>Github</li>
-        <li>Linkedin</li>
-        <li>Email</li>
-      </ul>
-      <div class="position"></div>
-      <p class="summary"></p>
+        <ul>
+          <li>
+            <a href="#"><i class="bi bi-envelope-at-fill"></i>Email</a>
+          </li>
+          <li>
+            <a href="#"><i class="bi bi-github"></i>Github</a>
+          </li>
+          <li>
+            <a href="#"><i class="bi bi-linkedin"></i>Linkedin</a>
+          </li>
+        </ul>
+      </div>
+
+      <div class="main-content">
+        <div class="card ed">
+          <h2>Education</h2>
+          <div class="line"></div>
+          <div class="row">
+            <span class="degree">Bachelor of Science in Computer Science</span>
+            <span class="year">2018–2022</span>
+          </div>
+          <span class="dept">Biliran Province State University(BIPSU)</span>
+          <ul class="list">
+            <li>GPA: 1.72</li>
+            <li>Passer of the ICT Proficiency Diagnostic Exam</li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <h2>Work Experience</h2>
+          <div class="line"></div>
+          <div class="row">
+            <span class="degree">AI.clife</span>
+            <span class="year">August 2024 - Present</span>
+          </div>
+          <div class="row">
+            <span class="job">Assistant</span>
+            <span class="dept">Education / Academic Research</span>
+          </div>
+          <ul class="list">
+            <li>
+              Facilitated in organizing the Machine Learning workshop and Zoom
+              meeting.
+            </li>
+            <li>
+              Facilitated sessions and supported participants with technical
+              setup and activities.
+            </li>
+            <li>
+              Designed event posters, brochures, and other promotional
+              materials.
+            </li>
+            <li>
+              Edited workshop and Zoom session recordings using DaVinci Resolve.
+            </li>
+            <li>Provided general household assistance as needed.</li>
+          </ul>
+        </div>
+      </div>
     </div>
 
-    <div class="education-section">
-      <h2>Education</h2>
-      <h3></h3>
-      <p></p>
-    </div>
-
-    <div class="experience-section">
-      <h2>Experience</h2>
-      <h3></h3>
-      <p></p>
-    </div>
-
-    <div class="skills-section">
-      <h2>Skills</h2>
-      <ul>
-        <li></li>
-        <li></li>
-        <li></li>
-        <li></li>
-        <li></li>
-      </ul>
-      <h2>Tech Stack</h2>
-      <ul>
-        <li></li>
-        <li></li>
-        <li></li>
-        <li></li>
-        <li></li>
-      </ul>
-    </div>
-    <div class="project-section">
-      <h2>Projects</h2>
-    </div>
-
-    <div class="certificate-section">
-      <h2>Certificate</h2>
-    </div>
-    
-    <div class="footer">SalasNorman</div>
+    <div class="footer">The Odin Project ❤️</div>
   </body>
 </html>
