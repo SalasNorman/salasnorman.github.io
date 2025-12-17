@@ -107,8 +107,8 @@ a {
 .main-content {
   display: flex;
   flex-direction: column;
-  flex: 2 0 500px;
-  min-width: 500px;
+  flex: 2 0;
+  min-width: 100%;
   flex-wrap: wrap;
   background-color: #515151;
   gap: 20px;
