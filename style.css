@@ -124,7 +124,7 @@ a {
   margin: 0 20px;
 }
 
-.card .row {
+.card .row-wrapper {
   display: flex;
   justify-content: space-between;
 }
