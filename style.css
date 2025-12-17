@@ -136,7 +136,8 @@ a {
 
 .card .summary {
   margin: 0;
-  margin-top: 8px;
+  margin-top: 4px;
+  margin-bottom: 12px;
 }
 
 .card p{
