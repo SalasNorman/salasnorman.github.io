@@ -106,7 +106,7 @@ a {
 .main-content {
   display: flex;
   flex-direction: column;
-  flex: 2 0;
+  flex: 2 1;
   min-width: 50%;
   flex-wrap: wrap;
   background-color: #515151;
