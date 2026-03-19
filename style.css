@@ -4,6 +4,7 @@ body {
   min-height: 100vh;
   margin: 0;
   font-family: system-ui, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  letter-spacing: 1px;
   background-color: #1f1f1f;
   color: white;
 }
@@ -19,6 +20,10 @@ a {
 
 .h2 {
   margin: 0;
+}
+
+.spacer {
+  padding: 8px;
 }
 
 /* Header */
