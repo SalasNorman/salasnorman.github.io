@@ -1,9 +1,13 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>SalasNorman Porfolio</title>
+    <meta
+      name="description"
+      content="Norman Salas - Web Developer and Machine Learning enthusiast. View my portfolio, projects, and skills."
+    />
+    <title>SalasNorman Portfolio</title>
     <link rel="stylesheet" href="style.css" />
     <link
       rel="stylesheet"
@@ -12,37 +16,38 @@
   </head>
   <body>
     <!-- Header -->
-    <div class="header">
-      <div class="logo">SalasNorman Porfolio</div>
-      <div class="navbar">
+    <header class="header">
+      <div class="logo">SalasNorman Portfolio</div>
+      <nav class="navbar">
         <ul class="removeBullet">
-          <li><a href="https://salasnorman.github.io/rock-paper-scissors/index.html">Projects</a></li>
-          <li><a href="#">Blog</a></li>
+          <!-- 
+          TODO: add pages
+          <li><a href="#">Projects</a></li>
+          <li><a href="#">Blog</a></li> 
+          -->
         </ul>
-      </div>
-    </div>
+      </nav>
+    </header>
 
     <div class="body">
       <!-- Sidebar -->
       <div class="sidebar">
         <img
-          src="/images/profile-pic.jpg"
+          src="images/profile-pic.jpg"
           alt="SalasNorman picture"
-          height="200" width="200"
+          height="200"
+          width="200"
         />
         <h1 class="h1">Norman Salas</h1>
         <p class="position">Web Developer | Machine Learning</p>
         <ul class="contacts removeBullet">
           <li>
-            <a
-              href="mailto:salasnorman015@gmail.com"
-              rel="nofollow"
+            <a href="mailto:salasnorman015@gmail.com" rel="nofollow"
               ><i class="bi bi-envelope-at-fill"></i>Email</a
             >
           </li>
           <li>
-            <a
-              href="https://github.com/SalasNorman/"
+            <a href="https://github.com/SalasNorman/"
               ><i class="bi bi-github"></i>Github</a
             >
           </li>
@@ -61,7 +66,7 @@
           <div class="line"></div>
           <div>Programming Languages & Web Technologies:</div>
           <ul class="skills">
-            <li>Python, Javascript, C, VB.net</li>
+            <li>Ruby, Python, Javascript, C, VB.net</li>
             <li>HTML, CSS</li>
           </ul>
 
@@ -85,7 +90,7 @@
       </div>
 
       <!-- Main Content -->
-      <div class="main-content">
+      <main class="main-content">
         <!-- Summary -->
         <div class="card">
           <h2 class="h2">Professional Summary</h2>
@@ -209,9 +214,9 @@
             <li>Helped maintain a neat and clean workplace.</li>
           </ul>
         </div>
-      </div>
+      </main>
     </div>
 
-    <div class="footer">©️ SalasNorman</div>
+    <footer class="footer">©️ SalasNorman</footer>
   </body>
 </html>
