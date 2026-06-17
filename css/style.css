@@ -5,6 +5,13 @@
   font-style: normal;
 }
 
+@font-face {
+  font-family: "IBM Plex Mono";
+  src: url("../assets/fonts/IBMPlexMono-Bold.ttf") format("truetype");
+  font-weight: 700;
+  font-style: normal;
+}
+
 body {
   display: flex;
   flex-direction: column;
@@ -29,6 +36,7 @@ a {
 
 .h2 {
   margin: 0;
+  font-weight: 700;
 }
 
 .spacer {
@@ -46,7 +54,7 @@ a {
 
 .logo {
   font-size: 24px;
-  font-weight: 800;
+  font-weight: 700;
 }
 
 .header .removeBullet {
@@ -86,6 +94,7 @@ a {
 .h1 {
   font-size: 40px;
   margin: 0;
+  font-weight: 700;
 }
 .position {
   margin: 0;
