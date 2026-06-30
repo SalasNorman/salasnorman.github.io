@@ -183,6 +183,7 @@ a:hover {
   text-decoration: none;
 }
 
+/* Resume page */
 .resume__container {
   border: 1px solid var(--divider);
   border-radius: 8px;
@@ -190,7 +191,19 @@ a:hover {
   margin-bottom: 1.5rem;
 }
 
-/* Resume page */
+.resume__skill-group {
+  margin-bottom: 0.75rem;
+}
+
+.resume__skill-label {
+  font-weight: 700;
+  font-size: 0.85rem;
+}
+
+.resume__skill-items {
+  font-size: 0.85rem;
+  color: var(--text-subtle);
+}
 .resume__section {
   margin-bottom: 2rem;
 }
