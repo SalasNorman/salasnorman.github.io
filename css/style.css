@@ -165,8 +165,17 @@ a:hover {
 }
 
 .home__contacts a {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.25rem;
+  font-size: 0.8rem;
   color: var(--text-subtle);
   transition: color 0.2s;
+}
+
+.home__contacts a i {
+  font-size: 1.4rem;
 }
 
 .home__contacts a:hover {
