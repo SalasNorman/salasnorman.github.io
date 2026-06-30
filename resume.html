@@ -19,11 +19,16 @@
     <header class="header">
       <a href="index.html" class="header__logo">SalasNorman</a>
       <nav class="header__nav">
-        <a href="index.html">Home</a>
-        <a href="resume.html" class="active">Resume</a>
-        <a href="projects.html">Projects</a>
+        <div class="header__nav-links">
+          <a href="index.html">Home</a>
+          <a href="resume.html" class="active">Resume</a>
+          <a href="projects.html">Projects</a>
+        </div>
         <button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme">
           <i id="toggle-icon" class="bi bi-sun"></i>
+        </button>
+        <button class="hamburger" id="hamburger" aria-label="Menu">
+          <i class="bi bi-list"></i>
         </button>
       </nav>
     </header>
@@ -135,27 +140,52 @@
 
             <div class="resume__skill-group">
               <span class="resume__skill-label">Computer:</span>
-              <span class="resume__skill-items">OpenCode AI coding agent, Windows and Ubuntu System Installation, Microsoft Office (Word, Excel) and Google Sheets, Smartphone troubleshooting</span>
+              <ul class="resume__skill-list">
+                <li>OpenCode AI coding agent for code assistance and development tasks</li>
+                <li>Windows and Ubuntu System Installation</li>
+                <li>Microsoft Office (Word, Excel) and Google Sheets</li>
+                <li>Smartphone troubleshooting (system diagnostics, connectivity issues, app errors, basic software repair)</li>
+              </ul>
             </div>
 
             <div class="resume__skill-group">
-              <span class="resume__skill-label">Programming Languages:</span>
-              <span class="resume__skill-items">Python, JavaScript, C, VB.NET, Ruby, HTML, CSS</span>
+              <span class="resume__skill-label">Programming Languages &amp; Web Technologies:</span>
+              <ul class="resume__skill-list">
+                <li>Python, JavaScript, C, VB.NET, Ruby</li>
+                <li>HTML, CSS</li>
+              </ul>
             </div>
 
             <div class="resume__skill-group">
-              <span class="resume__skill-label">Frameworks &amp; Database:</span>
-              <span class="resume__skill-items">Flask, MySQL, SQLite</span>
+              <span class="resume__skill-label">Frameworks &amp; Libraries:</span>
+              <ul class="resume__skill-list">
+                <li>Flask</li>
+              </ul>
+            </div>
+
+            <div class="resume__skill-group">
+              <span class="resume__skill-label">Database:</span>
+              <ul class="resume__skill-list">
+                <li>MySQL, SQLite</li>
+              </ul>
             </div>
 
             <div class="resume__skill-group">
               <span class="resume__skill-label">Tools &amp; Platform:</span>
-              <span class="resume__skill-items">Git, Visual Studio Code</span>
+              <ul class="resume__skill-list">
+                <li>Git</li>
+                <li>Visual Studio Code</li>
+              </ul>
             </div>
 
             <div class="resume__skill-group">
-              <span class="resume__skill-label">Other:</span>
-              <span class="resume__skill-items">Basic baking, hand-sewing, basic drawing, animation, video editing</span>
+              <span class="resume__skill-label">Other Skills:</span>
+              <ul class="resume__skill-list">
+                <li>Basic baking</li>
+                <li>Hand-sewing</li>
+                <li>Basic drawing and animation</li>
+                <li>Video editing</li>
+              </ul>
             </div>
           </section>
         </div>

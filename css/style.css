@@ -68,6 +68,7 @@ a:hover {
   padding: 1rem 2rem;
   background: var(--header-bg);
   border-bottom: 1px solid var(--divider);
+  position: relative;
 }
 
 .header__logo {
@@ -79,15 +80,21 @@ a:hover {
 .header__nav {
   display: flex;
   align-items: center;
+  gap: 0.75rem;
+}
+
+.header__nav-links {
+  display: flex;
+  align-items: center;
   gap: 1.25rem;
 }
 
-.header__nav a {
+.header__nav-links a {
   font-size: 0.85rem;
   color: var(--text-subtle);
 }
 
-.header__nav a.active {
+.header__nav-links a.active {
   color: var(--accent);
   font-weight: 700;
 }
@@ -204,6 +211,17 @@ a:hover {
   font-size: 0.85rem;
   color: var(--text-subtle);
 }
+
+.resume__skill-list {
+  margin: 0.25rem 0 0.75rem 1.25rem;
+  padding: 0;
+  font-size: 0.85rem;
+  color: var(--text-subtle);
+}
+
+.resume__skill-list li {
+  margin-bottom: 0.15rem;
+}
 .resume__section {
   margin-bottom: 2rem;
 }
@@ -297,4 +315,87 @@ a:hover {
   font-size: 0.8rem;
   color: var(--text-subtle);
   border-top: 1px solid var(--divider);
+}
+
+/* Hamburger */
+.hamburger {
+  display: none;
+  background: none;
+  border: 1px solid var(--divider);
+  border-radius: 6px;
+  padding: 4px 8px;
+  cursor: pointer;
+  color: var(--text-subtle);
+  font-size: 1.1rem;
+  line-height: 1;
+  transition: border-color 0.2s;
+}
+
+.hamburger:hover {
+  border-color: var(--accent);
+}
+
+/* Mobile */
+@media (max-width: 600px) {
+  .header {
+    padding: 0.75rem 1rem;
+  }
+
+  .header__nav {
+    gap: 0.5rem;
+  }
+
+  .header__nav-links {
+    display: none;
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background: var(--header-bg);
+    border: 1px solid var(--divider);
+    border-radius: 8px;
+    padding: 0.5rem;
+    flex-direction: column;
+    gap: 0.25rem;
+    min-width: 140px;
+    z-index: 100;
+  }
+
+  .nav-open .header__nav-links {
+    display: flex;
+  }
+
+  .header__nav-links a {
+    display: block;
+    padding: 0.5rem 0.75rem;
+    border-radius: 4px;
+  }
+
+  .header__nav-links a:hover {
+    background: var(--divider);
+  }
+
+  .hamburger {
+    display: block;
+  }
+
+  .layout {
+    padding: 2rem 1rem;
+  }
+
+  .home__name {
+    font-size: 1.5rem;
+  }
+
+  .resume__container {
+    padding: 1rem;
+  }
+
+  .resume__entry-header {
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+
+  .projects__placeholder {
+    padding: 2rem 1rem;
+  }
 }

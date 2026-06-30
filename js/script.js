@@ -1,6 +1,8 @@
 (function () {
   const themeToggle = document.getElementById('theme-toggle');
   const toggleIcon = document.getElementById('toggle-icon');
+  const hamburger = document.getElementById('hamburger');
+  const header = document.querySelector('.header');
 
   function setTheme(theme) {
     document.body.classList.toggle('light', theme === 'light');
@@ -23,6 +25,12 @@
     themeToggle.addEventListener('click', function () {
       const next = document.body.classList.contains('light') ? 'dark' : 'light';
       setTheme(next);
+    });
+  }
+
+  if (hamburger && header) {
+    hamburger.addEventListener('click', function () {
+      header.classList.toggle('nav-open');
     });
   }
 })();
