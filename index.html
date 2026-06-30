@@ -7,7 +7,7 @@
       name="description"
       content="Norman Salas - Web Developer and Machine Learning enthusiast. View my portfolio, projects, and skills."
     />
-    <title>SalasNorman Portfolio</title>
+    <title>Norman Salas</title>
     <link rel="icon" type="image/png" href="assets/images/favicon.png" />
     <link rel="stylesheet" href="css/style.css" />
     <link
@@ -16,228 +16,58 @@
     />
   </head>
   <body>
-    <!-- Header -->
     <header class="header">
-      <div class="logo">SalasNorman Portfolio</div>
-      <nav class="navbar">
-        <ul class="removeBullet">
-          <!-- 
-          TODO: add pages
-          <li><a href="#">Projects</a></li>
-          <li><a href="#">Blog</a></li> 
-          -->
-        </ul>
+      <a href="index.html" class="header__logo">SalasNorman</a>
+      <nav class="header__nav">
+        <a href="index.html" class="active">Home</a>
+        <a href="resume.html">Resume</a>
+        <a href="projects.html">Projects</a>
+        <button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme">
+          <i id="toggle-icon" class="bi bi-sun"></i>
+        </button>
       </nav>
     </header>
 
-    <div class="body">
-      <!-- Sidebar -->
-      <div class="sidebar">
-        <img
-          src="assets/images/profile-pic.jpg"
-          alt="SalasNorman picture"
-          height="200"
-          width="200"
-        />
-        <h1 class="h1">Norman Salas</h1>
-        <p class="position">Web Developer | Artist</p>
-        <ul class="contacts removeBullet">
-          <li>
-            <a href="mailto:salasnorman015@gmail.com" rel="nofollow"
-              ><i class="bi bi-envelope-at-fill"></i>Email</a
-            >
-          </li>
-          <li>
-            <a href="https://github.com/SalasNorman/"
-              ><i class="bi bi-github"></i>Github</a
-            >
-          </li>
-          <li>
+    <div class="layout">
+      <div class="layout__inner">
+        <section class="home">
+          <img
+            class="home__avatar"
+            src="assets/images/profile-pic.jpg"
+            alt="Norman Salas"
+            height="110"
+            width="110"
+          />
+          <h1 class="home__name">Norman Salas</h1>
+          <p class="home__title">Web Developer | Artist</p>
+          <p class="home__bio">
+            Graduated with a Bachelor of Science in Computer Science with
+            foundational knowledge in programming, especially in web development
+            and machine learning. Experience handling data through roles as an
+            Enumerator and Research Assistant. Additional experience in graphic
+            design, animation, video editing, and social media management.
+          </p>
+          <div class="home__contacts">
+            <a href="mailto:salasnorman015@gmail.com" aria-label="Email">
+              <i class="bi bi-envelope-at-fill"></i>
+            </a>
+            <a href="https://github.com/SalasNorman/" aria-label="GitHub">
+              <i class="bi bi-github"></i>
+            </a>
             <a
               href="https://www.linkedin.com/in/salasnorman/"
               rel="noopener"
               target="_blank"
-              ><i class="bi bi-linkedin"></i>Linkedin</a
+              aria-label="LinkedIn"
             >
-          </li>
-        </ul>
-
-        <div class="sidebar-card">
-          <h2 class="h2">Skills</h2>
-          <div class="line"></div>
-          <div>Programming Languages & Web Technologies:</div>
-          <ul class="skills">
-            <li>Ruby, Python, Javascript, C, VB.net</li>
-            <li>HTML, CSS</li>
-          </ul>
-
-          <div>Frameworks & Libraries:</div>
-          <ul class="skills">
-            <li>Flask</li>
-          </ul>
-
-          <div>Tools and Platform:</div>
-          <ul class="skills">
-            <li>Git</li>
-            <li>Visual Code</li>
-          </ul>
-
-          <div>Computer Skills:</div>
-          <ul class="skills">
-            <li>Windows and Ubuntu System Installation</li>
-            <li>Knowledge of MS Word / Excel / Google Sheets</li>
-          </ul>
-
-          <div>Other Skills:</div>
-          <ul class="skills">
-            <li>Semi-Realistic Portrait Drawing</li>
-            <li>Animation</li>
-          </ul>
-
-          <div class="spacer"></div>
-          <h2 class="h2">Language</h2>
-          <div class="line"></div>
-          <ul>
-            <li>Waray</li>
-            <li>Tagalog</li>
-            <li>English</li>
-          </ul>
-        </div>
+              <i class="bi bi-linkedin"></i>
+            </a>
+          </div>
+        </section>
       </div>
-
-      <!-- Main Content -->
-      <main class="main-content">
-        <!-- Summary -->
-        <div class="card">
-          <h2 class="h2">Professional Summary</h2>
-          <div class="line"></div>
-          <p>
-            Graduated with a Bachelor of Science in Computer Science with
-            foundational knowledge in programming, especially in web development
-            and machine learning.
-            <br />
-            Experience handling data through roles as an Enumerator (data
-            collection) and Research Assistant (data cleaning and correction).
-            Additional experience in graphic design, animation, video editing,
-            and social media management. Seeking an entry-level role to apply my
-            technical and data skills.
-          </p>
-        </div>
-
-        <!-- Education -->
-        <div class="card">
-          <h2 class="h2">Education</h2>
-          <div class="line"></div>
-          <div class="row">
-            <span class="title">Bachelor of Science in Computer Science</span>
-            <span class="year">2018–2022</span>
-          </div>
-          <span class="title-desc"
-            >Biliran Province State University(BIPSU)</span
-          >
-          <ul class="summary">
-            <li>GPA: 1.72</li>
-            <li>Passer of the ICT Proficiency Diagnostic Exam</li>
-          </ul>
-        </div>
-
-        <!-- Work Experience -->
-        <div class="card">
-          <h2 class="h2">Work Experience</h2>
-          <div class="line"></div>
-          <div class="row-wrapper">
-            <span class="title">AI.clife</span>
-            <span class="year">August 2024 - Present</span>
-          </div>
-          <span class="job">Assistant</span>
-          <ul class="summary">
-            <li>
-              Facilitated in organizing the Machine Learning workshop and Zoom
-              meeting.
-            </li>
-            <li>
-              Facilitated sessions and supported participants with technical
-              setup and activities.
-            </li>
-            <li>
-              Designed event posters, brochures, and other promotional
-              materials.
-            </li>
-            <li>
-              Edited workshop and Zoom session recordings using DaVinci Resolve.
-            </li>
-            <li>Provided general household assistance as needed.</li>
-          </ul>
-
-          <div class="row-wrapper">
-            <span class="title">Self-Employed</span>
-            <span class="year">August 2024 - August 2024</span>
-          </div>
-          <span class="job">Food Vendor</span>
-          <ul class="summary">
-            <li>
-              Prepared and sold homemade snacks such as puto cheese, banana cue
-              and pop rice, ensuring quality.
-            </li>
-            <li>
-              Managed orders, deliveries, and customer relationships, driving
-              repeat business.
-            </li>
-            <li>
-              Promoted products within the community, increasing brand awareness
-              and sales.
-            </li>
-          </ul>
-
-          <div class="row-wrapper">
-            <span class="title">RAPID Program</span>
-            <span class="year">April 2019 - June 2019</span>
-          </div>
-          <span class="job">Enumerator</span>
-          <ul class="summary">
-            <li>
-              One-week workshop training, enhancing interviewer skills for
-              efficient data collection.
-            </li>
-            <li>
-              Implemented interviewing techniques to reduce interview time,
-              which would last a maximum of 2 hours per household.
-            </li>
-          </ul>
-
-          <div class="row-wrapper">
-            <span class="title">Culaba LGU</span>
-            <span class="year">1 month</span>
-          </div>
-          <div class="row-wrapper">
-            <span class="job">Summer Job / Assistant</span>
-          </div>
-          <ul class="summary">
-            <li>
-              Assisted with office errands such as delivering documents and
-              organizing files.
-            </li>
-            <li>Helped maintain a neat and clean workplace.</li>
-          </ul>
-
-          <div class="row-wrapper">
-            <span class="title">Culaba BFP</span>
-            <span class="year">Dec 11 - 29 2017</span>
-          </div>
-          <div class="row-wrapper">
-            <span class="job">Senior High School / On-the-Job Training</span>
-          </div>
-          <ul class="summary">
-            <li>
-              Assisted with office errands such as delivering documents and
-              organizing files.
-            </li>
-            <li>Helped maintain a neat and clean workplace.</li>
-          </ul>
-        </div>
-      </main>
     </div>
 
-    <footer class="footer">©️ SalasNorman</footer>
+    <footer class="footer">&copy; SalasNorman</footer>
+    <script src="js/script.js"></script>
   </body>
 </html>
