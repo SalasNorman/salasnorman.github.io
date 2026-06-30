@@ -183,6 +183,13 @@ a:hover {
   text-decoration: none;
 }
 
+.resume__container {
+  border: 1px solid var(--divider);
+  border-radius: 8px;
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
 /* Resume page */
 .resume__section {
   margin-bottom: 2rem;
