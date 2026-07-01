@@ -369,6 +369,13 @@ a:hover {
   text-decoration: none;
 }
 
+.project__btn-icon {
+  width: 18px;
+  height: 18px;
+  vertical-align: middle;
+  margin-right: 0.3rem;
+}
+
 /* Divider */
 .divider {
   border: none;
