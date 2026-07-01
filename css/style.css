@@ -377,6 +377,44 @@ a:hover {
   text-decoration: none;
 }
 
+.project__demo-btn {
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+}
+
+.project__chevron {
+  font-size: 0.7rem;
+  transition: transform 0.2s;
+}
+
+.project__chevron.open {
+  transform: rotate(180deg);
+}
+
+.project__demo-list {
+  display: none;
+  margin-top: 0.75rem;
+  border-top: 1px solid var(--divider);
+  padding-top: 0.75rem;
+}
+
+.project__demo-list.open {
+  display: block;
+}
+
+.project__demo-list a {
+  display: block;
+  padding: 0.3rem 0;
+  font-size: 0.85rem;
+  color: var(--accent);
+}
+
+.project__demo-list a:hover {
+  text-decoration: underline;
+}
+
 .project__btn-icon {
   width: 18px;
   height: 18px;
