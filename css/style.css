@@ -72,9 +72,17 @@ a:hover {
 }
 
 .header__logo {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
   font-weight: 700;
   font-size: 1rem;
   color: var(--text);
+}
+
+.header__logo-icon {
+  width: 24px;
+  height: 24px;
 }
 
 .header__nav {
