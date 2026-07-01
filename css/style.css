@@ -171,6 +171,11 @@ a:hover {
   margin-bottom: 0.75rem;
 }
 
+.open-to-work {
+  color: #2da44e;
+  font-size: 0.7rem;
+}
+
 .home__bio {
   color: var(--text-subtle);
   font-size: 0.9rem;
