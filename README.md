@@ -1,13 +1,9 @@
-# SalasNorman Porfolio
+# SalasNorman.github.io
 
-This personal portfolio showcases my web development journey, evolving through different tech stacks, frameworks, and tools compatible with GitHub Pages.
+Personal portfolio site hosted on GitHub Pages. Built with pure HTML, CSS, and JavaScript — no framework, no build tools.
 
-## Tech Stack
+## Pages
 
-- HTML
-- CSS
-  - flexbox
-
-## Future Updates
-
-- Planning to continuous updates with new tech stacks, frameworks, and tools supported by GitHub Pages
+- **Home** — avatar, bio, contact links
+- **Resume** — education, work experience, skills
+- **Projects** — personal, coursework, and work projects
