@@ -370,6 +370,7 @@ a:hover {
   padding: 0.4rem 0.9rem;
   font-size: 0.85rem;
   color: var(--accent);
+  background: none;
   transition: background 0.2s, color 0.2s;
 }
 
