@@ -161,12 +161,6 @@ a:hover {
   margin-bottom: 0.25rem;
 }
 
-.home__title {
-  color: var(--text-subtle);
-  font-size: 0.95rem;
-  margin-bottom: 1.75rem;
-}
-
 .home__bio {
   color: var(--text-subtle);
   font-size: 0.9rem;
