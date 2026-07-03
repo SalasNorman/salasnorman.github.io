@@ -1,0 +1,69 @@
+.home {
+  text-align: center;
+}
+
+.home__avatar {
+  width: 110px;
+  height: 110px;
+  border-radius: 50%;
+  object-fit: cover;
+  object-position: top;
+  border: 2px solid var(--divider);
+  margin-bottom: 1.25rem;
+}
+
+.home__name {
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 0.25rem;
+}
+
+.home__location {
+  font-size: 0.85rem;
+  color: var(--text-subtle);
+  margin-bottom: 0.75rem;
+}
+
+.open-to-work {
+  color: #2da44e;
+  font-size: 0.7rem;
+}
+
+.home__bio {
+  color: var(--text-subtle);
+  font-size: 0.9rem;
+  line-height: 1.7;
+  margin-bottom: 2rem;
+}
+
+.home__contacts {
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+  font-size: 1.4rem;
+}
+
+.home__contacts a {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.25rem;
+  font-size: 0.8rem;
+  color: var(--text-subtle);
+  transition: color 0.2s;
+}
+
+.home__contacts a i {
+  font-size: 1.4rem;
+}
+
+.home__contacts a:hover {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+@media (max-width: 600px) {
+  .home__name {
+    font-size: 1.5rem;
+  }
+}

@@ -1,0 +1,127 @@
+.projects__title {
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--text-subtle);
+  margin-bottom: 1.5rem;
+}
+
+.project {
+  padding: 1.25rem;
+  margin-bottom: 1rem;
+}
+
+.project__header {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 0.5rem;
+}
+
+.project__logo {
+  width: 40px;
+  height: 40px;
+  border-radius: 8px;
+  flex-shrink: 0;
+}
+
+.project__name {
+  font-size: 1.05rem;
+  font-weight: 700;
+}
+
+.project__desc {
+  font-size: 0.85rem;
+  color: var(--text-subtle);
+  line-height: 1.6;
+  margin-bottom: 0.75rem;
+}
+
+.project__tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+
+.project__tag {
+  background: var(--divider);
+  padding: 0.2rem 0.6rem;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  color: var(--text-subtle);
+}
+
+.project__actions {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-top: 0.75rem;
+}
+
+.project__button {
+  display: inline-block;
+  border: 1px solid var(--accent);
+  border-radius: 6px;
+  padding: 0.4rem 0.9rem;
+  font-size: 0.85rem;
+  color: var(--accent);
+  background: none;
+  transition: background 0.2s, color 0.2s;
+}
+
+.project__button:hover {
+  background: var(--accent);
+  color: #ffffff;
+  text-decoration: none;
+}
+
+.project__demo-btn {
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+}
+
+.project__chevron {
+  font-size: 0.7rem;
+  transition: transform 0.2s;
+}
+
+.project__chevron.open {
+  transform: rotate(180deg);
+}
+
+.project__demo-list {
+  display: none;
+  margin-top: 0.75rem;
+  border-top: 1px solid var(--divider);
+  padding-top: 0.75rem;
+}
+
+.project__demo-list.open {
+  display: block;
+}
+
+.project__demo-list a {
+  display: block;
+  padding: 0.3rem 0;
+  font-size: 0.85rem;
+  color: var(--accent);
+}
+
+.project__demo-list a:hover {
+  text-decoration: underline;
+}
+
+.project__btn-icon {
+  width: 18px;
+  height: 18px;
+  vertical-align: middle;
+  margin-right: 0.3rem;
+}
+
+@media (max-width: 600px) {
+  .project {
+    padding: 1rem;
+  }
+}

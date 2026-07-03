@@ -1,0 +1,67 @@
+@font-face {
+  font-family: "IBM Plex Mono";
+  src: url("../assets/fonts/IBMPlexMono-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "IBM Plex Mono";
+  src: url("../assets/fonts/IBMPlexMono-Bold.ttf") format("truetype");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  --bg: #000000;
+  --text: #e0e0e0;
+  --text-subtle: #888888;
+  --accent: #3c7eff;
+  --divider: #333333;
+  --header-bg: #0a0a0a;
+  --card-bg: #111111;
+  --shadow: 0 2px 12px rgba(0,0,0,0.3);
+}
+
+body.light {
+  --bg: #ffffff;
+  --text: #000000;
+  --text-subtle: #555555;
+  --accent: #3c7eff;
+  --divider: #dddddd;
+  --header-bg: #f5f5f5;
+  --card-bg: #f8f8f8;
+  --shadow: 0 2px 12px rgba(0,0,0,0.08);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  height: 100%;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  font-family: "IBM Plex Mono", system-ui, monospace;
+  letter-spacing: 0.5px;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+  transition: background 0.2s, color 0.2s;
+}
+
+a {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}

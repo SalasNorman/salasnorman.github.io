@@ -1,0 +1,124 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  background: var(--header-bg);
+  border-bottom: 1px solid var(--divider);
+  position: relative;
+}
+
+.header__logo {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: 700;
+  font-size: 1rem;
+  color: var(--text);
+}
+
+.header__logo-icon {
+  width: 24px;
+  height: 24px;
+  border-radius: 4px;
+  background: #ffffff;
+}
+
+.header__nav {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.header__nav-links {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+}
+
+.header__nav-links a {
+  font-size: 0.85rem;
+  color: var(--text-subtle);
+}
+
+.header__nav-links a.active {
+  color: var(--accent);
+  font-weight: 700;
+}
+
+.theme-toggle {
+  background: none;
+  border: 1px solid var(--divider);
+  border-radius: 6px;
+  padding: 4px 8px;
+  cursor: pointer;
+  color: var(--text-subtle);
+  font-size: 0.9rem;
+  line-height: 1;
+  margin-left: 0.5rem;
+  transition: border-color 0.2s;
+}
+
+.theme-toggle:hover {
+  border-color: var(--accent);
+}
+
+.hamburger {
+  display: none;
+  background: none;
+  border: 1px solid var(--divider);
+  border-radius: 6px;
+  padding: 4px 8px;
+  cursor: pointer;
+  color: var(--text-subtle);
+  font-size: 1.1rem;
+  line-height: 1;
+  transition: border-color 0.2s;
+}
+
+.hamburger:hover {
+  border-color: var(--accent);
+}
+
+@media (max-width: 600px) {
+  .header {
+    padding: 0.75rem 1rem;
+  }
+
+  .header__nav {
+    gap: 0.5rem;
+  }
+
+  .header__nav-links {
+    display: none;
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background: var(--header-bg);
+    border: 1px solid var(--divider);
+    border-radius: 8px;
+    padding: 0.5rem;
+    flex-direction: column;
+    gap: 0.25rem;
+    min-width: 140px;
+    z-index: 100;
+  }
+
+  .nav-open .header__nav-links {
+    display: flex;
+  }
+
+  .header__nav-links a {
+    display: block;
+    padding: 0.5rem 0.75rem;
+    border-radius: 4px;
+  }
+
+  .header__nav-links a:hover {
+    background: var(--divider);
+  }
+
+  .hamburger {
+    display: block;
+  }
+}
