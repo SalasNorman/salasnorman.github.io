@@ -12,7 +12,7 @@ if (lightbox) {
 }
 
 if (container) {
-  fetch('assets/data/certificates.json')
+    fetch('data/certificates.json')
     .then(function (r) { return r.json(); })
     .then(function (data) {
       const groups = {};
