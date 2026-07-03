@@ -81,10 +81,7 @@
     },
     {
       "category": "Programming Languages & Web Technologies",
-      "items": [
-        "Python, JavaScript, C, VB.NET, Ruby",
-        "HTML, CSS"
-      ]
+      "items": ["Python, JavaScript, C, VB.NET, Ruby", "HTML, CSS"]
     },
     {
       "category": "Frameworks & Libraries",

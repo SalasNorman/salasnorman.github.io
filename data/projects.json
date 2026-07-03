@@ -1,0 +1,48 @@
+[
+  {
+    "name": "Venvoice",
+    "description": "A mobile app that helps market vendors record, organize, and loop voice promotions to attract customers without losing their voice.",
+    "tags": ["React Native", "Expo", "JavaScript"],
+    "logo": "https://github.com/SalasNorman/venvoice/raw/main/assets/icon.png",
+    "actions": [
+      { "label": "Install App", "icon": "download", "url": "https://github.com/SalasNorman/venvoice/releases" },
+      { "label": "Source", "icon": "github", "url": "https://github.com/SalasNorman/venvoice" }
+    ],
+    "demos": []
+  },
+  {
+    "name": "DBAASP Peptide Scraper",
+    "description": "Scrapes antimicrobial peptide data from DBAASP v4 and outputs an Excel report + HTML page.",
+    "tags": ["Python", "API", "Excel"],
+    "logo": "",
+    "actions": [
+      { "label": "Source", "icon": "github", "url": "https://github.com/SalasNorman/dbaasp" }
+    ],
+    "demos": []
+  },
+  {
+    "name": "The Odin Project",
+    "description": "A collection of projects built while following The Odin Project curriculum. Some projects are server-side and don't have a live demo.",
+    "tags": ["HTML", "CSS", "JavaScript", "Ruby"],
+    "logo": "",
+    "actions": [
+      { "label": "Source", "icon": "github", "url": "https://github.com/SalasNorman/theOdinProject-projects" }
+    ],
+    "demos": [
+      { "label": "Calculator", "url": "https://salasnorman.github.io/theOdinProject-projects/foundation_course/calculator/" },
+      { "label": "Etch-a-Sketch", "url": "https://salasnorman.github.io/theOdinProject-projects/foundation_course/etch_a_sketch/" },
+      { "label": "Odin Recipes", "url": "https://salasnorman.github.io/theOdinProject-projects/foundation_course/odin_recipes/" },
+      { "label": "Rock Paper Scissors", "url": "https://salasnorman.github.io/theOdinProject-projects/foundation_course/rock_paper_scissors/version_2/" }
+    ]
+  },
+  {
+    "name": "Simple Grading System",
+    "description": "Simple Grading System using VB.NET and MS ACCESS.",
+    "tags": ["VB.NET", "MS Access"],
+    "logo": "",
+    "actions": [
+      { "label": "Source", "icon": "github", "url": "https://github.com/SalasNorman/SimpleGradingSystem" }
+    ],
+    "demos": []
+  }
+]
