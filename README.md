@@ -7,3 +7,4 @@ Personal portfolio site hosted on GitHub Pages. Built with pure HTML, CSS, and J
 - **Home** — avatar, bio, contact links
 - **Resume** — education, work experience, skills
 - **Projects** — personal, coursework, and work projects
+- **Certificates** — certifications grouped by org, loaded from JSON
