@@ -11,6 +11,10 @@
   max-width: 580px;
 }
 
+.layout__inner--wide {
+  max-width: 720px;
+}
+
 @media (max-width: 600px) {
   .layout {
     padding: 2rem 1rem;
