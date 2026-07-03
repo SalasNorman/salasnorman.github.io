@@ -30,6 +30,12 @@
   border-radius: 8px;
   box-shadow: var(--shadow);
   border-left: 4px solid var(--accent);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.card:hover {
+  transform: scale(1.03);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
 }
 
 body.light {
