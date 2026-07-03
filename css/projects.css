@@ -7,8 +7,8 @@
 }
 
 .project {
-  padding: 1.25rem;
-  margin-bottom: 1rem;
+  padding: 1.5rem;
+  margin-bottom: 2rem;
 }
 
 .project__header {
@@ -122,6 +122,6 @@
 
 @media (max-width: 600px) {
   .project {
-    padding: 1rem;
+    padding: 1.25rem;
   }
 }
