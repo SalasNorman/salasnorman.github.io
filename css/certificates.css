@@ -53,6 +53,45 @@
   margin-bottom: 0.4rem;
 }
 
+/* Filter bar */
+.certificates__filter {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin-bottom: 1.5rem;
+  padding: 0.5rem 0;
+  background: var(--bg);
+}
+
+.certificates__filter-btn {
+  background: var(--divider);
+  border: none;
+  border-radius: 4px;
+  padding: 0.35rem 0.7rem;
+  font-size: 0.75rem;
+  font-family: inherit;
+  color: var(--text-subtle);
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+}
+
+.certificates__filter-btn:hover {
+  background: var(--accent);
+  color: #ffffff;
+}
+
+.certificates__filter-btn.active {
+  background: var(--accent);
+  color: #ffffff;
+}
+
+.certificate--hidden {
+  display: none;
+}
+
 .certificate__tags {
   display: flex;
   flex-wrap: wrap;
