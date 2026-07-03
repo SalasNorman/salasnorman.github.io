@@ -1,0 +1,111 @@
+{
+  "education": {
+    "degree": "Bachelor of Science in Computer Science",
+    "institution": "Biliran Province State University",
+    "details": "GPA: 1.72",
+    "years": "2018–2022"
+  },
+  "experience": [
+    {
+      "company": "AI.clife",
+      "role": "Research Assistant",
+      "dates": "August 2024 – Present",
+      "highlights": [
+        "Built Python scripts for web scraping using AI coding tools",
+        "Performed data annotation for machine learning datasets",
+        "Created animations for presentations and content",
+        "Designed event posters, brochures, and promotional materials",
+        "Edited workshop recordings using DaVinci Resolve",
+        "Facilitated machine learning workshops and Zoom sessions"
+      ]
+    },
+    {
+      "company": "Family Business",
+      "role": "Independent Entrepreneur",
+      "dates": "August 2022 – August 2024",
+      "highlights": [
+        "Prepared and sold homemade snacks and ensured quality.",
+        "Managed orders, deliveries, and customer relationships, driving repeat business.",
+        "Promoted products within the community, increasing brand awareness and sales."
+      ]
+    },
+    {
+      "company": "CVISNET Foundation Inc.",
+      "role": "College / On-the-Job Training",
+      "dates": "May 2022 – August 2022",
+      "highlights": [
+        "Built a web record storage system",
+        "Used Trello to manage and prioritize tasks",
+        "Reviewed code for bugs and worked with a small team to complete the project"
+      ]
+    },
+    {
+      "company": "RAPID Program",
+      "role": "Enumerator",
+      "dates": "April – June 2019",
+      "highlights": [
+        "One-week workshop training, enhancing interviewer skills for efficient data collection.",
+        "Implemented interviewing techniques to reduce interview time per household."
+      ]
+    },
+    {
+      "company": "Culaba LGU",
+      "role": "Summer Job / Assistant",
+      "dates": "1 month",
+      "highlights": [
+        "Assisted with office errands such as delivering documents and organizing files.",
+        "Helped maintain a neat and clean workplace."
+      ]
+    },
+    {
+      "company": "Culaba BFP",
+      "role": "Senior High School / On-the-Job Training",
+      "dates": "December 2017",
+      "highlights": [
+        "Conducted fire safety awareness sessions in the barangay",
+        "Conducted and assisted in earthquake drills at elementary school",
+        "Studied topics related to the duties of the Bureau of Fire Protection",
+        "Completed hands-on training in PPE usage, hose handling, knot tying, ladder operation, fire hose techniques, and basic first aid"
+      ]
+    }
+  ],
+  "skills": [
+    {
+      "category": "Computer",
+      "items": [
+        "OpenCode AI coding agent for code assistance and development tasks",
+        "Windows and Ubuntu System Installation",
+        "Microsoft Office (Word, Excel) and Google Sheets",
+        "Smartphone troubleshooting (system diagnostics, connectivity issues, app errors, basic software repair)"
+      ]
+    },
+    {
+      "category": "Programming Languages & Web Technologies",
+      "items": [
+        "Python, JavaScript, C, VB.NET, Ruby",
+        "HTML, CSS"
+      ]
+    },
+    {
+      "category": "Frameworks & Libraries",
+      "items": ["Flask"]
+    },
+    {
+      "category": "Database",
+      "items": ["MySQL, SQLite"]
+    },
+    {
+      "category": "Tools & Platform",
+      "items": ["Git", "Visual Studio Code"]
+    },
+    {
+      "category": "Other Skills",
+      "items": [
+        "Basic baking",
+        "Hand-sewing",
+        "Basic drawing and animation",
+        "Video editing"
+      ]
+    }
+  ]
+}
