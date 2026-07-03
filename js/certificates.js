@@ -19,8 +19,8 @@ if (container) {
     .then(function (data) {
       // Collect unique tags
       const allTags = new Set();
-      data.forEach(function (cert) {
-        if (cert.techStack && cert.techStack.length > 0 && cert.techStack[0] !== '') {
+      Object.values(data).flat().forEach(function (cert) {
+        if (cert.techStack && cert.techStack.length > 0) {
           cert.techStack.forEach(function (t) { allTags.add(t); });
         }
         if (cert.pathway) allTags.add(cert.pathway);
@@ -34,23 +34,15 @@ if (container) {
         }).join('');
       }
 
-      // Group by organization
-      const groups = {};
-      data.forEach(function (cert) {
-        const org = cert.organization || 'Other';
-        if (!groups[org]) groups[org] = [];
-        groups[org].push(cert);
-      });
-
       let html = '';
-      Object.keys(groups).forEach(function (org) {
+      Object.keys(data).forEach(function (org) {
         html += '<div class="certificates__group">';
         html += '<h3 class="certificates__org-title">' + org + '</h3>';
         html += '<div class="certificates__grid">';
-        groups[org].forEach(function (cert) {
+        data[org].forEach(function (cert) {
           let tags = '';
           let tagItems = [];
-          if (cert.techStack && cert.techStack.length > 0 && cert.techStack[0] !== '') {
+          if (cert.techStack && cert.techStack.length > 0) {
             tagItems = tagItems.concat(cert.techStack);
           }
           if (cert.pathway) {
