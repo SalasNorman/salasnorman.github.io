@@ -24,9 +24,8 @@
 }
 
 .certificate {
-  background: var(--card-bg);
   border: 1px solid var(--divider);
-  border-radius: 8px;
+  border-left: none;
   overflow: hidden;
   transition: border-color 0.2s;
 }

@@ -35,7 +35,7 @@ if (container) {
                 return '<span class="certificate__tag">' + t + '</span>';
               }).join('') + '</div>';
           }
-          html += '<div class="certificate">' +
+          html += '<div class="card certificate">' +
             '<img class="certificate__image" src="' + cert.image + '" alt="' + cert.title + '" loading="lazy" />' +
             '<div class="certificate__info">' +
             '<h4 class="certificate__name">' + cert.title + '</h4>' +
