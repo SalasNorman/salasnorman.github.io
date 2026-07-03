@@ -29,9 +29,16 @@ if (container) {
         html += '<div class="certificates__grid">';
         groups[org].forEach(function (cert) {
           let tags = '';
+          let tagItems = [];
           if (cert.techStack && cert.techStack.length > 0 && cert.techStack[0] !== '') {
+            tagItems = tagItems.concat(cert.techStack);
+          }
+          if (cert.pathway) {
+            tagItems.push(cert.pathway);
+          }
+          if (tagItems.length > 0) {
             tags = '<div class="certificate__tags">' +
-              cert.techStack.map(function (t) {
+              tagItems.map(function (t) {
                 return '<span class="certificate__tag">' + t + '</span>';
               }).join('') + '</div>';
           }
