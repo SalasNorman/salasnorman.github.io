@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Norman Salas - Offline Notepad. A minimal distraction-free text editor with markdown support."
+    />
+    <title>SalasNorman Portfolio</title>
+    <link rel="icon" type="image/png" href="../assets/images/favicon.png" />
+    <link rel="stylesheet" href="../css/base.css" />
+    <link rel="stylesheet" href="../css/layout.css" />
+    <link rel="stylesheet" href="../css/header.css" />
+    <link rel="stylesheet" href="../css/footer.css" />
+    <link rel="stylesheet" href="../css/playground/zen.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css"
+    />
+  </head>
+  <body>
+    <header class="header">
+      <a href="../index.html" class="header__logo">
+        <img src="../assets/images/favicon.png" alt="" class="header__logo-icon" />
+        SalasNorman
+      </a>
+      <nav class="header__nav">
+        <div class="header__nav-links">
+          <a href="../index.html">Home</a>
+          <a href="../resume.html">Resume</a>
+          <a href="../projects.html">Projects</a>
+          <a href="../playground.html" class="active">Playground</a>
+          <a href="../certificates.html">Certificates</a>
+        </div>
+        <button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme">
+          <i id="toggle-icon" class="bi bi-sun"></i>
+        </button>
+        <button class="hamburger" id="hamburger" aria-label="Menu">
+          <i class="bi bi-list"></i>
+        </button>
+      </nav>
+    </header>
+
+    <div class="layout">
+      <div class="layout__inner layout__inner--wide">
+        <div class="zen">
+      <div class="zen__toolbar">
+        <div class="zen__toolbar-row">
+          <span class="zen__title">Offline Notepad</span>
+          <span class="zen__credit">Inspired by <a href="https://zen.unit.ms/" target="_blank" rel="noopener">Zen</a></span>
+        </div>
+        <div class="zen__toolbar-row">
+          <select id="zen-font" class="zen__select">
+            <option value="IBM Plex Mono">IBM Plex Mono</option>
+            <option value="Georgia">Georgia</option>
+            <option value="Arial">Arial</option>
+            <option value="Courier New">Courier New</option>
+          </select>
+          <select id="zen-font-size" class="zen__select">
+            <option value="10">10</option>
+            <option value="12">12</option>
+            <option value="14">14</option>
+            <option value="16" selected>16</option>
+            <option value="18">18</option>
+          </select>
+          <button id="zen-fullscreen" class="zen__btn" title="Fullscreen">
+            <i class="bi bi-arrows-fullscreen"></i>
+          </button>
+          <button id="zen-markdown" class="zen__btn" title="Markdown mode">
+            <i class="bi bi-markdown"></i>
+          </button>
+          <button id="zen-find" class="zen__btn" title="Find and replace">
+            <i class="bi bi-search"></i>
+          </button>
+          <div class="zen__download-wrap">
+            <button id="zen-download" class="zen__btn" title="Download">
+              <i class="bi bi-download"></i>
+            </button>
+            <div id="zen-download-menu" class="zen__download-menu" style="display:none">
+              <button id="zen-download-txt" class="zen__download-item">.txt</button>
+              <button id="zen-download-md" class="zen__download-item">.md</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div id="zen-find-bar" class="zen__find-bar" style="display:none">
+        <input id="zen-find-input" class="zen__find-input" type="text" placeholder="Find..." />
+        <input id="zen-replace-input" class="zen__find-input" type="text" placeholder="Replace..." />
+        <button id="zen-find-prev" class="zen__btn zen__btn--small" title="Previous">
+          <i class="bi bi-chevron-up"></i>
+        </button>
+        <button id="zen-find-next" class="zen__btn zen__btn--small" title="Next">
+          <i class="bi bi-chevron-down"></i>
+        </button>
+        <button id="zen-replace-one" class="zen__btn zen__btn--small" title="Replace">
+          <i class="bi bi-arrow-left-right"></i>
+        </button>
+        <button id="zen-replace-all" class="zen__btn zen__btn--small" title="Replace all">
+          <i class="bi bi-arrow-repeat"></i>
+        </button>
+        <button id="zen-find-close" class="zen__btn zen__btn--small" title="Close">
+          <i class="bi bi-x"></i>
+        </button>
+      </div>
+
+      <div id="zen-tabs" class="zen__tabs" style="display:none">
+        <button id="zen-tab-edit" class="zen__tab zen__tab--active">Edit</button>
+        <button id="zen-tab-preview" class="zen__tab">Preview</button>
+      </div>
+
+      <div class="zen__editor">
+        <div id="zen-content" class="zen__content" contenteditable="true" data-placeholder="Start writing..."></div>
+        <div id="zen-preview" class="zen__preview" style="display:none"></div>
+      </div>
+
+      <div class="zen__stats">
+        <span id="zen-words">0 words</span>
+        <span id="zen-chars">0 characters</span>
+      </div>
+    </div>
+    </div>
+    </div>
+
+    <footer class="footer">&copy; SalasNorman</footer>
+    <script type="module" src="../js/main.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/showdown@2.1.0/dist/showdown.min.js"></script>
+    <script src="../js/playground/zen.js"></script>
+  </body>
+</html>

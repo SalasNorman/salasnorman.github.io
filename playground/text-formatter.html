@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Norman Salas - Text Formatter. Format and transform text with one click."
+    />
+    <title>SalasNorman Portfolio</title>
+    <link rel="icon" type="image/png" href="../assets/images/favicon.png" />
+    <link rel="stylesheet" href="../css/base.css" />
+    <link rel="stylesheet" href="../css/layout.css" />
+    <link rel="stylesheet" href="../css/header.css" />
+    <link rel="stylesheet" href="../css/footer.css" />
+    <link rel="stylesheet" href="../css/playground/text-formatter.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css"
+    />
+  </head>
+  <body>
+    <header class="header">
+      <a href="../index.html" class="header__logo">
+        <img src="../assets/images/favicon.png" alt="" class="header__logo-icon" />
+        SalasNorman
+      </a>
+      <nav class="header__nav">
+        <div class="header__nav-links">
+          <a href="../index.html">Home</a>
+          <a href="../resume.html">Resume</a>
+          <a href="../projects.html">Projects</a>
+          <a href="../playground.html" class="active">Playground</a>
+          <a href="../certificates.html">Certificates</a>
+        </div>
+        <button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme">
+          <i id="toggle-icon" class="bi bi-sun"></i>
+        </button>
+        <button class="hamburger" id="hamburger" aria-label="Menu">
+          <i class="bi bi-list"></i>
+        </button>
+      </nav>
+    </header>
+
+    <div class="layout">
+      <div class="layout__inner layout__inner--wide">
+        <div class="tf">
+          <div class="tf__header">
+            <span class="tf__title">Text Formatter</span>
+            <button id="tfDrawerToggle" class="tf__btn" title="Operations">
+              <i class="bi bi-gear"></i> Operations
+            </button>
+          </div>
+
+          <div class="tf__tabs">
+            <button id="tf-tab-edit" class="tf__tab tf__tab--active">Edit</button>
+            <button id="tf-tab-preview" class="tf__tab">Preview</button>
+          </div>
+
+          <textarea id="tf-editor" class="tf__textarea" placeholder="Paste your text here..."></textarea>
+
+          <div class="tf__copy-wrap">
+            <button id="tf-copy" class="tf__btn tf__btn--copy" title="Copy to clipboard">
+              <i class="bi bi-clipboard"></i> Copy
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div id="tfBackdrop" class="tf__backdrop" style="display:none"></div>
+
+      <div id="tfDrawer" class="tf__drawer" style="display:none">
+        <div class="tf__drawer-header">
+          <span class="tf__drawer-title">Operations</span>
+          <button id="tfDrawerClose" class="tf__drawer-close" title="Close">
+            <i class="bi bi-x"></i>
+          </button>
+        </div>
+        <div id="tfDrawerBody" class="tf__drawer-body"></div>
+      </div>
+    </div>
+
+    <footer class="footer">&copy; SalasNorman</footer>
+    <script type="module" src="../js/main.js"></script>
+    <script src="../js/playground/text-formatter.js"></script>
+  </body>
+</html>

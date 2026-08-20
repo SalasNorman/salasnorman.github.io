@@ -1,0 +1,16 @@
+[
+  {
+    "name": "Text Formatter",
+    "description": "Format and transform text with one click. Convert case, trim whitespace, remove duplicates, sort lines, and more. No AI — your data stays in your browser.",
+    "tags": ["HTML", "CSS", "JavaScript"],
+    "logo": "",
+    "url": "playground/text-formatter.html"
+  },
+  {
+    "name": "Offline Notepad",
+    "description": "A minimal distraction-free text editor with markdown preview, find and replace, font switching, and auto-save. No AI — your text stays in your browser. Inspired by <a href='https://zen.unit.ms/' target='_blank' rel='noopener'>Zen</a>.",
+    "tags": ["HTML", "CSS", "JavaScript", "Markdown"],
+    "logo": "",
+    "url": "playground/zen.html"
+  }
+]
