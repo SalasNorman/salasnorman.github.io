@@ -150,7 +150,7 @@
 .zen__content {
   flex: 1;
   outline: none;
-  border: 1px solid var(--divider);
+  border: none;
   font-family: 'IBM Plex Mono', monospace;
   font-size: 0.85rem;
   line-height: 1.6;
