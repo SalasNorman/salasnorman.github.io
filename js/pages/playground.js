@@ -1,37 +1,32 @@
-var container = document.getElementById('playground-container');
+import { fetchJson } from '../lib/dom.js';
+
+const container = document.getElementById('playground-container');
 
 if (container) {
-  fetch('data/playground.json')
-    .then(function (r) { return r.json(); })
-    .then(function (items) {
-      var html = '';
-      items.forEach(function (t) {
-        html += '<div class="card playground">';
+  fetchJson('data/playground.json').then((tools) => {
+    const cards = tools
+      .map((t) => {
+        const header = t.logo
+          ? `
+            <div class="playground__header">
+              <img class="playground__logo" src="${t.logo}" alt="${t.name} logo" />
+              <h3 class="playground__name">${t.name}</h3>
+            </div>`
+          : `<h3 class="playground__name playground__name--standalone">${t.name}</h3>`;
 
-        if (t.logo) {
-          html +=
-            '<div class="playground__header">' +
-              '<img class="playground__logo" src="' + t.logo + '" alt="' + t.name + ' logo" />' +
-              '<h3 class="playground__name">' + t.name + '</h3>' +
-            '</div>';
-        } else {
-          html += '<h3 class="playground__name" style="margin-bottom:0.5rem">' + t.name + '</h3>';
-        }
+        const tags = t.tags.map((tag) => `<span class="playground__tag">${tag}</span>`).join('');
+        const openBtn = t.url ? `<a href="${t.url}" class="playground__open-btn">Open</a>` : '';
 
-        html += '<p class="playground__desc">' + t.description + '</p>';
+        return `
+          <div class="card playground">
+            ${header}
+            <p class="playground__desc">${t.description}</p>
+            <div class="playground__tags">${tags}</div>
+            ${openBtn}
+          </div>`;
+      })
+      .join('');
 
-        html += '<div class="playground__tags">';
-        t.tags.forEach(function (tag) {
-          html += '<span class="playground__tag">' + tag + '</span>';
-        });
-        html += '</div>';
-
-        if (t.url) {
-          html += '<a href="' + t.url + '" class="playground__open-btn">Open</a>';
-        }
-
-        html += '</div>';
-      });
-      container.innerHTML = html;
-    });
+    container.innerHTML = cards;
+  });
 }

@@ -30,6 +30,10 @@
   font-weight: 700;
 }
 
+.playground__name--standalone {
+  margin-bottom: 0.5rem;
+}
+
 .playground__desc {
   font-size: 0.85rem;
   color: var(--text-subtle);

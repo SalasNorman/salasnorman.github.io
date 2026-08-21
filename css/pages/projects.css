@@ -30,6 +30,10 @@
   font-weight: 700;
 }
 
+.project__name--standalone {
+  margin-bottom: 0.5rem;
+}
+
 .project__desc {
   font-size: 0.85rem;
   color: var(--text-subtle);

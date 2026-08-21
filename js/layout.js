@@ -1,4 +1,4 @@
-var NAV_ITEMS = [
+const NAV_ITEMS = [
   ['Home', 'index.html'],
   ['Resume', 'resume.html'],
   ['Projects', 'projects.html'],
@@ -7,63 +7,61 @@ var NAV_ITEMS = [
 ];
 
 function getBase() {
-  var parts = location.pathname.split('/');
+  const parts = location.pathname.split('/');
   parts.pop();
-  var base = '';
-  for (var i = 1; i < parts.length; i++) {
+  let base = '';
+  for (let i = 1; i < parts.length; i++) {
     base += '../';
   }
   return base;
 }
 
 function getCurrentTarget() {
-  var path = location.pathname;
+  const path = location.pathname;
   if (path.indexOf('/playground/') !== -1) return 'playground.html';
-  var page = path.substring(path.lastIndexOf('/') + 1);
+  let page = path.substring(path.lastIndexOf('/') + 1);
   if (page === '') page = 'index.html';
   return page;
 }
 
 function buildHeader() {
-  var base = getBase();
-  var current = getCurrentTarget();
-  var html = '';
+  const base = getBase();
+  const current = getCurrentTarget();
 
-  html += '<a href="' + base + 'index.html" class="header__logo">';
-  html += '<img src="' + base + 'assets/images/favicon.png" alt="" class="header__logo-icon" />';
-  html += 'SalasNorman';
-  html += '</a>';
+  const links = NAV_ITEMS
+    .map(([label, target]) => {
+      const isActive = target === current;
+      return `<a href="${base}${target}"${isActive ? ' class="active" aria-current="page"' : ''}>${label}</a>`;
+    })
+    .join('');
 
-  html += '<nav class="header__nav">';
-  html += '<div class="header__nav-links">';
-  NAV_ITEMS.forEach(function (item) {
-    var isActive = item[1] === current;
-    html += '<a href="' + base + item[1] + '"' +
-      (isActive ? ' class="active" aria-current="page"' : '') +
-      '>' + item[0] + '</a>';
-  });
-  html += '</div>';
-  html += '<button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme">';
-  html += '<i id="toggle-icon" class="bi bi-sun"></i>';
-  html += '</button>';
-  html += '<button class="hamburger" id="hamburger" aria-label="Menu">';
-  html += '<i class="bi bi-list"></i>';
-  html += '</button>';
-  html += '</nav>';
-
-  return html;
+  return (
+    `<a href="${base}index.html" class="header__logo">` +
+    `<img src="${base}assets/images/favicon.png" alt="" class="header__logo-icon" />` +
+    'SalasNorman' +
+    '</a>' +
+    '<nav class="header__nav">' +
+    `<div class="header__nav-links">${links}</div>` +
+    '<button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme">' +
+    '<i id="toggle-icon" class="bi bi-sun"></i>' +
+    '</button>' +
+    '<button class="hamburger" id="hamburger" aria-label="Menu">' +
+    '<i class="bi bi-list"></i>' +
+    '</button>' +
+    '</nav>'
+  );
 }
 
-var headerEl = document.getElementById('site-header');
-var footerEl = document.getElementById('site-footer');
+const headerEl = document.getElementById('site-header');
+const footerEl = document.getElementById('site-footer');
 
 if (headerEl) {
   headerEl.innerHTML = buildHeader();
 
-  var hamburger = document.getElementById('hamburger');
+  const hamburger = document.getElementById('hamburger');
   if (hamburger) {
-    hamburger.addEventListener('click', function () {
-      var isOpen = headerEl.classList.toggle('nav-open');
+    hamburger.addEventListener('click', () => {
+      const isOpen = headerEl.classList.toggle('nav-open');
       hamburger.setAttribute('aria-expanded', isOpen);
     });
   }
