@@ -7,6 +7,7 @@ var tfDrawerClose = document.getElementById('tfDrawerClose');
 var tfBackdrop = document.getElementById('tfBackdrop');
 var tfDrawer = document.getElementById('tfDrawer');
 var tfDrawerBody = document.getElementById('tfDrawerBody');
+var tfChips = document.getElementById('tfChips');
 
 var originalText = '';
 var formattedText = '';
@@ -181,24 +182,21 @@ function buildDrawer() {
     html += '</span>';
     html += '</div>';
   });
-  html += '<div class="tf__group-header">Fonts</div>';
-  html += '<div class="tf__chips">';
+  tfDrawerBody.innerHTML = html;
+}
+
+function buildChips() {
+  if (!tfChips) return;
+  var html = '';
   OPERATIONS.forEach(function (op) {
-    if (op.ui !== 'chip' || op.kind !== 'font') return;
-    html += '<button type="button" id="' + op.id + '" class="tf__chip" aria-pressed="false" aria-label="' + op.label + '" title="' + op.label + '">' + op.glyph + '</button>';
-  });
-  html += '</div>';
-  html += '<div class="tf__group-header">Decorations</div>';
-  html += '<div class="tf__chips">';
-  OPERATIONS.forEach(function (op) {
-    if (op.ui !== 'chip' || op.kind !== 'deco') return;
-    html += '<button type="button" id="' + op.id + '" class="tf__chip" aria-pressed="false" aria-label="' + op.label + '" title="' + op.label + '"><i class="bi ' + op.icon + '"></i></button>';
+    if (op.ui !== 'chip') return;
+    var inner = op.glyph ? op.glyph : '<i class="bi ' + op.icon + '"></i>';
+    html += '<button type="button" id="' + op.id + '" class="tf__chip" aria-pressed="false" aria-label="' + op.label + '" title="' + op.label + '">' + inner + '</button>';
     if (op.control === 'range') {
       html += '<input type="range" id="' + op.id + '-range" class="tf__range" min="' + op.rangeMin + '" max="' + op.rangeMax + '" value="' + op.rangeValue + '" hidden />';
     }
   });
-  html += '</div>';
-  tfDrawerBody.innerHTML = html;
+  tfChips.innerHTML = html;
 }
 
 function computeFormatted() {
@@ -340,6 +338,7 @@ function setupTooltipRow(row) {
 }
 
 buildDrawer();
+buildChips();
 
 var opRows = tfDrawerBody ? tfDrawerBody.querySelectorAll('.tf__op') : [];
 for (var r = 0; r < opRows.length; r++) setupTooltipRow(opRows[r]);
@@ -382,11 +381,16 @@ function toggleChip(chipId) {
   autoFormat();
 }
 
-tfDrawerBody.addEventListener('click', function (e) {
-  var chip = e.target.closest ? e.target.closest('.tf__chip') : null;
-  if (!chip) return;
-  toggleChip(chip.id);
-});
+if (tfChips) {
+  tfChips.addEventListener('click', function (e) {
+    var chip = e.target.closest ? e.target.closest('.tf__chip') : null;
+    if (!chip) return;
+    toggleChip(chip.id);
+  });
+  tfChips.addEventListener('change', function () {
+    autoFormat();
+  });
+}
 
 tfDrawerBody.addEventListener('change', function () {
   autoFormat();

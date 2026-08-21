@@ -31,6 +31,19 @@
   align-items: center;
   gap: 0.5rem;
   margin-bottom: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.tf__actions .tf__btn--copy {
+  margin-left: auto;
+}
+
+.tf__btn--icon {
+  width: 34px;
+  height: 34px;
+  padding: 0;
+  justify-content: center;
+  font-size: 1rem;
 }
 
 /* Tabs */
@@ -277,15 +290,6 @@
 }
 
 /* Font & decoration chips */
-.tf__group-header {
-  margin: 0.75rem 0 0.4rem;
-  font-size: 0.7rem;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-  color: var(--text-subtle);
-}
-
 .tf__chips {
   display: flex;
   align-items: center;
