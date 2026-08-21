@@ -1,6 +1,6 @@
 import './layout.js';
 import './theme.js';
-import './projects.js';
-import './playground.js';
-import './certificates.js';
-import './resume.js';
+import './pages/projects.js';
+import './pages/playground.js';
+import './pages/certificates.js';
+import './pages/resume.js';
