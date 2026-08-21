@@ -24,9 +24,9 @@
       "role": "Independent Entrepreneur",
       "dates": "August 2022 – August 2024",
       "highlights": [
-        "Prepared and sold homemade snacks and ensured quality.",
-        "Managed orders, deliveries, and customer relationships, driving repeat business.",
-        "Promoted products within the community, increasing brand awareness and sales."
+        "Prepared and sold homemade snacks and ensured quality",
+        "Managed orders, deliveries, and customer relationships, driving repeat business",
+        "Promoted products within the community, increasing brand awareness and sales"
       ]
     },
     {
@@ -44,8 +44,8 @@
       "role": "Enumerator",
       "dates": "April – June 2019",
       "highlights": [
-        "One-week workshop training, enhancing interviewer skills for efficient data collection.",
-        "Implemented interviewing techniques to reduce interview time per household."
+        "One-week workshop training, enhancing interviewer skills for efficient data collection",
+        "Implemented interviewing techniques to reduce interview time per household"
       ]
     },
     {
@@ -53,8 +53,8 @@
       "role": "Summer Job / Assistant",
       "dates": "1 month",
       "highlights": [
-        "Assisted with office errands such as delivering documents and organizing files.",
-        "Helped maintain a neat and clean workplace."
+        "Assisted with office errands such as delivering documents and organizing files",
+        "Helped maintain a neat and clean workplace"
       ]
     },
     {
@@ -81,19 +81,29 @@
     },
     {
       "category": "Programming Languages & Web Technologies",
-      "items": ["Python, JavaScript, C, VB.NET, Ruby", "HTML, CSS"]
+      "items": [
+        "Python, JavaScript, C, VB.NET, Ruby",
+        "HTML, CSS"
+      ]
     },
     {
       "category": "Frameworks & Libraries",
-      "items": ["Flask"]
+      "items": [
+        "Flask"
+      ]
     },
     {
       "category": "Database",
-      "items": ["MySQL, SQLite"]
+      "items": [
+        "MySQL, SQLite"
+      ]
     },
     {
       "category": "Tools & Platform",
-      "items": ["Git", "Visual Studio Code"]
+      "items": [
+        "Git",
+        "Visual Studio Code"
+      ]
     },
     {
       "category": "Other Skills",
