@@ -268,7 +268,7 @@ function copyToClipboard() {
   navigator.clipboard.writeText(text).then(function () {
     var icon = tfCopy.querySelector('i');
     if (icon) icon.className = 'bi bi-check';
-    setTimeout(function () { if (icon) icon.className = 'bi bi-clipboard'; }, 1500);
+    setTimeout(function () { if (icon) icon.className = 'bi bi-copy'; }, 1500);
   }).catch(function () {});
 }
 
