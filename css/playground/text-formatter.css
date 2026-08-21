@@ -29,6 +29,15 @@
 .tf__tabs {
   display: flex;
   gap: 0;
+  align-items: flex-end;
+}
+
+.tf__tabs .tf__btn {
+  margin-left: 0.5rem;
+}
+
+.tf__tabs .tf__btn--copy {
+  margin-left: auto;
 }
 
 .tf__tab {
@@ -76,13 +85,7 @@
   outline-offset: 1px;
 }
 
-/* Copy */
-.tf__copy-wrap {
-  display: flex;
-  justify-content: flex-end;
-  margin-top: 0.5rem;
-}
-
+/* Buttons */
 .tf__btn {
   display: inline-flex;
   align-items: center;
