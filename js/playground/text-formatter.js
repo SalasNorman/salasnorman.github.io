@@ -119,11 +119,11 @@ function makeFontFn(style) {
 }
 
 function underlineText(text) {
-  return text.split('').join('\u0332');
+  return Array.from(text).join('\u0332');
 }
 
 function strikeText(text) {
-  return text.split('').join('\u0336');
+  return Array.from(text).join('\u0336');
 }
 
 var ZALGO_RANGES = [
@@ -138,13 +138,14 @@ function randomZalgoMark() {
 }
 
 function zalgoText(text, maxMarks) {
+  var chars = Array.from(text);
   var out = '';
   var i;
   var j;
   var count;
-  for (i = 0; i < text.length; i++) {
-    out += text[i];
-    if (/\s/.test(text[i])) continue;
+  for (i = 0; i < chars.length; i++) {
+    out += chars[i];
+    if (/\s/.test(chars[i])) continue;
     count = 1 + Math.floor(Math.random() * maxMarks);
     for (j = 0; j < count; j++) out += randomZalgoMark();
   }
