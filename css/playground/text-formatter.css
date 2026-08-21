@@ -323,9 +323,9 @@
 }
 
 .tf__chip--on {
-  color: var(--accent);
+  color: #ffffff;
   border-color: var(--accent);
-  background: var(--card-bg);
+  background: var(--accent);
 }
 
 .tf__range {

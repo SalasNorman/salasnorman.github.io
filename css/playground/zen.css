@@ -68,9 +68,9 @@
 }
 
 .zen__btn--active {
-  color: var(--accent);
+  color: #ffffff;
   border-color: var(--accent);
-  background: var(--card-bg);
+  background: var(--accent);
 }
 
 .zen__btn--small {
