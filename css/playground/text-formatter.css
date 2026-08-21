@@ -78,7 +78,7 @@
   font-family: 'IBM Plex Mono', monospace;
   font-size: 0.85rem;
   line-height: 1.6;
-  resize: vertical;
+  resize: none;
   outline: none;
 }
 
