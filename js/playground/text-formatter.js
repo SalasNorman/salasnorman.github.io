@@ -131,7 +131,9 @@ function showTab(tab) {
 
 function autoFormat() {
   if (!tfEditor) return;
-  originalText = tfEditor.value;
+  if (activeTab === 'edit') {
+    originalText = tfEditor.value;
+  }
   formattedText = computeFormatted();
   showTab('preview');
 }
@@ -183,9 +185,6 @@ OPERATIONS.forEach(function (op) {
 });
 
 tfDrawerBody.addEventListener('change', function () {
-  if (activeTab === 'edit') {
-    originalText = tfEditor.value;
-  }
   autoFormat();
 });
 
