@@ -186,9 +186,18 @@
 
 /* Operation items */
 .tf__op {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.tf__op-main {
   display: flex;
   align-items: center;
   gap: 0.5rem;
+  flex: 1;
+  min-width: 0;
   padding: 0.5rem 0.75rem;
   background: var(--bg);
   border-radius: 6px;
@@ -198,7 +207,7 @@
   transition: background 0.2s;
 }
 
-.tf__op:hover {
+.tf__op-main:hover {
   background: var(--divider);
 }
 
@@ -206,6 +215,50 @@
   accent-color: var(--accent);
   cursor: pointer;
   flex-shrink: 0;
+}
+
+.tf__info {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+  padding: 0;
+  border: none;
+  border-radius: 50%;
+  background: none;
+  color: var(--text-subtle);
+  font-size: 0.8rem;
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: color 0.2s;
+}
+
+.tf__info:hover,
+.tf__info:focus-visible {
+  color: var(--accent);
+}
+
+.tf__tooltip {
+  position: absolute;
+  top: calc(100% + 4px);
+  left: 0.75rem;
+  right: 0.75rem;
+  z-index: 30;
+  padding: 0.5rem 0.6rem;
+  background: var(--card-bg);
+  color: var(--text);
+  border: 1px solid var(--divider);
+  border-radius: 6px;
+  box-shadow: var(--shadow);
+  font-size: 0.7rem;
+  line-height: 1.4;
+  text-align: left;
+  pointer-events: none;
+}
+
+.tf__tooltip[hidden] {
+  display: none;
 }
 
 /* Shared input styles */

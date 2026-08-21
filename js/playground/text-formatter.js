@@ -13,26 +13,26 @@ var formattedText = '';
 var activeTab = 'edit';
 
 var OPERATIONS = [
-  { id: 'tf-trim-check', label: 'Trim whitespace', fn: function (text) {
+  { id: 'tf-trim-check', label: 'Trim whitespace', desc: 'Removes leading and trailing spaces from every line.', fn: function (text) {
     return text.split('\n').map(function (l) { return l.replace(/^\s+|\s+$/g, ''); }).join('\n');
   }},
-  { id: 'tf-spaces-check', label: 'Remove extra spaces', fn: function (text) {
+  { id: 'tf-spaces-check', label: 'Remove extra spaces', desc: 'Collapses runs of spaces into a single space.', fn: function (text) {
     return text.replace(/[^\S\n]+/g, ' ');
   }},
-  { id: 'tf-breaks-check', label: 'Remove line breaks', fn: function (text) {
+  { id: 'tf-breaks-check', label: 'Remove line breaks', desc: 'Joins all lines into one continuous line.', fn: function (text) {
     return text.split('\n').map(function (l) { return l.replace(/^\s+|\s+$/g, ''); }).filter(function (l) { return l !== ''; }).join(' ');
   }},
-  { id: 'tf-dedup-check', label: 'Deduplicate lines', fn: function (text) {
+  { id: 'tf-dedup-check', label: 'Deduplicate lines', desc: 'Keeps only the first copy of each repeated line.', fn: function (text) {
     var seen = {};
     return text.split('\n').filter(function (l) { if (seen[l]) return false; seen[l] = true; return true; }).join('\n');
   }},
-  { id: 'tf-sort-check', label: 'Sort lines', type: 'select', options: [
+  { id: 'tf-sort-check', label: 'Sort lines', desc: 'Orders lines alphabetically; choose A→Z or Z→A.', type: 'select', options: [
     { value: 'asc', text: 'A→Z' },
     { value: 'desc', text: 'Z→A' }
   ], fn: function (text, dir) {
     return text.split('\n').sort(function (a, b) { return dir === 'desc' ? b.localeCompare(a) : a.localeCompare(b); }).join('\n');
   }},
-  { id: 'tf-case-check', label: 'Convert Case', type: 'select', options: [
+  { id: 'tf-case-check', label: 'Convert Case', desc: 'Switches letter casing: UPPERCASE, lowercase, Title Case, Sentence case, camelCase, snake_case, kebab-case.', type: 'select', options: [
     { value: 'upper', text: 'UPPERCASE' },
     { value: 'lower', text: 'lowercase' },
     { value: 'title', text: 'Title Case' },
@@ -53,10 +53,10 @@ var OPERATIONS = [
     if (type === 'kebab') return text.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '');
     return text;
   }},
-  { id: 'tf-linenums-check', label: 'Add line numbers', fn: function (text) {
+  { id: 'tf-linenums-check', label: 'Add line numbers', desc: 'Prefixes each line with its number (1., 2., 3., …).', fn: function (text) {
     return text.split('\n').map(function (l, i) { return (i + 1) + '. ' + l; }).join('\n');
   }},
-  { id: 'tf-wrap-check', label: 'Word wrap at', type: 'number', defaultValue: 80, fn: function (text, width) {
+  { id: 'tf-wrap-check', label: 'Word wrap at', desc: 'Breaks lines longer than the given number of characters.', type: 'number', defaultValue: 80, fn: function (text, width) {
     var result = [];
     text.split('\n\n').forEach(function (para) {
       var words = para.split(/\s+/);
@@ -76,7 +76,8 @@ function buildDrawer() {
   if (!tfDrawerBody) return;
   var html = '';
   OPERATIONS.forEach(function (op) {
-    html += '<label class="tf__op">';
+    html += '<div class="tf__op">';
+    html += '<label class="tf__op-main" for="' + op.id + '">';
     html += '<input type="checkbox" id="' + op.id + '" />';
     html += '<span>' + op.label + '</span>';
     if (op.type === 'select') {
@@ -90,6 +91,11 @@ function buildDrawer() {
       html += '<span>chars</span>';
     }
     html += '</label>';
+    html += '<button type="button" id="' + op.id + '-info" class="tf__info" aria-expanded="false" aria-label="About ' + op.label + '" aria-describedby="' + op.id + '-tip">';
+    html += '<i class="bi bi-info-circle"></i>';
+    html += '</button>';
+    html += '<span id="' + op.id + '-tip" class="tf__tooltip" role="tooltip" hidden>' + op.desc + '</span>';
+    html += '</div>';
   });
   tfDrawerBody.innerHTML = html;
 }
@@ -177,7 +183,56 @@ function bindCheckboxDisabled(checkboxId, selector) {
   }
 }
 
+function closeAllTooltips() {
+  var tips = tfDrawerBody.querySelectorAll('.tf__tooltip');
+  var infos = tfDrawerBody.querySelectorAll('.tf__info');
+  var i;
+  for (i = 0; i < tips.length; i++) {
+    tips[i].hidden = true;
+    tips[i].removeAttribute('data-pinned');
+  }
+  for (i = 0; i < infos.length; i++) {
+    infos[i].setAttribute('aria-expanded', 'false');
+  }
+}
+
+function setupTooltipRow(row) {
+  var btn = row.querySelector('.tf__info');
+  var tip = row.querySelector('.tf__tooltip');
+  if (!btn || !tip) return;
+
+  function show() {
+    tip.hidden = false;
+    btn.setAttribute('aria-expanded', 'true');
+  }
+
+  function hideUnlessPinned() {
+    if (tip.getAttribute('data-pinned') !== 'true') {
+      tip.hidden = true;
+      btn.setAttribute('aria-expanded', 'false');
+    }
+  }
+
+  row.addEventListener('mouseenter', show);
+  row.addEventListener('mouseleave', hideUnlessPinned);
+  btn.addEventListener('focus', show);
+  btn.addEventListener('blur', hideUnlessPinned);
+  btn.addEventListener('click', function (e) {
+    e.stopPropagation();
+    var wasPinned = tip.getAttribute('data-pinned') === 'true';
+    closeAllTooltips();
+    if (!wasPinned) {
+      tip.setAttribute('data-pinned', 'true');
+      tip.hidden = false;
+      btn.setAttribute('aria-expanded', 'true');
+    }
+  });
+}
+
 buildDrawer();
+
+var opRows = tfDrawerBody ? tfDrawerBody.querySelectorAll('.tf__op') : [];
+for (var r = 0; r < opRows.length; r++) setupTooltipRow(opRows[r]);
 
 OPERATIONS.forEach(function (op) {
   if (op.type === 'select') bindCheckboxDisabled(op.id, op.id + '-select');
@@ -214,8 +269,19 @@ if (tfDrawerToggle) tfDrawerToggle.addEventListener('click', openDrawer);
 if (tfDrawerClose) tfDrawerClose.addEventListener('click', closeDrawer);
 if (tfBackdrop) tfBackdrop.addEventListener('click', closeDrawer);
 
+document.addEventListener('click', function (e) {
+  if (e.target.closest && !e.target.closest('.tf__info')) {
+    closeAllTooltips();
+  }
+});
+
 document.addEventListener('keydown', function (e) {
-  if (e.key === 'Escape' && tfDrawer && tfDrawer.classList.contains('tf__drawer--open')) {
+  if (e.key !== 'Escape') return;
+  if (tfDrawerBody && tfDrawerBody.querySelector('.tf__tooltip:not([hidden])')) {
+    closeAllTooltips();
+    return;
+  }
+  if (tfDrawer && tfDrawer.classList.contains('tf__drawer--open')) {
     closeDrawer();
   }
 });
