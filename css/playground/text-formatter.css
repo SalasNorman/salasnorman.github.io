@@ -106,11 +106,6 @@
   color: #ffffff;
 }
 
-.tf__btn--copy {
-  font-size: 0.75rem;
-  padding: 0.35rem 0.75rem;
-}
-
 /* Backdrop */
 .tf__backdrop {
   position: absolute;
