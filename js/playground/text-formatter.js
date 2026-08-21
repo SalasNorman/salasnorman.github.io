@@ -69,17 +69,92 @@ var OPERATIONS = [
       if (line !== '') result.push(line);
     });
     return result.join('\n');
-  }}
+  }},
+  { id: 'tf-font-bold', label: 'Bold', ui: 'chip', kind: 'font', glyph: '𝐁', fn: makeFontFn('bold') },
+  { id: 'tf-font-italic', label: 'Italic', ui: 'chip', kind: 'font', glyph: '𝐼', fn: makeFontFn('italic') },
+  { id: 'tf-font-bolditalic', label: 'Bold Italic', ui: 'chip', kind: 'font', glyph: '𝘽', fn: makeFontFn('boldItalic') },
+  { id: 'tf-font-sans', label: 'Sans', ui: 'chip', kind: 'font', glyph: '𝖲', fn: makeFontFn('sans') },
+  { id: 'tf-font-sansbold', label: 'Sans Bold', ui: 'chip', kind: 'font', glyph: '𝗦', fn: makeFontFn('sansBold') },
+  { id: 'tf-font-mono', label: 'Monospace', ui: 'chip', kind: 'font', glyph: '𝙼', fn: makeFontFn('mono') },
+  { id: 'tf-under-chip', label: 'Underline', ui: 'chip', kind: 'deco', icon: 'bi-type-underline', fn: underlineText },
+  { id: 'tf-strike-chip', label: 'Strikethrough', ui: 'chip', kind: 'deco', icon: 'bi-type-strikethrough', fn: strikeText },
+  { id: 'tf-zalgo-chip', label: 'Zalgo text', ui: 'chip', kind: 'deco', icon: 'bi-virus', control: 'range', rangeMin: 1, rangeMax: 15, rangeValue: 6, fn: zalgoText }
 ];
 
 function visualizeSample(text) {
   return text.replace(/ /g, '␣').replace(/\n/g, '↵');
 }
 
+var FONT_RANGES = {
+  bold: { upper: 0x1D400, lower: 0x1D41A, digits: 0x1D7CE },
+  italic: { upper: 0x1D434, lower: 0x1D44E },
+  boldItalic: { upper: 0x1D468, lower: 0x1D482 },
+  sans: { upper: 0x1D5A0, lower: 0x1D5BA, digits: 0x1D7E2 },
+  sansBold: { upper: 0x1D5D4, lower: 0x1D5EE, digits: 0x1D7EC },
+  mono: { upper: 0x1D670, lower: 0x1D68A, digits: 0x1D7F6 }
+};
+
+function makeFontFn(style) {
+  return function (text) {
+    var range = FONT_RANGES[style];
+    var out = '';
+    var i;
+    var code;
+    for (i = 0; i < text.length; i++) {
+      if (style === 'italic' && text[i] === 'h') { out += '\u210E'; continue; }
+      code = text.charCodeAt(i);
+      if (code >= 65 && code <= 90) {
+        out += String.fromCodePoint(range.upper + code - 65);
+      } else if (code >= 97 && code <= 122) {
+        out += String.fromCodePoint(range.lower + code - 97);
+      } else if (range.digits && code >= 48 && code <= 57) {
+        out += String.fromCodePoint(range.digits + code - 48);
+      } else {
+        out += text[i];
+      }
+    }
+    return out;
+  };
+}
+
+function underlineText(text) {
+  return text.split('').join('\u0332');
+}
+
+function strikeText(text) {
+  return text.split('').join('\u0336');
+}
+
+var ZALGO_RANGES = [
+  [0x0300, 0x0314], [0x033D, 0x0344], [0x0346, 0x034F],
+  [0x0333, 0x0338],
+  [0x0316, 0x0329], [0x032C, 0x0331]
+];
+
+function randomZalgoMark() {
+  var r = ZALGO_RANGES[Math.floor(Math.random() * ZALGO_RANGES.length)];
+  return String.fromCodePoint(r[0] + Math.floor(Math.random() * (r[1] - r[0] + 1)));
+}
+
+function zalgoText(text, maxMarks) {
+  var out = '';
+  var i;
+  var j;
+  var count;
+  for (i = 0; i < text.length; i++) {
+    out += text[i];
+    if (/\s/.test(text[i])) continue;
+    count = 1 + Math.floor(Math.random() * maxMarks);
+    for (j = 0; j < count; j++) out += randomZalgoMark();
+  }
+  return out;
+}
+
 function buildDrawer() {
   if (!tfDrawerBody) return;
   var html = '';
   OPERATIONS.forEach(function (op) {
+    if (op.ui === 'chip') return;
     html += '<div class="tf__op">';
     html += '<label class="tf__op-main" for="' + op.id + '">';
     html += '<input type="checkbox" id="' + op.id + '" />';
@@ -106,15 +181,41 @@ function buildDrawer() {
     html += '</span>';
     html += '</div>';
   });
+  html += '<div class="tf__group-header">Fonts</div>';
+  html += '<div class="tf__chips">';
+  OPERATIONS.forEach(function (op) {
+    if (op.ui !== 'chip' || op.kind !== 'font') return;
+    html += '<button type="button" id="' + op.id + '" class="tf__chip" aria-pressed="false" aria-label="' + op.label + '" title="' + op.label + '">' + op.glyph + '</button>';
+  });
+  html += '</div>';
+  html += '<div class="tf__group-header">Decorations</div>';
+  html += '<div class="tf__chips">';
+  OPERATIONS.forEach(function (op) {
+    if (op.ui !== 'chip' || op.kind !== 'deco') return;
+    html += '<button type="button" id="' + op.id + '" class="tf__chip" aria-pressed="false" aria-label="' + op.label + '" title="' + op.label + '"><i class="bi ' + op.icon + '"></i></button>';
+    if (op.control === 'range') {
+      html += '<input type="range" id="' + op.id + '-range" class="tf__range" min="' + op.rangeMin + '" max="' + op.rangeMax + '" value="' + op.rangeValue + '" hidden />';
+    }
+  });
+  html += '</div>';
   tfDrawerBody.innerHTML = html;
 }
 
 function computeFormatted() {
   var text = originalText;
   OPERATIONS.forEach(function (op) {
+    var param = null;
+    if (op.ui === 'chip') {
+      if (!op.active) return;
+      if (op.control === 'range') {
+        var slider = document.getElementById(op.id + '-range');
+        param = slider ? (parseInt(slider.value, 10) || op.rangeValue) : op.rangeValue;
+      }
+      text = op.fn(text, param);
+      return;
+    }
     var checkbox = document.getElementById(op.id);
     if (!checkbox || !checkbox.checked) return;
-    var param = null;
     if (op.type === 'select') {
       var sel = document.getElementById(op.id + '-select');
       param = sel ? sel.value : null;
@@ -246,6 +347,45 @@ for (var r = 0; r < opRows.length; r++) setupTooltipRow(opRows[r]);
 OPERATIONS.forEach(function (op) {
   if (op.type === 'select') bindCheckboxDisabled(op.id, op.id + '-select');
   if (op.type === 'number') bindCheckboxDisabled(op.id, op.id + '-width');
+});
+
+function syncChipUI() {
+  OPERATIONS.forEach(function (op) {
+    if (op.ui !== 'chip') return;
+    var el = document.getElementById(op.id);
+    if (!el) return;
+    el.classList.toggle('tf__chip--on', !!op.active);
+    el.setAttribute('aria-pressed', op.active ? 'true' : 'false');
+    if (op.control === 'range') {
+      var slider = document.getElementById(op.id + '-range');
+      if (slider) slider.hidden = !op.active;
+    }
+  });
+}
+
+function toggleChip(chipId) {
+  var target = null;
+  OPERATIONS.forEach(function (op) {
+    if (op.id === chipId && op.ui === 'chip') target = op;
+  });
+  if (!target) return;
+  if (target.kind === 'font') {
+    var wasActive = !!target.active;
+    OPERATIONS.forEach(function (op) {
+      if (op.kind === 'font') op.active = false;
+    });
+    target.active = !wasActive;
+  } else {
+    target.active = !target.active;
+  }
+  syncChipUI();
+  autoFormat();
+}
+
+tfDrawerBody.addEventListener('click', function (e) {
+  var chip = e.target.closest ? e.target.closest('.tf__chip') : null;
+  if (!chip) return;
+  toggleChip(chip.id);
 });
 
 tfDrawerBody.addEventListener('change', function () {

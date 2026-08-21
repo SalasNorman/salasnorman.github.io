@@ -276,6 +276,58 @@
   word-break: break-word;
 }
 
+/* Font & decoration chips */
+.tf__group-header {
+  margin: 0.75rem 0 0.4rem;
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--text-subtle);
+}
+
+.tf__chips {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+
+.tf__chip {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  padding: 0;
+  border: 1px solid var(--divider);
+  border-radius: 6px;
+  background: none;
+  color: var(--text);
+  font-family: inherit;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: color 0.2s, border-color 0.2s, background 0.2s;
+}
+
+.tf__chip:hover {
+  color: var(--accent);
+  border-color: var(--accent);
+}
+
+.tf__chip--on {
+  color: var(--accent);
+  border-color: var(--accent);
+  background: var(--card-bg);
+}
+
+.tf__range {
+  flex: 1;
+  min-width: 80px;
+  accent-color: var(--accent);
+  cursor: pointer;
+}
+
 /* Shared input styles */
 .tf__select,
 .tf__num-input {
