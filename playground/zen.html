@@ -58,7 +58,7 @@
             <button id="zen-download" class="zen__btn" title="Download">
               <i class="bi bi-download"></i>
             </button>
-            <div id="zen-download-menu" class="zen__download-menu" style="display:none">
+            <div id="zen-download-menu" class="zen__download-menu" hidden>
               <button id="zen-download-txt" class="zen__download-item">.txt</button>
               <button id="zen-download-md" class="zen__download-item">.md</button>
             </div>
@@ -66,7 +66,7 @@
         </div>
       </div>
 
-      <div id="zen-find-bar" class="zen__find-bar" style="display:none">
+      <div id="zen-find-bar" class="zen__find-bar" hidden>
         <input id="zen-find-input" class="zen__find-input" type="text" placeholder="Find..." />
         <input id="zen-replace-input" class="zen__find-input" type="text" placeholder="Replace..." />
         <button id="zen-find-prev" class="zen__btn zen__btn--small" title="Previous">
@@ -86,14 +86,14 @@
         </button>
       </div>
 
-      <div id="zen-tabs" class="zen__tabs" style="display:none">
+      <div id="zen-tabs" class="zen__tabs" hidden>
         <button id="zen-tab-edit" class="zen__tab zen__tab--active">Edit</button>
         <button id="zen-tab-preview" class="zen__tab">Preview</button>
       </div>
 
       <div class="zen__editor">
         <div id="zen-content" class="zen__content" contenteditable="true" data-placeholder="Start writing..."></div>
-        <div id="zen-preview" class="zen__preview" style="display:none"></div>
+        <div id="zen-preview" class="zen__preview" hidden></div>
       </div>
 
       <div class="zen__stats">

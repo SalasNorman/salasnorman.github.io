@@ -1,34 +1,34 @@
-var zenContent = document.getElementById('zen-content');
-var zenPreview = document.getElementById('zen-preview');
-var zenWords = document.getElementById('zen-words');
-var zenChars = document.getElementById('zen-chars');
-var zenFont = document.getElementById('zen-font');
-var zenFullscreen = document.getElementById('zen-fullscreen');
-var zenMarkdown = document.getElementById('zen-markdown');
-var zenFind = document.getElementById('zen-find');
-var zenDownload = document.getElementById('zen-download');
-var zenDownloadMenu = document.getElementById('zen-download-menu');
-var zenDownloadTxt = document.getElementById('zen-download-txt');
-var zenDownloadMd = document.getElementById('zen-download-md');
-var zenFindBar = document.getElementById('zen-find-bar');
-var zenFindInput = document.getElementById('zen-find-input');
-var zenReplaceInput = document.getElementById('zen-replace-input');
-var zenFindPrev = document.getElementById('zen-find-prev');
-var zenFindNext = document.getElementById('zen-find-next');
-var zenReplaceOne = document.getElementById('zen-replace-one');
-var zenReplaceAll = document.getElementById('zen-replace-all');
-var zenFindClose = document.getElementById('zen-find-close');
-var zenTabs = document.getElementById('zen-tabs');
-var zenTabEdit = document.getElementById('zen-tab-edit');
-var zenTabPreview = document.getElementById('zen-tab-preview');
-var zenFontSize = document.getElementById('zen-font-size');
+const zenContent = document.getElementById('zen-content');
+const zenPreview = document.getElementById('zen-preview');
+const zenWords = document.getElementById('zen-words');
+const zenChars = document.getElementById('zen-chars');
+const zenFont = document.getElementById('zen-font');
+const zenFullscreen = document.getElementById('zen-fullscreen');
+const zenMarkdown = document.getElementById('zen-markdown');
+const zenFind = document.getElementById('zen-find');
+const zenDownload = document.getElementById('zen-download');
+const zenDownloadMenu = document.getElementById('zen-download-menu');
+const zenDownloadTxt = document.getElementById('zen-download-txt');
+const zenDownloadMd = document.getElementById('zen-download-md');
+const zenFindBar = document.getElementById('zen-find-bar');
+const zenFindInput = document.getElementById('zen-find-input');
+const zenReplaceInput = document.getElementById('zen-replace-input');
+const zenFindPrev = document.getElementById('zen-find-prev');
+const zenFindNext = document.getElementById('zen-find-next');
+const zenReplaceOne = document.getElementById('zen-replace-one');
+const zenReplaceAll = document.getElementById('zen-replace-all');
+const zenFindClose = document.getElementById('zen-find-close');
+const zenTabs = document.getElementById('zen-tabs');
+const zenTabEdit = document.getElementById('zen-tab-edit');
+const zenTabPreview = document.getElementById('zen-tab-preview');
+const zenFontSize = document.getElementById('zen-font-size');
 
-var STORAGE_KEY = 'zen-editor-content';
-var FONT_KEY = 'zen-editor-font';
-var FONT_SIZE_KEY = 'zen-editor-font-size';
-var MARKDOWN_KEY = 'zen-editor-markdown';
-var markdownMode = false;
-var converter = null;
+const STORAGE_KEY = 'zen-editor-content';
+const FONT_KEY = 'zen-editor-font';
+const FONT_SIZE_KEY = 'zen-editor-font-size';
+const MARKDOWN_KEY = 'zen-editor-markdown';
+let markdownMode = false;
+let converter = null;
 
 function getConverter() {
   if (!converter && typeof showdown !== 'undefined') {
@@ -39,12 +39,12 @@ function getConverter() {
 
 function updateStats() {
   if (!zenContent || !zenWords || !zenChars) return;
-  var text = zenContent.innerText || '';
-  var trimmed = text.trim();
-  var wordCount = trimmed === '' ? 0 : trimmed.split(/\s+/).length;
-  var charCount = trimmed.length;
-  zenWords.textContent = wordCount + ' word' + (wordCount !== 1 ? 's' : '');
-  zenChars.textContent = charCount + ' character' + (charCount !== 1 ? 's' : '');
+  const text = zenContent.innerText || '';
+  const trimmed = text.trim();
+  const wordCount = trimmed === '' ? 0 : trimmed.split(/\s+/).length;
+  const charCount = trimmed.length;
+  zenWords.textContent = `${wordCount} word${wordCount !== 1 ? 's' : ''}`;
+  zenChars.textContent = `${charCount} character${charCount !== 1 ? 's' : ''}`;
 }
 
 function saveContent() {
@@ -57,7 +57,7 @@ function saveContent() {
 function loadContent() {
   if (!zenContent) return;
   try {
-    var saved = localStorage.getItem(STORAGE_KEY);
+    const saved = localStorage.getItem(STORAGE_KEY);
     if (saved) {
       zenContent.innerHTML = saved;
     }
@@ -65,17 +65,21 @@ function loadContent() {
 }
 
 function updatePreview() {
-  var conv = getConverter();
+  const conv = getConverter();
   if (!zenPreview || !conv) return;
-  var html = zenContent.innerHTML || '';
-  var plain = html.replace(/<br\s*\/?>/gi, '\n').replace(/<div[^>]*>/gi, '\n').replace(/<\/div>/gi, '').replace(/<[^>]+>/g, '');
+  const html = zenContent.innerHTML || '';
+  const plain = html
+    .replace(/<br\s*\/?>/gi, '\n')
+    .replace(/<div[^>]*>/gi, '\n')
+    .replace(/<\/div>/gi, '')
+    .replace(/<[^>]+>/g, '');
   zenPreview.innerHTML = conv.makeHtml(plain);
 }
 
 function loadFont() {
   if (!zenContent || !zenFont) return;
   try {
-    var saved = localStorage.getItem(FONT_KEY);
+    const saved = localStorage.getItem(FONT_KEY);
     if (saved) {
       zenContent.style.fontFamily = saved;
       zenFont.value = saved;
@@ -86,10 +90,10 @@ function loadFont() {
 function loadFontSize() {
   if (!zenContent || !zenFontSize) return;
   try {
-    var saved = localStorage.getItem(FONT_SIZE_KEY);
+    const saved = localStorage.getItem(FONT_SIZE_KEY);
     if (saved) {
-      zenContent.style.fontSize = saved + 'px';
-      if (zenPreview) zenPreview.style.fontSize = saved + 'px';
+      zenContent.style.fontSize = `${saved}px`;
+      if (zenPreview) zenPreview.style.fontSize = `${saved}px`;
       zenFontSize.value = saved;
     }
   } catch (e) {}
@@ -100,23 +104,23 @@ function showTab(tab) {
   if (tab === 'edit') {
     zenTabEdit.classList.add('zen__tab--active');
     zenTabPreview.classList.remove('zen__tab--active');
-    zenContent.style.display = '';
-    zenPreview.style.display = 'none';
+    zenContent.hidden = false;
+    zenPreview.hidden = true;
   } else {
     zenTabPreview.classList.add('zen__tab--active');
     zenTabEdit.classList.remove('zen__tab--active');
-    zenContent.style.display = 'none';
-    zenPreview.style.display = '';
+    zenContent.hidden = true;
+    zenPreview.hidden = false;
     updatePreview();
   }
 }
 
 function loadMarkdownMode() {
   try {
-    var saved = localStorage.getItem(MARKDOWN_KEY);
+    const saved = localStorage.getItem(MARKDOWN_KEY);
     if (saved === 'true') {
       markdownMode = true;
-      if (zenTabs) zenTabs.style.display = '';
+      if (zenTabs) zenTabs.hidden = false;
       if (zenMarkdown) zenMarkdown.classList.add('zen__btn--active');
       showTab('edit');
     }
@@ -130,7 +134,7 @@ if (zenContent) {
   loadMarkdownMode();
   updateStats();
 
-  zenContent.addEventListener('input', function () {
+  zenContent.addEventListener('input', () => {
     updateStats();
     saveContent();
     if (markdownMode && zenTabPreview && zenTabPreview.classList.contains('zen__tab--active')) {
@@ -138,36 +142,36 @@ if (zenContent) {
     }
   });
 
-  zenContent.addEventListener('paste', function (e) {
+  zenContent.addEventListener('paste', (e) => {
     e.preventDefault();
-    var text = (e.clipboardData || window.clipboardData).getData('text/plain');
+    const text = (e.clipboardData || window.clipboardData).getData('text/plain');
     document.execCommand('insertText', false, text);
   });
 }
 
 if (zenFont && zenContent) {
-  zenFont.addEventListener('change', function () {
-    zenContent.style.fontFamily = this.value;
+  zenFont.addEventListener('change', (e) => {
+    zenContent.style.fontFamily = e.target.value;
     try {
-      localStorage.setItem(FONT_KEY, this.value);
-    } catch (e) {}
+      localStorage.setItem(FONT_KEY, e.target.value);
+    } catch (err) {}
   });
 }
 
 if (zenFontSize && zenContent) {
-  zenFontSize.addEventListener('change', function () {
-    zenContent.style.fontSize = this.value + 'px';
-    if (zenPreview) zenPreview.style.fontSize = this.value + 'px';
+  zenFontSize.addEventListener('change', (e) => {
+    zenContent.style.fontSize = `${e.target.value}px`;
+    if (zenPreview) zenPreview.style.fontSize = `${e.target.value}px`;
     try {
-      localStorage.setItem(FONT_SIZE_KEY, this.value);
-    } catch (e) {}
+      localStorage.setItem(FONT_SIZE_KEY, e.target.value);
+    } catch (err) {}
   });
 }
 
 if (zenFullscreen) {
-  zenFullscreen.addEventListener('click', function () {
+  zenFullscreen.addEventListener('click', () => {
     if (!document.fullscreenElement) {
-      document.documentElement.requestFullscreen().catch(function () {});
+      document.documentElement.requestFullscreen().catch(() => {});
     } else {
       document.exitFullscreen();
     }
@@ -175,42 +179,38 @@ if (zenFullscreen) {
 }
 
 if (zenMarkdown) {
-  zenMarkdown.addEventListener('click', function () {
+  zenMarkdown.addEventListener('click', (e) => {
     markdownMode = !markdownMode;
     if (zenTabs) {
-      zenTabs.style.display = markdownMode ? '' : 'none';
+      zenTabs.hidden = !markdownMode;
     }
-    this.classList.toggle('zen__btn--active', markdownMode);
+    e.currentTarget.classList.toggle('zen__btn--active', markdownMode);
     try {
       localStorage.setItem(MARKDOWN_KEY, markdownMode);
-    } catch (e) {}
+    } catch (err) {}
     if (markdownMode) {
       showTab('edit');
     } else {
-      if (zenContent) zenContent.style.display = '';
-      if (zenPreview) zenPreview.style.display = 'none';
+      if (zenContent) zenContent.hidden = false;
+      if (zenPreview) zenPreview.hidden = true;
     }
   });
 }
 
 if (zenTabEdit) {
-  zenTabEdit.addEventListener('click', function () {
-    showTab('edit');
-  });
+  zenTabEdit.addEventListener('click', () => showTab('edit'));
 }
 
 if (zenTabPreview) {
-  zenTabPreview.addEventListener('click', function () {
-    showTab('preview');
-  });
+  zenTabPreview.addEventListener('click', () => showTab('preview'));
 }
 
 function downloadFile(filename, type) {
   if (!zenContent) return;
-  var text = zenContent.innerText || '';
-  var blob = new Blob([text], { type: type });
-  var url = URL.createObjectURL(blob);
-  var a = document.createElement('a');
+  const text = zenContent.innerText || '';
+  const blob = new Blob([text], { type });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
   a.href = url;
   a.download = filename;
   a.click();
@@ -218,66 +218,65 @@ function downloadFile(filename, type) {
 }
 
 if (zenDownload) {
-  zenDownload.addEventListener('click', function (e) {
+  zenDownload.addEventListener('click', (e) => {
     e.stopPropagation();
     if (zenDownloadMenu) {
-      zenDownloadMenu.style.display = zenDownloadMenu.style.display === 'none' ? 'block' : 'none';
+      zenDownloadMenu.hidden = !zenDownloadMenu.hidden;
     }
   });
 }
 
-document.addEventListener('click', function () {
-  if (zenDownloadMenu) zenDownloadMenu.style.display = 'none';
+document.addEventListener('click', () => {
+  if (zenDownloadMenu) zenDownloadMenu.hidden = true;
 });
 
 if (zenDownloadTxt) {
-  zenDownloadTxt.addEventListener('click', function () {
-    downloadFile('notepad.txt', 'text/plain');
-  });
+  zenDownloadTxt.addEventListener('click', () => downloadFile('notepad.txt', 'text/plain'));
 }
 
 if (zenDownloadMd) {
-  zenDownloadMd.addEventListener('click', function () {
-    downloadFile('notepad.md', 'text/markdown');
-  });
+  zenDownloadMd.addEventListener('click', () => downloadFile('notepad.md', 'text/markdown'));
 }
 
 if (zenFind) {
-  zenFind.addEventListener('click', function () {
+  zenFind.addEventListener('click', () => {
     if (!zenFindBar) return;
-    var isVisible = zenFindBar.style.display !== 'none';
-    zenFindBar.style.display = isVisible ? 'none' : 'flex';
-    if (!isVisible && zenFindInput) {
+    const willShow = zenFindBar.hidden;
+    zenFindBar.hidden = !willShow;
+    if (willShow && zenFindInput) {
       zenFindInput.focus();
     }
   });
 }
 
 if (zenFindClose) {
-  zenFindClose.addEventListener('click', function () {
-    if (zenFindBar) zenFindBar.style.display = 'none';
+  zenFindClose.addEventListener('click', () => {
+    if (zenFindBar) zenFindBar.hidden = true;
     clearHighlights();
   });
 }
 
 function clearHighlights() {
   if (!zenContent) return;
-  var marks = zenContent.querySelectorAll('mark.zen-highlight');
-  for (var i = 0; i < marks.length; i++) {
-    var parent = marks[i].parentNode;
-    parent.replaceChild(document.createTextNode(marks[i].textContent), marks[i]);
+  const marks = zenContent.querySelectorAll('mark.zen-highlight');
+  marks.forEach((mark) => {
+    const parent = mark.parentNode;
+    parent.replaceChild(document.createTextNode(mark.textContent), mark);
     parent.normalize();
-  }
+  });
+}
+
+function escapeRegExp(text) {
+  return text.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 }
 
 function highlightAll(query) {
   clearHighlights();
   if (!query || !zenContent) return 0;
-  var textNode = zenContent.firstChild;
-  if (!textNode) return 0;
-  var html = zenContent.innerHTML;
-  var regex = new RegExp('(' + query.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + ')', 'gi');
-  var count = (html.match(regex) || []).length;
+  if (!zenContent.firstChild) return 0;
+  const html = zenContent.innerHTML;
+  const regex = new RegExp(`(${escapeRegExp(query)})`, 'gi');
+  const count = (html.match(regex) || []).length;
   if (count > 0) {
     zenContent.innerHTML = html.replace(regex, '<mark class="zen-highlight">$1</mark>');
   }
@@ -287,8 +286,8 @@ function highlightAll(query) {
 function replaceOne(query, replacement) {
   if (!query || !zenContent) return;
   clearHighlights();
-  var html = zenContent.innerHTML;
-  var regex = new RegExp('(' + query.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + ')', 'i');
+  const html = zenContent.innerHTML;
+  const regex = new RegExp(`(${escapeRegExp(query)})`, 'i');
   zenContent.innerHTML = html.replace(regex, replacement);
   saveContent();
   if (markdownMode && zenTabPreview && zenTabPreview.classList.contains('zen__tab--active')) {
@@ -299,8 +298,8 @@ function replaceOne(query, replacement) {
 function replaceAll(query, replacement) {
   if (!query || !zenContent) return;
   clearHighlights();
-  var html = zenContent.innerHTML;
-  var regex = new RegExp(query.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'gi');
+  const html = zenContent.innerHTML;
+  const regex = new RegExp(escapeRegExp(query), 'gi');
   zenContent.innerHTML = html.replace(regex, replacement);
   saveContent();
   if (markdownMode && zenTabPreview && zenTabPreview.classList.contains('zen__tab--active')) {
@@ -309,23 +308,23 @@ function replaceAll(query, replacement) {
 }
 
 if (zenFindInput) {
-  var findTimer = null;
-  zenFindInput.addEventListener('input', function () {
+  let findTimer = null;
+  zenFindInput.addEventListener('input', (e) => {
     clearTimeout(findTimer);
-    var val = this.value;
-    findTimer = setTimeout(function () {
+    const val = e.target.value;
+    findTimer = setTimeout(() => {
       highlightAll(val);
     }, 200);
   });
 }
 
 if (zenFindNext) {
-  zenFindNext.addEventListener('click', function () {
-    var marks = zenContent ? zenContent.querySelectorAll('mark.zen-highlight') : [];
+  zenFindNext.addEventListener('click', () => {
+    const marks = zenContent ? zenContent.querySelectorAll('mark.zen-highlight') : [];
     if (marks.length === 0) return;
-    var current = zenContent.querySelector('mark.zen-highlight--active');
+    const current = zenContent.querySelector('mark.zen-highlight--active');
     if (current) current.classList.remove('zen-highlight--active');
-    var next = current ? current.nextElementSibling : null;
+    let next = current ? current.nextElementSibling : null;
     while (next && next.tagName !== 'MARK') next = next.nextElementSibling;
     if (!next) next = marks[0];
     next.classList.add('zen-highlight--active');
@@ -334,12 +333,12 @@ if (zenFindNext) {
 }
 
 if (zenFindPrev) {
-  zenFindPrev.addEventListener('click', function () {
-    var marks = zenContent ? zenContent.querySelectorAll('mark.zen-highlight') : [];
+  zenFindPrev.addEventListener('click', () => {
+    const marks = zenContent ? zenContent.querySelectorAll('mark.zen-highlight') : [];
     if (marks.length === 0) return;
-    var current = zenContent.querySelector('mark.zen-highlight--active');
+    const current = zenContent.querySelector('mark.zen-highlight--active');
     if (current) current.classList.remove('zen-highlight--active');
-    var prev = current ? current.previousElementSibling : null;
+    let prev = current ? current.previousElementSibling : null;
     while (prev && prev.tagName !== 'MARK') prev = prev.previousElementSibling;
     if (!prev) prev = marks[marks.length - 1];
     prev.classList.add('zen-highlight--active');
@@ -348,18 +347,18 @@ if (zenFindPrev) {
 }
 
 if (zenReplaceOne) {
-  zenReplaceOne.addEventListener('click', function () {
-    var q = zenFindInput ? zenFindInput.value : '';
-    var r = zenReplaceInput ? zenReplaceInput.value : '';
+  zenReplaceOne.addEventListener('click', () => {
+    const q = zenFindInput ? zenFindInput.value : '';
+    const r = zenReplaceInput ? zenReplaceInput.value : '';
     replaceOne(q, r);
     if (q) highlightAll(q);
   });
 }
 
 if (zenReplaceAll) {
-  zenReplaceAll.addEventListener('click', function () {
-    var q = zenFindInput ? zenFindInput.value : '';
-    var r = zenReplaceInput ? zenReplaceInput.value : '';
+  zenReplaceAll.addEventListener('click', () => {
+    const q = zenFindInput ? zenFindInput.value : '';
+    const r = zenReplaceInput ? zenReplaceInput.value : '';
     replaceAll(q, r);
   });
 }

@@ -274,10 +274,6 @@
   pointer-events: none;
 }
 
-.tf__tooltip[hidden] {
-  display: none;
-}
-
 .tf__tooltip-sample {
   display: block;
   margin-top: 0.4rem;
