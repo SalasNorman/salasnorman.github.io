@@ -56,7 +56,7 @@
   border: 1px solid var(--accent);
   border-radius: 6px;
   background: none;
-  color: var(--accent);
+  color: var(--text);
   cursor: pointer;
   font-size: 0.9rem;
   transition: background 0.2s, color 0.2s, border-color 0.2s;
