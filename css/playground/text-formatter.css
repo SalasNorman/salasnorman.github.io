@@ -294,7 +294,10 @@
   display: flex;
   align-items: center;
   flex-wrap: wrap;
-  gap: 0.4rem;
+}
+
+.tf__chips--deco {
+  margin-left: 0.75rem;
 }
 
 .tf__chip {

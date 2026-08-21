@@ -7,7 +7,8 @@ var tfDrawerClose = document.getElementById('tfDrawerClose');
 var tfBackdrop = document.getElementById('tfBackdrop');
 var tfDrawer = document.getElementById('tfDrawer');
 var tfDrawerBody = document.getElementById('tfDrawerBody');
-var tfChips = document.getElementById('tfChips');
+var tfChipsFonts = document.getElementById('tfChipsFonts');
+var tfChipsDeco = document.getElementById('tfChipsDeco');
 
 var originalText = '';
 var formattedText = '';
@@ -187,17 +188,24 @@ function buildDrawer() {
 }
 
 function buildChips() {
-  if (!tfChips) return;
-  var html = '';
+  if (!tfChipsFonts || !tfChipsDeco) return;
+  var fontsHtml = '';
+  var decoHtml = '';
   OPERATIONS.forEach(function (op) {
     if (op.ui !== 'chip') return;
     var inner = op.glyph ? op.glyph : '<i class="bi ' + op.icon + '"></i>';
-    html += '<button type="button" id="' + op.id + '" class="tf__chip" aria-pressed="false" aria-label="' + op.label + '" title="' + op.label + '">' + inner + '</button>';
-    if (op.control === 'range') {
-      html += '<input type="range" id="' + op.id + '-range" class="tf__range" min="' + op.rangeMin + '" max="' + op.rangeMax + '" value="' + op.rangeValue + '" hidden />';
+    var chip = '<button type="button" id="' + op.id + '" class="tf__chip" aria-pressed="false" aria-label="' + op.label + '" title="' + op.label + '">' + inner + '</button>';
+    if (op.kind === 'font') {
+      fontsHtml += chip;
+    } else {
+      decoHtml += chip;
+      if (op.control === 'range') {
+        decoHtml += '<input type="range" id="' + op.id + '-range" class="tf__range" min="' + op.rangeMin + '" max="' + op.rangeMax + '" value="' + op.rangeValue + '" hidden />';
+      }
     }
   });
-  tfChips.innerHTML = html;
+  tfChipsFonts.innerHTML = fontsHtml;
+  tfChipsDeco.innerHTML = decoHtml;
 }
 
 function computeFormatted() {
@@ -382,16 +390,20 @@ function toggleChip(chipId) {
   autoFormat();
 }
 
-if (tfChips) {
-  tfChips.addEventListener('click', function (e) {
+function bindChipEvents(container) {
+  if (!container) return;
+  container.addEventListener('click', function (e) {
     var chip = e.target.closest ? e.target.closest('.tf__chip') : null;
     if (!chip) return;
     toggleChip(chip.id);
   });
-  tfChips.addEventListener('change', function () {
+  container.addEventListener('change', function () {
     autoFormat();
   });
 }
+
+bindChipEvents(tfChipsFonts);
+bindChipEvents(tfChipsDeco);
 
 tfDrawerBody.addEventListener('change', function () {
   autoFormat();
