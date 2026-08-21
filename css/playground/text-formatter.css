@@ -81,6 +81,11 @@
   outline: none;
 }
 
+.tf__textarea[readonly] {
+  caret-color: transparent;
+  cursor: default;
+}
+
 /* Buttons */
 .tf__btn {
   display: inline-flex;
