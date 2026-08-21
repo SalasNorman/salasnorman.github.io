@@ -261,6 +261,17 @@
   display: none;
 }
 
+.tf__tooltip-sample {
+  display: block;
+  margin-top: 0.4rem;
+  padding-top: 0.4rem;
+  border-top: 1px solid var(--divider);
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.65rem;
+  color: var(--text-subtle);
+  word-break: break-word;
+}
+
 /* Shared input styles */
 .tf__select,
 .tf__num-input {

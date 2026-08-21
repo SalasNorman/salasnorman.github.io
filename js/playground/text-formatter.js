@@ -13,26 +13,26 @@ var formattedText = '';
 var activeTab = 'edit';
 
 var OPERATIONS = [
-  { id: 'tf-trim-check', label: 'Trim whitespace', desc: 'Removes leading and trailing spaces from every line.', fn: function (text) {
+  { id: 'tf-trim-check', label: 'Trim whitespace', desc: 'Removes leading and trailing spaces from every line.', sampleIn: '  Hi, How are you?  ', fn: function (text) {
     return text.split('\n').map(function (l) { return l.replace(/^\s+|\s+$/g, ''); }).join('\n');
   }},
-  { id: 'tf-spaces-check', label: 'Remove extra spaces', desc: 'Collapses runs of spaces into a single space.', fn: function (text) {
+  { id: 'tf-spaces-check', label: 'Remove extra spaces', desc: 'Collapses runs of spaces into a single space.', sampleIn: 'Hi,  How are  you?', fn: function (text) {
     return text.replace(/[^\S\n]+/g, ' ');
   }},
-  { id: 'tf-breaks-check', label: 'Remove line breaks', desc: 'Joins all lines into one continuous line.', fn: function (text) {
+  { id: 'tf-breaks-check', label: 'Remove line breaks', desc: 'Joins all lines into one continuous line.', sampleIn: 'Hi,\nHow are you?', fn: function (text) {
     return text.split('\n').map(function (l) { return l.replace(/^\s+|\s+$/g, ''); }).filter(function (l) { return l !== ''; }).join(' ');
   }},
-  { id: 'tf-dedup-check', label: 'Deduplicate lines', desc: 'Keeps only the first copy of each repeated line.', fn: function (text) {
+  { id: 'tf-dedup-check', label: 'Deduplicate lines', desc: 'Keeps only the first copy of each repeated line.', sampleIn: 'apple\nbanana\napple', fn: function (text) {
     var seen = {};
     return text.split('\n').filter(function (l) { if (seen[l]) return false; seen[l] = true; return true; }).join('\n');
   }},
-  { id: 'tf-sort-check', label: 'Sort lines', desc: 'Orders lines alphabetically; choose A→Z or Z→A.', type: 'select', options: [
+  { id: 'tf-sort-check', label: 'Sort lines', desc: 'Orders lines alphabetically; choose A→Z or Z→A.', sampleIn: 'banana\napple\ncherry', type: 'select', options: [
     { value: 'asc', text: 'A→Z' },
     { value: 'desc', text: 'Z→A' }
   ], fn: function (text, dir) {
     return text.split('\n').sort(function (a, b) { return dir === 'desc' ? b.localeCompare(a) : a.localeCompare(b); }).join('\n');
   }},
-  { id: 'tf-case-check', label: 'Convert Case', desc: 'Switches letter casing: UPPERCASE, lowercase, Title Case, Sentence case, camelCase, snake_case, kebab-case.', type: 'select', options: [
+  { id: 'tf-case-check', label: 'Convert Case', desc: 'Switches letter casing: UPPERCASE, lowercase, Title Case, Sentence case, camelCase, snake_case, kebab-case.', sampleIn: 'hello world', sampleParam: 'upper', type: 'select', options: [
     { value: 'upper', text: 'UPPERCASE' },
     { value: 'lower', text: 'lowercase' },
     { value: 'title', text: 'Title Case' },
@@ -53,10 +53,10 @@ var OPERATIONS = [
     if (type === 'kebab') return text.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '');
     return text;
   }},
-  { id: 'tf-linenums-check', label: 'Add line numbers', desc: 'Prefixes each line with its number (1., 2., 3., …).', fn: function (text) {
+  { id: 'tf-linenums-check', label: 'Add line numbers', desc: 'Prefixes each line with its number (1., 2., 3., …).', sampleIn: 'a\nb', fn: function (text) {
     return text.split('\n').map(function (l, i) { return (i + 1) + '. ' + l; }).join('\n');
   }},
-  { id: 'tf-wrap-check', label: 'Word wrap at', desc: 'Breaks lines longer than the given number of characters.', type: 'number', defaultValue: 80, fn: function (text, width) {
+  { id: 'tf-wrap-check', label: 'Word wrap at', desc: 'Breaks lines longer than the given number of characters.', sampleIn: 'Wrap me at twelve chars please', sampleParam: 12, type: 'number', defaultValue: 80, fn: function (text, width) {
     var result = [];
     text.split('\n\n').forEach(function (para) {
       var words = para.split(/\s+/);
@@ -71,6 +71,10 @@ var OPERATIONS = [
     return result.join('\n');
   }}
 ];
+
+function visualizeSample(text) {
+  return text.replace(/ /g, '␣').replace(/\n/g, '↵');
+}
 
 function buildDrawer() {
   if (!tfDrawerBody) return;
@@ -94,7 +98,12 @@ function buildDrawer() {
     html += '<button type="button" id="' + op.id + '-info" class="tf__info" aria-expanded="false" aria-label="About ' + op.label + '" aria-describedby="' + op.id + '-tip">';
     html += '<i class="bi bi-info-circle"></i>';
     html += '</button>';
-    html += '<span id="' + op.id + '-tip" class="tf__tooltip" role="tooltip" hidden>' + op.desc + '</span>';
+    html += '<span id="' + op.id + '-tip" class="tf__tooltip" role="tooltip" hidden>' + op.desc;
+    html += '<span class="tf__tooltip-sample">' +
+      visualizeSample(op.sampleIn) + '<br>↓<br>' +
+      visualizeSample(op.fn(op.sampleIn, op.sampleParam !== undefined ? op.sampleParam : null)) +
+      '</span>';
+    html += '</span>';
     html += '</div>';
   });
   tfDrawerBody.innerHTML = html;
