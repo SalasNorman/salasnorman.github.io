@@ -14,7 +14,7 @@
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 0.75rem;
+  margin-bottom: 0.5rem;
 }
 
 .tf__title {
@@ -25,20 +25,19 @@
   color: var(--text-subtle);
 }
 
+/* Actions row */
+.tf__actions {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.75rem;
+}
+
 /* Tabs */
 .tf__tabs {
   display: flex;
   gap: 0;
   align-items: flex-end;
-}
-
-.tf__tabs .tf__btn {
-  margin-left: 0.5rem;
-  margin-bottom: 0.25rem;
-}
-
-.tf__tabs .tf__btn--copy {
-  margin-left: auto;
 }
 
 .tf__tab {
