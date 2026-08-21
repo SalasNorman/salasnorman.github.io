@@ -301,8 +301,34 @@
   grid-template-columns: repeat(4, max-content);
 }
 
+.tf__chips--grid .tf__chip {
+  position: relative;
+  border-radius: 0;
+}
+
+.tf__chips--grid .tf__chip:nth-child(4n + 1) {
+  border-top-left-radius: 6px;
+  border-bottom-left-radius: 6px;
+}
+
+.tf__chips--grid .tf__chip:nth-child(4n + 3) {
+  border-top-right-radius: 6px;
+  border-bottom-right-radius: 6px;
+}
+
 .tf__chips--grid .tf__chip:nth-child(4n) {
+  border-radius: 6px;
   margin-left: 0.5rem;
+}
+
+.tf__chips--grid .tf__chip:nth-child(4n + 2),
+.tf__chips--grid .tf__chip:nth-child(4n + 3) {
+  margin-left: -1px;
+}
+
+.tf__chips--grid .tf__chip:hover,
+.tf__chips--grid .tf__chip--on {
+  z-index: 1;
 }
 
 .tf__chip {
