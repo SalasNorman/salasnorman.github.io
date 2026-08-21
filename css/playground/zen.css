@@ -160,11 +160,6 @@
   min-height: 200px;
 }
 
-.zen__content:focus {
-  outline: 2px solid var(--accent);
-  outline-offset: 1px;
-}
-
 .zen__content:empty:before {
   content: attr(data-placeholder);
   color: var(--text-subtle);
