@@ -296,6 +296,15 @@
   margin-left: 0.75rem;
 }
 
+.tf__chips--grid {
+  display: grid;
+  grid-template-columns: repeat(4, max-content);
+}
+
+.tf__chips--grid .tf__chip:nth-child(4n) {
+  margin-left: 0.5rem;
+}
+
 .tf__chip {
   display: inline-flex;
   align-items: center;

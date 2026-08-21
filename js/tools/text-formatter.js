@@ -18,8 +18,9 @@ const FONT_RANGES = {
   bold: { upper: 0x1d400, lower: 0x1d41a, digits: 0x1d7ce },
   italic: { upper: 0x1d434, lower: 0x1d44e },
   boldItalic: { upper: 0x1d468, lower: 0x1d482 },
-  sans: { upper: 0x1d5a0, lower: 0x1d5ba, digits: 0x1d7e2 },
   sansBold: { upper: 0x1d5d4, lower: 0x1d5ee, digits: 0x1d7ec },
+  sansItalic: { upper: 0x1d608, lower: 0x1d622 },
+  sansBoldItalic: { upper: 0x1d63c, lower: 0x1d656 },
   mono: { upper: 0x1d670, lower: 0x1d68a, digits: 0x1d7f6 }
 };
 
@@ -53,6 +54,17 @@ function underlineText(text) {
 
 function strikeText(text) {
   return Array.from(text).join('\u0336');
+}
+
+function fullwidthText(text) {
+  return Array.from(text)
+    .map((ch) => {
+      const code = ch.codePointAt(0);
+      if (code === 0x20) return '\u3000';
+      if (code >= 0x21 && code <= 0x7e) return String.fromCodePoint(code + 0xfee0);
+      return ch;
+    })
+    .join('');
 }
 
 const ZALGO_RANGES = [
@@ -203,12 +215,14 @@ const OPERATIONS = [
       return result.join('\n');
     }
   },
-  { id: 'tf-font-bold', label: 'Bold', ui: 'chip', kind: 'font', glyph: '𝐁', fn: makeFontFn('bold') },
-  { id: 'tf-font-italic', label: 'Italic', ui: 'chip', kind: 'font', glyph: '𝐼', fn: makeFontFn('italic') },
-  { id: 'tf-font-bolditalic', label: 'Bold Italic', ui: 'chip', kind: 'font', glyph: '𝘽', fn: makeFontFn('boldItalic') },
-  { id: 'tf-font-sans', label: 'Sans', ui: 'chip', kind: 'font', glyph: '𝖲', fn: makeFontFn('sans') },
-  { id: 'tf-font-sansbold', label: 'Sans Bold', ui: 'chip', kind: 'font', glyph: '𝗦', fn: makeFontFn('sansBold') },
+  { id: 'tf-font-bold', label: 'Serif Bold', ui: 'chip', kind: 'font', glyph: '𝐁', fn: makeFontFn('bold') },
+  { id: 'tf-font-italic', label: 'Serif Italic', ui: 'chip', kind: 'font', glyph: '𝐼', fn: makeFontFn('italic') },
+  { id: 'tf-font-bolditalic', label: 'Serif Bold Italic', ui: 'chip', kind: 'font', glyph: '𝘽', fn: makeFontFn('boldItalic') },
   { id: 'tf-font-mono', label: 'Monospace', ui: 'chip', kind: 'font', glyph: '𝙼', fn: makeFontFn('mono') },
+  { id: 'tf-font-sansbold', label: 'Sans Bold', ui: 'chip', kind: 'font', glyph: '𝗦', fn: makeFontFn('sansBold') },
+  { id: 'tf-font-sansitalic', label: 'Sans Italic', ui: 'chip', kind: 'font', glyph: '𝘚', fn: makeFontFn('sansItalic') },
+  { id: 'tf-font-sansbolditalic', label: 'Sans Bold Italic', ui: 'chip', kind: 'font', glyph: '𝙎', fn: makeFontFn('sansBoldItalic') },
+  { id: 'tf-font-fullwidth', label: 'Fullwidth', ui: 'chip', kind: 'font', glyph: 'Ｓ', fn: fullwidthText },
   { id: 'tf-under-chip', label: 'Underline', ui: 'chip', kind: 'deco', icon: 'bi-type-underline', fn: underlineText },
   { id: 'tf-strike-chip', label: 'Strikethrough', ui: 'chip', kind: 'deco', icon: 'bi-type-strikethrough', fn: strikeText },
   {
