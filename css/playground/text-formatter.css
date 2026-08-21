@@ -307,19 +307,19 @@
   width: 34px;
   height: 34px;
   padding: 0;
-  border: 1px solid var(--divider);
+  border: 1px solid var(--accent);
   border-radius: 6px;
   background: none;
-  color: var(--text);
+  color: var(--accent);
   font-family: inherit;
   font-size: 1rem;
   cursor: pointer;
-  transition: color 0.2s, border-color 0.2s, background 0.2s;
+  transition: background 0.2s, color 0.2s, border-color 0.2s;
 }
 
 .tf__chip:hover {
-  color: var(--accent);
-  border-color: var(--accent);
+  background: var(--accent);
+  color: #ffffff;
 }
 
 .tf__chip--on {
