@@ -34,6 +34,7 @@
 
 .tf__tabs .tf__btn {
   margin-left: 0.5rem;
+  margin-bottom: 0.25rem;
 }
 
 .tf__tabs .tf__btn--copy {
@@ -78,11 +79,6 @@
   font-size: 0.85rem;
   line-height: 1.6;
   resize: vertical;
-}
-
-.tf__textarea:focus {
-  outline: 2px solid var(--accent);
-  outline-offset: 1px;
 }
 
 /* Buttons */
