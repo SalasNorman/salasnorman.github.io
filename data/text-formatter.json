@@ -1,0 +1,110 @@
+{
+  "letterform": {
+    "A": "丹", "B": "乃", "C": "匚", "D": "刀", "E": "モ", "F": "下",
+    "G": "ム", "H": "卄", "I": "工", "J": "丿", "K": "ㄑ", "L": "ㄥ",
+    "M": "爪", "N": "力", "O": "口", "P": "ㄗ", "Q": "囚", "R": "尺",
+    "S": "ち", "T": "匕", "U": "し", "V": "レ", "W": "山", "X": "㐅",
+    "Y": "ソ", "Z": "乙",
+    "0": "ㄖ", "1": "丨", "2": "己", "3": "ヨ", "4": "ㄐ",
+    "5": "丂", "6": "石", "7": "ワ", "8": "曰", "9": "ㄢ"
+  },
+  "operations": [
+    {
+      "id": "tf-trim-check",
+      "label": "Trim whitespace",
+      "desc": "Removes leading and trailing spaces from every line.",
+      "sampleIn": "  Hi, How are you?  ",
+      "fn": "trimLines"
+    },
+    {
+      "id": "tf-spaces-check",
+      "label": "Remove extra spaces",
+      "desc": "Collapses runs of spaces into a single space.",
+      "sampleIn": "Hi,  How are  you?",
+      "fn": "collapseSpaces"
+    },
+    {
+      "id": "tf-breaks-check",
+      "label": "Remove line breaks",
+      "desc": "Joins all lines into one continuous line.",
+      "sampleIn": "Hi,\nHow are you?",
+      "fn": "removeLineBreaks"
+    },
+    {
+      "id": "tf-dedup-check",
+      "label": "Deduplicate lines",
+      "desc": "Keeps only the first copy of each repeated line.",
+      "sampleIn": "apple\nbanana\napple",
+      "fn": "dedupeLines"
+    },
+    {
+      "id": "tf-sort-check",
+      "label": "Sort lines",
+      "desc": "Orders lines alphabetically; choose A→Z or Z→A.",
+      "sampleIn": "banana\napple\ncherry",
+      "type": "select",
+      "options": [
+        { "value": "asc", "text": "A→Z" },
+        { "value": "desc", "text": "Z→A" }
+      ],
+      "fn": "sortLines"
+    },
+    {
+      "id": "tf-case-check",
+      "label": "Convert Case",
+      "desc": "Switches letter casing: UPPERCASE, lowercase, Title Case, Sentence case, camelCase, snake_case, kebab-case.",
+      "sampleIn": "hello world",
+      "sampleParam": "upper",
+      "type": "select",
+      "options": [
+        { "value": "upper", "text": "UPPERCASE" },
+        { "value": "lower", "text": "lowercase" },
+        { "value": "title", "text": "Title Case" },
+        { "value": "sentence", "text": "Sentence case" },
+        { "value": "camel", "text": "camelCase" },
+        { "value": "snake", "text": "snake_case" },
+        { "value": "kebab", "text": "kebab-case" }
+      ],
+      "fn": "convertCase"
+    },
+    {
+      "id": "tf-linenums-check",
+      "label": "Add line numbers",
+      "desc": "Prefixes each line with its number (1., 2., 3., …).",
+      "sampleIn": "a\nb",
+      "fn": "addLineNumbers"
+    },
+    {
+      "id": "tf-wrap-check",
+      "label": "Word wrap at",
+      "desc": "Breaks lines longer than the given number of characters.",
+      "sampleIn": "Wrap me at twelve chars please",
+      "sampleParam": 12,
+      "type": "number",
+      "defaultValue": 80,
+      "fn": "wrapWords"
+    },
+    { "id": "tf-font-bold", "label": "Serif Bold", "ui": "chip", "kind": "font", "glyph": "𝐁", "fn": "serifBold" },
+    { "id": "tf-font-italic", "label": "Serif Italic", "ui": "chip", "kind": "font", "glyph": "𝐼", "fn": "serifItalic" },
+    { "id": "tf-font-bolditalic", "label": "Serif Bold Italic", "ui": "chip", "kind": "font", "glyph": "𝘽", "fn": "serifBoldItalic" },
+    { "id": "tf-font-mono", "label": "Monospace", "ui": "chip", "kind": "font", "glyph": "𝙼", "fn": "monospace" },
+    { "id": "tf-font-sansbold", "label": "Sans Bold", "ui": "chip", "kind": "font", "glyph": "𝗦", "fn": "sansBold" },
+    { "id": "tf-font-sansitalic", "label": "Sans Italic", "ui": "chip", "kind": "font", "glyph": "𝘚", "fn": "sansItalic" },
+    { "id": "tf-font-sansbolditalic", "label": "Sans Bold Italic", "ui": "chip", "kind": "font", "glyph": "𝙎", "fn": "sansBoldItalic" },
+    { "id": "tf-font-cjk", "label": "CJK Letterform", "ui": "chip", "kind": "font", "glyph": "丹", "fn": "cjkLetterform" },
+    { "id": "tf-under-chip", "label": "Underline", "ui": "chip", "kind": "deco", "icon": "bi-type-underline", "fn": "underlineText" },
+    { "id": "tf-strike-chip", "label": "Strikethrough", "ui": "chip", "kind": "deco", "icon": "bi-type-strikethrough", "fn": "strikeText" },
+    {
+      "id": "tf-zalgo-chip",
+      "label": "Zalgo text",
+      "ui": "chip",
+      "kind": "deco",
+      "icon": "bi-virus",
+      "control": "range",
+      "rangeMin": 1,
+      "rangeMax": 15,
+      "rangeValue": 6,
+      "fn": "zalgoText"
+    }
+  ]
+}

@@ -56,16 +56,11 @@ function strikeText(text) {
   return Array.from(text).join('\u0336');
 }
 
-const CJK_LETTERFORM = {
-  A: '丹', B: '乃', C: '匚', D: '刀', E: 'モ', F: '下', G: 'ム', H: '卄', I: '工', J: '丿',
-  K: 'ㄑ', L: 'ㄥ', M: '爪', N: '力', O: '口', P: 'ㄗ', Q: '囚', R: '尺', S: 'ち', T: '匕',
-  U: 'し', V: 'レ', W: '山', X: '㐅', Y: 'ソ', Z: '乙',
-  0: 'ㄖ', 1: '丨', 2: '己', 3: 'ヨ', 4: 'ㄐ', 5: '丂', 6: '石', 7: 'ワ', 8: '曰', 9: 'ㄢ'
-};
+let LETTERFORM = {};
 
 function cjkText(text) {
   return Array.from(text.toUpperCase())
-    .map((ch) => CJK_LETTERFORM[ch] || ch)
+    .map((ch) => LETTERFORM[ch] || ch)
     .join('');
 }
 
@@ -99,147 +94,91 @@ function visualizeSample(text) {
   return text.replace(/ /g, '\u2423').replace(/\n/g, '\u21B5');
 }
 
-const OPERATIONS = [
-  {
-    id: 'tf-trim-check',
-    label: 'Trim whitespace',
-    desc: 'Removes leading and trailing spaces from every line.',
-    sampleIn: '  Hi, How are you?  ',
-    fn: (text) => text.split('\n').map((l) => l.replace(/^\s+|\s+$/g, '')).join('\n')
+const TRANSFORMS = {
+  trimLines(text) {
+    return text.split('\n').map((l) => l.replace(/^\s+|\s+$/g, '')).join('\n');
   },
-  {
-    id: 'tf-spaces-check',
-    label: 'Remove extra spaces',
-    desc: 'Collapses runs of spaces into a single space.',
-    sampleIn: 'Hi,  How are  you?',
-    fn: (text) => text.replace(/[^\S\n]+/g, ' ')
+  collapseSpaces(text) {
+    return text.replace(/[^\S\n]+/g, ' ');
   },
-  {
-    id: 'tf-breaks-check',
-    label: 'Remove line breaks',
-    desc: 'Joins all lines into one continuous line.',
-    sampleIn: 'Hi,\nHow are you?',
-    fn: (text) => text.split('\n').map((l) => l.replace(/^\s+|\s+$/g, '')).filter((l) => l !== '').join(' ')
+  removeLineBreaks(text) {
+    return text.split('\n').map((l) => l.replace(/^\s+|\s+$/g, '')).filter((l) => l !== '').join(' ');
   },
-  {
-    id: 'tf-dedup-check',
-    label: 'Deduplicate lines',
-    desc: 'Keeps only the first copy of each repeated line.',
-    sampleIn: 'apple\nbanana\napple',
-    fn: (text) => {
-      const seen = {};
-      return text.split('\n').filter((l) => {
-        if (seen[l]) return false;
-        seen[l] = true;
-        return true;
-      }).join('\n');
+  dedupeLines(text) {
+    const seen = {};
+    return text.split('\n').filter((l) => {
+      if (seen[l]) return false;
+      seen[l] = true;
+      return true;
+    }).join('\n');
+  },
+  sortLines(text, dir) {
+    return text.split('\n').sort((a, b) => (dir === 'desc' ? b.localeCompare(a) : a.localeCompare(b))).join('\n');
+  },
+  convertCase(text, type) {
+    if (type === 'upper') return text.toUpperCase();
+    if (type === 'lower') return text.toLowerCase();
+    if (type === 'title') {
+      return text.replace(/\w\S*/g, (w) => w.charAt(0).toUpperCase() + w.substr(1).toLowerCase());
     }
-  },
-  {
-    id: 'tf-sort-check',
-    label: 'Sort lines',
-    desc: 'Orders lines alphabetically; choose A\u2192Z or Z\u2192A.',
-    sampleIn: 'banana\napple\ncherry',
-    type: 'select',
-    options: [
-      { value: 'asc', text: 'A\u2192Z' },
-      { value: 'desc', text: 'Z\u2192A' }
-    ],
-    fn: (text, dir) =>
-      text.split('\n').sort((a, b) => (dir === 'desc' ? b.localeCompare(a) : a.localeCompare(b))).join('\n')
-  },
-  {
-    id: 'tf-case-check',
-    label: 'Convert Case',
-    desc: 'Switches letter casing: UPPERCASE, lowercase, Title Case, Sentence case, camelCase, snake_case, kebab-case.',
-    sampleIn: 'hello world',
-    sampleParam: 'upper',
-    type: 'select',
-    options: [
-      { value: 'upper', text: 'UPPERCASE' },
-      { value: 'lower', text: 'lowercase' },
-      { value: 'title', text: 'Title Case' },
-      { value: 'sentence', text: 'Sentence case' },
-      { value: 'camel', text: 'camelCase' },
-      { value: 'snake', text: 'snake_case' },
-      { value: 'kebab', text: 'kebab-case' }
-    ],
-    fn: (text, type) => {
-      if (type === 'upper') return text.toUpperCase();
-      if (type === 'lower') return text.toLowerCase();
-      if (type === 'title') {
-        return text.replace(/\w\S*/g, (w) => w.charAt(0).toUpperCase() + w.substr(1).toLowerCase());
-      }
-      if (type === 'sentence') {
-        return text.replace(/(^|[.!?]\s+)([a-z])/g, (m, s, l) => s + l.toUpperCase());
-      }
-      if (type === 'camel') {
-        const words = text.toLowerCase().split(/\s+/);
-        return words[0] || words.slice(1).map((w) => w.charAt(0).toUpperCase() + w.substr(1)).join('');
-      }
-      if (type === 'snake') return text.toLowerCase().replace(/\s+/g, '_').replace(/[^a-z0-9_]/g, '');
-      if (type === 'kebab') return text.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '');
-      return text;
+    if (type === 'sentence') {
+      return text.replace(/(^|[.!?]\s+)([a-z])/g, (m, s, l) => s + l.toUpperCase());
     }
+    if (type === 'camel') {
+      const words = text.toLowerCase().split(/\s+/);
+      return words[0] || words.slice(1).map((w) => w.charAt(0).toUpperCase() + w.substr(1)).join('');
+    }
+    if (type === 'snake') return text.toLowerCase().replace(/\s+/g, '_').replace(/[^a-z0-9_]/g, '');
+    if (type === 'kebab') return text.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '');
+    return text;
   },
-  {
-    id: 'tf-linenums-check',
-    label: 'Add line numbers',
-    desc: 'Prefixes each line with its number (1., 2., 3., \u2026).',
-    sampleIn: 'a\nb',
-    fn: (text) => text.split('\n').map((l, i) => `${i + 1}. ${l}`).join('\n')
+  addLineNumbers(text) {
+    return text.split('\n').map((l, i) => `${i + 1}. ${l}`).join('\n');
   },
-  {
-    id: 'tf-wrap-check',
-    label: 'Word wrap at',
-    desc: 'Breaks lines longer than the given number of characters.',
-    sampleIn: 'Wrap me at twelve chars please',
-    sampleParam: 12,
-    type: 'number',
-    defaultValue: 80,
-    fn: (text, width) => {
-      const result = [];
-      text.split('\n\n').forEach((para) => {
-        const words = para.split(/\s+/);
-        let line = '';
-        words.forEach((w) => {
-          if (line === '') {
-            line = w;
-          } else if (line.length + 1 + w.length <= width) {
-            line += ` ${w}`;
-          } else {
-            result.push(line);
-            line = w;
-          }
-        });
-        if (line !== '') result.push(line);
+  wrapWords(text, width) {
+    const result = [];
+    text.split('\n\n').forEach((para) => {
+      const words = para.split(/\s+/);
+      let line = '';
+      words.forEach((w) => {
+        if (line === '') {
+          line = w;
+        } else if (line.length + 1 + w.length <= width) {
+          line += ` ${w}`;
+        } else {
+          result.push(line);
+          line = w;
+        }
       });
-      return result.join('\n');
-    }
+      if (line !== '') result.push(line);
+    });
+    return result.join('\n');
   },
-  { id: 'tf-font-bold', label: 'Serif Bold', ui: 'chip', kind: 'font', glyph: '𝐁', fn: makeFontFn('bold') },
-  { id: 'tf-font-italic', label: 'Serif Italic', ui: 'chip', kind: 'font', glyph: '𝐼', fn: makeFontFn('italic') },
-  { id: 'tf-font-bolditalic', label: 'Serif Bold Italic', ui: 'chip', kind: 'font', glyph: '𝘽', fn: makeFontFn('boldItalic') },
-  { id: 'tf-font-mono', label: 'Monospace', ui: 'chip', kind: 'font', glyph: '𝙼', fn: makeFontFn('mono') },
-  { id: 'tf-font-sansbold', label: 'Sans Bold', ui: 'chip', kind: 'font', glyph: '𝗦', fn: makeFontFn('sansBold') },
-  { id: 'tf-font-sansitalic', label: 'Sans Italic', ui: 'chip', kind: 'font', glyph: '𝘚', fn: makeFontFn('sansItalic') },
-  { id: 'tf-font-sansbolditalic', label: 'Sans Bold Italic', ui: 'chip', kind: 'font', glyph: '𝙎', fn: makeFontFn('sansBoldItalic') },
-  { id: 'tf-font-cjk', label: 'CJK Letterform', ui: 'chip', kind: 'font', glyph: '丹', fn: cjkText },
-  { id: 'tf-under-chip', label: 'Underline', ui: 'chip', kind: 'deco', icon: 'bi-type-underline', fn: underlineText },
-  { id: 'tf-strike-chip', label: 'Strikethrough', ui: 'chip', kind: 'deco', icon: 'bi-type-strikethrough', fn: strikeText },
-  {
-    id: 'tf-zalgo-chip',
-    label: 'Zalgo text',
-    ui: 'chip',
-    kind: 'deco',
-    icon: 'bi-virus',
-    control: 'range',
-    rangeMin: 1,
-    rangeMax: 15,
-    rangeValue: 6,
-    fn: zalgoText
-  }
-];
+  serifBold: makeFontFn('bold'),
+  serifItalic: makeFontFn('italic'),
+  serifBoldItalic: makeFontFn('boldItalic'),
+  monospace: makeFontFn('mono'),
+  sansBold: makeFontFn('sansBold'),
+  sansItalic: makeFontFn('sansItalic'),
+  sansBoldItalic: makeFontFn('sansBoldItalic'),
+  cjkLetterform: cjkText,
+  underlineText,
+  strikeText,
+  zalgoText
+};
+
+let OPERATIONS = [];
+
+fetch('../data/text-formatter.json')
+  .then((response) => {
+    if (!response.ok) throw new Error(`HTTP ${response.status} while loading text-formatter data`);
+    return response.json();
+  })
+  .then((config) => {
+    LETTERFORM = config.letterform || {};
+    OPERATIONS = config.operations.map((op) => ({ ...op, fn: TRANSFORMS[op.fn] }));
+    init();
+  });
 
 function buildDrawer() {
   if (!tfDrawerBody) return;
@@ -440,11 +379,12 @@ function setupTooltipRow(row) {
   });
 }
 
-buildDrawer();
-buildFontSelect();
-buildChips();
+function init() {
+  buildDrawer();
+  buildFontSelect();
+  buildChips();
 
-if (tfDrawerBody) {
+  if (!tfDrawerBody) return;
   tfDrawerBody.querySelectorAll('.tf__op').forEach((row) => setupTooltipRow(row));
 
   OPERATIONS.forEach((op) => {
