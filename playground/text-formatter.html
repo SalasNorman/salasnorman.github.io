@@ -33,11 +33,10 @@
           <div class="tf__actions">
             <select id="tf-font" class="tf__select tf__font" aria-label="Font style"></select>
             <div id="tf-chips-deco" class="tf__chips"></div>
-              <button id="tf-copy" class="tf__btn tf__btn--icon tf__btn--copy push-btn" title="Copy to clipboard" aria-label="Copy to clipboard">
-                <i class="bi bi-copy"></i>
-              </button>
-            <button id="tf-drawer-toggle" class="tf__btn push-btn" title="Transform">
-              <i class="bi bi-magic"></i> Transform
+            <button id="tf-case-btn" class="tf__btn push-btn" type="button">Case</button>
+            <button id="tf-sort-btn" class="tf__btn push-btn" type="button">Sort</button>
+            <button id="tf-copy" class="tf__btn tf__btn--icon tf__btn--copy push-btn" title="Copy to clipboard" aria-label="Copy to clipboard">
+              <i class="bi bi-copy"></i>
             </button>
           </div>
 
@@ -48,18 +47,6 @@
 
           <textarea id="tf-editor" class="tf__textarea" placeholder="Paste your text here..."></textarea>
         </div>
-      </div>
-
-      <div id="tf-backdrop" class="tf__backdrop" hidden></div>
-
-      <div id="tf-drawer" class="tf__drawer" hidden>
-        <div class="tf__drawer-header">
-          <span class="tf__drawer-title">Transform</span>
-          <button id="tf-drawer-close" class="tf__drawer-close" title="Close">
-            <i class="bi bi-x"></i>
-          </button>
-        </div>
-        <div id="tf-drawer-body" class="tf__drawer-body"></div>
       </div>
     </main>
 

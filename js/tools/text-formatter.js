@@ -2,17 +2,16 @@ const tfEditor = document.getElementById('tf-editor');
 const tfCopy = document.getElementById('tf-copy');
 const tfTabEdit = document.getElementById('tf-tab-edit');
 const tfTabPreview = document.getElementById('tf-tab-preview');
-const tfDrawerToggle = document.getElementById('tf-drawer-toggle');
-const tfDrawerClose = document.getElementById('tf-drawer-close');
-const tfBackdrop = document.getElementById('tf-backdrop');
-const tfDrawer = document.getElementById('tf-drawer');
-const tfDrawerBody = document.getElementById('tf-drawer-body');
 const tfFontSelect = document.getElementById('tf-font');
 const tfChipsDeco = document.getElementById('tf-chips-deco');
+const tfCaseBtn = document.getElementById('tf-case-btn');
+const tfSortBtn = document.getElementById('tf-sort-btn');
 
 let originalText = '';
 let formattedText = '';
 let activeTab = 'edit';
+let caseIndex = -1;
+let sortIndex = -1;
 
 const FONT_RANGES = {
   bold: { upper: 0x1d400, lower: 0x1d41a, digits: 0x1d7ce },
@@ -90,28 +89,7 @@ function zalgoText(text, maxMarks) {
   return out;
 }
 
-function visualizeSample(text) {
-  return text.replace(/ /g, '\u2423').replace(/\n/g, '\u21B5');
-}
-
 const TRANSFORMS = {
-  trimLines(text) {
-    return text.split('\n').map((l) => l.replace(/^\s+|\s+$/g, '')).join('\n');
-  },
-  collapseSpaces(text) {
-    return text.replace(/[^\S\n]+/g, ' ');
-  },
-  removeLineBreaks(text) {
-    return text.split('\n').map((l) => l.replace(/^\s+|\s+$/g, '')).filter((l) => l !== '').join(' ');
-  },
-  dedupeLines(text) {
-    const seen = {};
-    return text.split('\n').filter((l) => {
-      if (seen[l]) return false;
-      seen[l] = true;
-      return true;
-    }).join('\n');
-  },
   sortLines(text, dir) {
     return text.split('\n').sort((a, b) => (dir === 'desc' ? b.localeCompare(a) : a.localeCompare(b))).join('\n');
   },
@@ -131,28 +109,6 @@ const TRANSFORMS = {
     if (type === 'snake') return text.toLowerCase().replace(/\s+/g, '_').replace(/[^a-z0-9_]/g, '');
     if (type === 'kebab') return text.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '');
     return text;
-  },
-  addLineNumbers(text) {
-    return text.split('\n').map((l, i) => `${i + 1}. ${l}`).join('\n');
-  },
-  wrapWords(text, width) {
-    const result = [];
-    text.split('\n\n').forEach((para) => {
-      const words = para.split(/\s+/);
-      let line = '';
-      words.forEach((w) => {
-        if (line === '') {
-          line = w;
-        } else if (line.length + 1 + w.length <= width) {
-          line += ` ${w}`;
-        } else {
-          result.push(line);
-          line = w;
-        }
-      });
-      if (line !== '') result.push(line);
-    });
-    return result.join('\n');
   },
   serifBold: makeFontFn('bold'),
   serifItalic: makeFontFn('italic'),
@@ -180,44 +136,6 @@ fetch('../data/text-formatter.json')
     init();
   });
 
-function buildDrawer() {
-  if (!tfDrawerBody) return;
-  const rows = OPERATIONS.filter((op) => op.ui !== 'chip').map((op) => {
-    let control = '';
-    if (op.type === 'select') {
-      const options = op.options.map((opt) => `<option value="${opt.value}">${opt.text}</option>`).join('');
-      control = `<select id="${op.id}-select" class="tf__select" disabled>${options}</select>`;
-    } else if (op.type === 'number') {
-      control =
-        `<input type="number" id="${op.id}-width" class="tf__num-input" value="${op.defaultValue}" min="10" max="200" disabled />` +
-        '<span>chars</span>';
-    }
-
-    const sampleOut = op.fn(op.sampleIn, op.sampleParam !== undefined ? op.sampleParam : null);
-
-    return (
-      `<div class="tf__op">` +
-      `<label class="tf__op-main" for="${op.id}">` +
-      `<input type="checkbox" id="${op.id}" />` +
-      `<span>${op.label}</span>` +
-      control +
-      '</label>' +
-      `<button type="button" id="${op.id}-info" class="tf__info" aria-expanded="false" aria-label="About ${op.label}" aria-describedby="${op.id}-tip">` +
-      '<i class="bi bi-info-circle"></i>' +
-      '</button>' +
-      `<span id="${op.id}-tip" class="tf__tooltip" role="tooltip" hidden>${op.desc}` +
-      '<span class="tf__tooltip-sample">' +
-      `${visualizeSample(op.sampleIn)}<br>\u2193<br>` +
-      `${visualizeSample(sampleOut)}` +
-      '</span>' +
-      '</span>' +
-      '</div>'
-    );
-  });
-
-  tfDrawerBody.innerHTML = rows.join('');
-}
-
 function buildFontSelect() {
   if (!tfFontSelect) return;
   const fonts = OPERATIONS.filter((op) => op.kind === 'font');
@@ -244,6 +162,8 @@ function buildChips() {
 
 function computeFormatted() {
   let text = originalText;
+  if (caseIndex >= 0) text = TRANSFORMS.convertCase(text, CASE_MODES[caseIndex]);
+  if (sortIndex >= 0) text = TRANSFORMS.sortLines(text, SORT_DIRS[sortIndex]);
   OPERATIONS.forEach((op) => {
     let param = null;
     if (op.ui === 'chip') {
@@ -308,91 +228,9 @@ function copyToClipboard() {
   }).catch(() => {});
 }
 
-function openDrawer() {
-  if (tfDrawer) tfDrawer.hidden = false;
-  if (tfBackdrop) tfBackdrop.hidden = false;
-  requestAnimationFrame(() => {
-    if (tfDrawer) tfDrawer.classList.add('tf__drawer--open');
-    if (tfBackdrop) tfBackdrop.classList.add('tf__backdrop--visible');
-  });
-}
-
-function closeDrawer() {
-  if (tfDrawer) tfDrawer.classList.remove('tf__drawer--open');
-  if (tfBackdrop) tfBackdrop.classList.remove('tf__backdrop--visible');
-  setTimeout(() => {
-    if (tfDrawer) tfDrawer.hidden = true;
-    if (tfBackdrop) tfBackdrop.hidden = true;
-  }, 300);
-}
-
-function bindCheckboxDisabled(checkboxId, selectorId) {
-  const checkbox = document.getElementById(checkboxId);
-  const control = document.getElementById(selectorId);
-  if (checkbox && control) {
-    checkbox.addEventListener('change', (e) => {
-      control.disabled = !e.target.checked;
-    });
-  }
-}
-
-function closeAllTooltips() {
-  tfDrawerBody.querySelectorAll('.tf__tooltip').forEach((tip) => {
-    tip.hidden = true;
-    tip.removeAttribute('data-pinned');
-  });
-  tfDrawerBody.querySelectorAll('.tf__info').forEach((info) => {
-    info.setAttribute('aria-expanded', 'false');
-  });
-}
-
-function setupTooltipRow(row) {
-  const btn = row.querySelector('.tf__info');
-  const tip = row.querySelector('.tf__tooltip');
-  if (!btn || !tip) return;
-
-  const show = () => {
-    tip.hidden = false;
-    btn.setAttribute('aria-expanded', 'true');
-  };
-
-  const hideUnlessPinned = () => {
-    if (tip.getAttribute('data-pinned') !== 'true') {
-      tip.hidden = true;
-      btn.setAttribute('aria-expanded', 'false');
-    }
-  };
-
-  row.addEventListener('mouseenter', show);
-  row.addEventListener('mouseleave', hideUnlessPinned);
-  btn.addEventListener('focus', show);
-  btn.addEventListener('blur', hideUnlessPinned);
-  btn.addEventListener('click', (e) => {
-    e.stopPropagation();
-    const wasPinned = tip.getAttribute('data-pinned') === 'true';
-    closeAllTooltips();
-    if (!wasPinned) {
-      tip.setAttribute('data-pinned', 'true');
-      tip.hidden = false;
-      btn.setAttribute('aria-expanded', 'true');
-    }
-  });
-}
-
 function init() {
-  buildDrawer();
   buildFontSelect();
   buildChips();
-
-  if (!tfDrawerBody) return;
-  tfDrawerBody.querySelectorAll('.tf__op').forEach((row) => setupTooltipRow(row));
-
-  OPERATIONS.forEach((op) => {
-    if (op.type === 'select') bindCheckboxDisabled(op.id, `${op.id}-select`);
-    if (op.type === 'number') bindCheckboxDisabled(op.id, `${op.id}-width`);
-  });
-
-  tfDrawerBody.addEventListener('change', () => autoFormat());
 }
 
 function syncChipUI() {
@@ -444,6 +282,46 @@ if (tfFontSelect) {
 }
 bindChipEvents(tfChipsDeco);
 
+const CASE_MODES = ['upper', 'lower', 'title', 'sentence', 'camel', 'snake', 'kebab'];
+const CASE_LABELS = {
+  upper: 'UPPER',
+  lower: 'lower',
+  title: 'Title',
+  sentence: 'Sentence',
+  camel: 'camel',
+  snake: 'snake',
+  kebab: 'kebab'
+};
+const SORT_DIRS = ['asc', 'desc'];
+
+function syncActionButtons() {
+  if (!tfCaseBtn || !tfSortBtn) return;
+  const mode = CASE_MODES[caseIndex];
+  tfCaseBtn.textContent = mode ? `Case: ${CASE_LABELS[mode]}` : 'Case';
+  tfCaseBtn.classList.toggle('push-btn--in', Boolean(mode));
+  const dir = SORT_DIRS[sortIndex];
+  tfSortBtn.textContent = dir === 'asc' ? 'Sort A\u2192Z' : dir === 'desc' ? 'Sort Z\u2192A' : 'Sort';
+  tfSortBtn.classList.toggle('push-btn--in', Boolean(dir));
+}
+
+if (tfCaseBtn) {
+  tfCaseBtn.addEventListener('click', () => {
+    caseIndex = caseIndex + 1 >= CASE_MODES.length ? -1 : caseIndex + 1;
+    syncActionButtons();
+    autoFormat();
+  });
+}
+
+if (tfSortBtn) {
+  tfSortBtn.addEventListener('click', () => {
+    sortIndex = sortIndex + 1 >= SORT_DIRS.length ? -1 : sortIndex + 1;
+    syncActionButtons();
+    autoFormat();
+  });
+}
+
+syncActionButtons();
+
 if (tfEditor) {
   tfEditor.addEventListener('input', () => {
     if (activeTab === 'edit') {
@@ -464,23 +342,3 @@ if (tfTabPreview) {
 }
 
 if (tfCopy) tfCopy.addEventListener('click', copyToClipboard);
-if (tfDrawerToggle) tfDrawerToggle.addEventListener('click', openDrawer);
-if (tfDrawerClose) tfDrawerClose.addEventListener('click', closeDrawer);
-if (tfBackdrop) tfBackdrop.addEventListener('click', closeDrawer);
-
-document.addEventListener('click', (e) => {
-  if (e.target.closest && !e.target.closest('.tf__info')) {
-    closeAllTooltips();
-  }
-});
-
-document.addEventListener('keydown', (e) => {
-  if (e.key !== 'Escape') return;
-  if (tfDrawerBody && tfDrawerBody.querySelector('.tf__tooltip:not([hidden])')) {
-    closeAllTooltips();
-    return;
-  }
-  if (tfDrawer && tfDrawer.classList.contains('tf__drawer--open')) {
-    closeDrawer();
-  }
-});
