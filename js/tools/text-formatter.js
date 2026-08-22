@@ -1,14 +1,12 @@
-const tfEditor = document.getElementById('tf-editor');
+const tfInput = document.getElementById('tf-input');
+const tfOutput = document.getElementById('tf-output');
 const tfCopy = document.getElementById('tf-copy');
-const tfTabEdit = document.getElementById('tf-tab-edit');
-const tfTabPreview = document.getElementById('tf-tab-preview');
 const tfFontSelect = document.getElementById('tf-font');
 const tfChipsDeco = document.getElementById('tf-chips-deco');
 const tfCaseSelect = document.getElementById('tf-case');
 
 let originalText = '';
 let formattedText = '';
-let activeTab = 'edit';
 let caseIndex = -1;
 
 const FONT_RANGES = {
@@ -182,35 +180,16 @@ function computeFormatted() {
   return text;
 }
 
-function showTab(tab) {
-  if (!tfTabEdit || !tfTabPreview || !tfEditor) return;
-  activeTab = tab;
-  if (tab === 'edit') {
-    tfTabEdit.classList.add('tf__tab--active');
-    tfTabPreview.classList.remove('tf__tab--active');
-    tfEditor.readOnly = false;
-    tfEditor.value = originalText;
-  } else {
-    tfTabPreview.classList.add('tf__tab--active');
-    tfTabEdit.classList.remove('tf__tab--active');
-    formattedText = computeFormatted();
-    tfEditor.readOnly = true;
-    tfEditor.value = formattedText;
-  }
-}
-
-function autoFormat() {
-  if (!tfEditor) return;
-  if (activeTab === 'edit') {
-    originalText = tfEditor.value;
-  }
+function renderPreview() {
+  if (!tfInput || !tfOutput) return;
+  originalText = tfInput.value;
   formattedText = computeFormatted();
-  showTab('preview');
+  tfOutput.value = formattedText;
 }
 
 function copyToClipboard() {
-  if (!tfEditor || !tfCopy) return;
-  const text = tfEditor.value;
+  if (!tfOutput || !tfCopy) return;
+  const text = tfOutput.value;
   if (text === '') return;
   navigator.clipboard.writeText(text).then(() => {
     const icon = tfCopy.querySelector('i');
@@ -267,7 +246,7 @@ function toggleChip(chipId) {
     });
   }
   syncChipUI();
-  autoFormat();
+  renderPreview();
 }
 
 function bindChipEvents(chipsContainer) {
@@ -287,7 +266,7 @@ if (tfFontSelect) {
     const chosen = OPERATIONS.find((op) => op.id === tfFontSelect.value);
     if (chosen) chosen.active = true;
     syncChipUI();
-    autoFormat();
+    renderPreview();
   });
 }
 bindChipEvents(tfChipsDeco);
@@ -302,28 +281,16 @@ function syncActionButtons() {
 if (tfCaseSelect) {
   tfCaseSelect.addEventListener('change', () => {
     caseIndex = tfCaseSelect.value ? CASE_MODES.indexOf(tfCaseSelect.value) : -1;
-    autoFormat();
+    renderPreview();
   });
 }
 
 syncActionButtons();
 
-if (tfEditor) {
-  tfEditor.addEventListener('input', () => {
-    if (activeTab === 'edit') {
-      originalText = tfEditor.value;
-    }
-  });
-}
-
-if (tfTabEdit) {
-  tfTabEdit.addEventListener('click', () => showTab('edit'));
-}
-
-if (tfTabPreview) {
-  tfTabPreview.addEventListener('click', () => {
-    originalText = tfEditor.value;
-    showTab('preview');
+if (tfInput) {
+  tfInput.addEventListener('input', () => {
+    originalText = tfInput.value;
+    renderPreview();
   });
 }
 

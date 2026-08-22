@@ -34,10 +34,6 @@
   flex-wrap: wrap;
 }
 
-.tf__actions .tf__btn--copy {
-  margin-left: auto;
-}
-
 .tf__btn--icon {
   width: 34px;
   height: 34px;
@@ -46,36 +42,35 @@
   font-size: 1rem;
 }
 
-/* Tabs */
-.tf__tabs {
+/* Panes */
+.tf__pane {
   display: flex;
-  gap: 0;
-  align-items: flex-end;
+  flex-direction: column;
+  flex: 1;
+  min-height: 0;
 }
 
-.tf__tab {
-  background: none;
+.tf__pane + .tf__pane {
+  margin-top: 0.75rem;
+}
+
+.tf__pane__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.4rem 0.75rem;
   border: 1px solid var(--divider);
   border-bottom: none;
   border-radius: 6px 6px 0 0;
-  padding: 0.5rem 1rem;
-  font-family: inherit;
+}
+
+.tf__pane__title {
   font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
   color: var(--text-subtle);
-  cursor: pointer;
-  margin-bottom: -1px;
-  transition: color 0.2s, background 0.2s, border-color 0.2s;
-}
-
-.tf__tab:hover:not(.tf__tab--active) {
-  color: var(--text);
-  background: var(--divider);
-}
-
-.tf__tab--active {
-  background: var(--card-bg);
-  border-color: var(--accent);
-  color: var(--accent);
+  cursor: default;
 }
 
 /* Editor */
@@ -87,7 +82,7 @@
   background: var(--card-bg);
   color: var(--text);
   border: 1px solid var(--divider);
-  border-radius: 0 8px 8px 8px;
+  border-radius: 0 0 8px 8px;
   font-family: "IBM Plex Mono", monospace;
   font-size: 0.85rem;
   line-height: 1.6;
@@ -218,9 +213,5 @@
 @media (max-width: 600px) {
   .tf {
     height: calc(100vh - 180px);
-  }
-
-  .tf__textarea {
-    min-height: 0;
   }
 }
