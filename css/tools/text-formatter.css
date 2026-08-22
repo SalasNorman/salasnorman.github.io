@@ -101,23 +101,9 @@
 
 /* Buttons */
 .tf__btn {
-  display: inline-flex;
-  align-items: center;
   gap: 0.4rem;
   padding: 0.5rem 1.25rem;
-  border: 1px solid var(--accent);
-  border-radius: 6px;
-  background: none;
-  color: var(--text);
-  font-family: inherit;
   font-size: 0.8rem;
-  cursor: pointer;
-  transition: background 0.2s, color 0.2s;
-}
-
-.tf__btn:hover {
-  background: var(--accent);
-  color: #ffffff;
 }
 
 /* Backdrop */
@@ -350,11 +336,11 @@
 
 .tf__chip:hover {
   background: var(--accent);
-  color: #ffffff;
+  color: var(--bg);
 }
 
 .tf__chip--on {
-  color: #ffffff;
+  color: var(--bg);
   border-color: var(--accent);
   background: var(--accent);
 }

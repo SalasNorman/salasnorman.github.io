@@ -47,37 +47,17 @@
 }
 
 .theme-toggle {
-  background: none;
-  border: 1px solid var(--divider);
-  border-radius: 6px;
   padding: 4px 8px;
-  cursor: pointer;
-  color: var(--text-subtle);
   font-size: 0.9rem;
   line-height: 1;
   margin-left: 0.5rem;
-  transition: border-color 0.2s;
-}
-
-.theme-toggle:hover {
-  border-color: var(--accent);
 }
 
 .hamburger {
   display: none;
-  background: none;
-  border: 1px solid var(--divider);
-  border-radius: 6px;
   padding: 4px 8px;
-  cursor: pointer;
-  color: var(--text-subtle);
   font-size: 1.1rem;
   line-height: 1;
-  transition: border-color 0.2s;
-}
-
-.hamburger:hover {
-  border-color: var(--accent);
 }
 
 @media (max-width: 600px) {

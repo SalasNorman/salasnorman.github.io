@@ -15,7 +15,7 @@ if (container) {
           : `<h3 class="playground__name playground__name--standalone">${t.name}</h3>`;
 
         const tags = t.tags.map((tag) => `<span class="playground__tag">${tag}</span>`).join('');
-        const openBtn = t.url ? `<a href="${t.url}" class="playground__open-btn">Open</a>` : '';
+        const openBtn = t.url ? `<a href="${t.url}" class="playground__open-btn push-btn">Open</a>` : '';
 
         return `
           <div class="card playground">

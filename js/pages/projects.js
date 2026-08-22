@@ -32,13 +32,13 @@ if (container) {
         const actions = p.actions
           .map(
             (a) =>
-              `<a href="${a.url}" target="_blank" rel="noopener" class="project__button">${iconSVG(a.icon)}${a.label}</a>`
+              `<a href="${a.url}" target="_blank" rel="noopener" class="project__button push-btn">${iconSVG(a.icon)}${a.label}</a>`
           )
           .join('');
 
         const demoButton =
           p.demos.length > 0
-            ? `<button class="project__button project__demo-btn">${iconSVG('demo')}Live Demo<i class="bi bi-chevron-down project__chevron"></i></button>`
+            ? `<button class="project__button project__demo-btn push-btn">${iconSVG('demo')}Live Demo<i class="bi bi-chevron-down project__chevron"></i></button>`
             : '';
 
         const demoList =

@@ -48,29 +48,16 @@
 }
 
 .zen__btn {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
   width: 32px;
   height: 32px;
-  border: 1px solid var(--accent);
-  border-radius: 6px;
-  background: none;
-  color: var(--text);
-  cursor: pointer;
   font-size: 0.9rem;
-  transition: background 0.2s, color 0.2s, border-color 0.2s;
-}
-
-.zen__btn:hover {
-  background: var(--accent);
-  color: #ffffff;
 }
 
 .zen__btn--active {
-  color: #ffffff;
-  border-color: var(--accent);
   background: var(--accent);
+  color: var(--bg);
+  transform: translateY(0);
+  box-shadow: 0 0 0 0 var(--accent);
 }
 
 .zen__btn--small {

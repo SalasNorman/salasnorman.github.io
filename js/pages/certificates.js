@@ -72,7 +72,7 @@ if (container) {
       filterEl.innerHTML = collectTags(data)
         .map(
           (tag) =>
-            `<button class="certificates__filter-btn${tag === 'All' ? ' active' : ''}" data-tag="${tag}">${tag}</button>`
+            `<button class="certificates__filter-btn push-btn${tag === 'All' ? ' active' : ''}" data-tag="${tag}">${tag}</button>`
         )
         .join('');
 

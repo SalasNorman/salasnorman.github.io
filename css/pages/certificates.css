@@ -67,25 +67,15 @@
 }
 
 .certificates__filter-btn {
-  background: var(--divider);
-  border: none;
-  border-radius: 4px;
   padding: 0.35rem 0.7rem;
   font-size: 0.75rem;
-  font-family: inherit;
-  color: var(--text-subtle);
-  cursor: pointer;
-  transition: background 0.2s, color 0.2s;
-}
-
-.certificates__filter-btn:hover {
-  background: var(--accent);
-  color: #ffffff;
 }
 
 .certificates__filter-btn.active {
   background: var(--accent);
-  color: #ffffff;
+  color: var(--bg);
+  transform: translateY(0);
+  box-shadow: 0 0 0 0 var(--accent);
 }
 
 .certificate--hidden {
