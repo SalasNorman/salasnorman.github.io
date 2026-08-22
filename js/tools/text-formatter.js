@@ -56,14 +56,16 @@ function strikeText(text) {
   return Array.from(text).join('\u0336');
 }
 
-function fullwidthText(text) {
-  return Array.from(text)
-    .map((ch) => {
-      const code = ch.codePointAt(0);
-      if (code === 0x20) return '\u3000';
-      if (code >= 0x21 && code <= 0x7e) return String.fromCodePoint(code + 0xfee0);
-      return ch;
-    })
+const CJK_LETTERFORM = {
+  A: '丹', B: '乃', C: '匚', D: '刀', E: 'モ', F: '下', G: 'ム', H: '卄', I: '工', J: '丿',
+  K: 'ㄑ', L: 'ㄥ', M: '爪', N: '力', O: '口', P: 'ㄗ', Q: '囚', R: '尺', S: 'ち', T: '匕',
+  U: 'し', V: 'レ', W: '山', X: '㐅', Y: 'ソ', Z: '乙',
+  0: 'ㄖ', 1: '丨', 2: '己', 3: 'ヨ', 4: 'ㄐ', 5: '丂', 6: '石', 7: 'ワ', 8: '曰', 9: 'ㄢ'
+};
+
+function cjkText(text) {
+  return Array.from(text.toUpperCase())
+    .map((ch) => CJK_LETTERFORM[ch] || ch)
     .join('');
 }
 
@@ -222,7 +224,7 @@ const OPERATIONS = [
   { id: 'tf-font-sansbold', label: 'Sans Bold', ui: 'chip', kind: 'font', glyph: '𝗦', fn: makeFontFn('sansBold') },
   { id: 'tf-font-sansitalic', label: 'Sans Italic', ui: 'chip', kind: 'font', glyph: '𝘚', fn: makeFontFn('sansItalic') },
   { id: 'tf-font-sansbolditalic', label: 'Sans Bold Italic', ui: 'chip', kind: 'font', glyph: '𝙎', fn: makeFontFn('sansBoldItalic') },
-  { id: 'tf-font-fullwidth', label: 'Fullwidth', ui: 'chip', kind: 'font', glyph: 'Ｓ', fn: fullwidthText },
+  { id: 'tf-font-cjk', label: 'CJK Letterform', ui: 'chip', kind: 'font', glyph: '丹', fn: cjkText },
   { id: 'tf-under-chip', label: 'Underline', ui: 'chip', kind: 'deco', icon: 'bi-type-underline', fn: underlineText },
   { id: 'tf-strike-chip', label: 'Strikethrough', ui: 'chip', kind: 'deco', icon: 'bi-type-strikethrough', fn: strikeText },
   {
