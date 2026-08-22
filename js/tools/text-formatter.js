@@ -249,6 +249,12 @@ function toggleChip(chipId) {
   const target = OPERATIONS.find((op) => op.id === chipId && op.ui === 'chip');
   if (!target) return;
   target.active = !target.active;
+  if (target.active && target.kind === 'deco') {
+    OPERATIONS.forEach((op) => {
+      if (op.ui !== 'chip' || op.kind !== 'deco' || op === target) return;
+      if (target.exclusive || op.exclusive) op.active = false;
+    });
+  }
   syncChipUI();
   autoFormat();
 }

@@ -24,6 +24,7 @@
       "label": "Zalgo text",
       "ui": "chip",
       "kind": "deco",
+      "exclusive": true,
       "icon": "bi-virus",
       "control": "range",
       "rangeMin": 1,
