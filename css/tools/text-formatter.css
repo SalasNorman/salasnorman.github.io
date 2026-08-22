@@ -114,22 +114,6 @@
 
 .tf__seg {
   display: inline-flex;
-  border: 2px solid var(--text);
-  border-radius: 6px;
-  background: var(--card-bg);
-  box-shadow: 0 0.25em 0 0 var(--text);
-  overflow: hidden;
-  transition: transform 0.1s ease, box-shadow 0.1s ease;
-}
-
-.tf__seg:hover {
-  transform: translateY(-0.1em);
-  box-shadow: 0 0.35em 0 0 var(--text);
-}
-
-.tf__seg:active {
-  transform: translateY(0);
-  box-shadow: 0 0 0 0 var(--text);
 }
 
 .tf__seg__btn {
@@ -139,28 +123,48 @@
   min-width: 44px;
   height: 34px;
   padding: 0 0.75rem;
-  border: none;
-  border-left: 1px solid var(--divider);
-  background: none;
+  border: 2px solid var(--text);
+  border-radius: 6px;
+  background: var(--card-bg);
   color: var(--text);
   font-family: inherit;
   font-size: 1rem;
   cursor: pointer;
-  transition: background 0.2s, color 0.2s;
+  box-shadow: 0 0.25em 0 0 var(--text);
+  transition:
+    transform 0.1s ease,
+    box-shadow 0.1s ease,
+    background 0.2s,
+    color 0.2s;
 }
 
-.tf__seg__btn:first-child {
-  border-left: none;
+.tf__seg__btn + .tf__seg__btn {
+  margin-left: -2px;
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+}
+
+.tf__seg__btn:not(:last-child) {
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
 }
 
 .tf__seg__btn:hover {
-  background: var(--divider);
+  transform: translateY(-0.1em);
+  box-shadow: 0 0.35em 0 0 var(--text);
+}
+
+.tf__seg__btn:active {
+  transform: translateY(0);
+  box-shadow: 0 0 0 0 var(--text);
 }
 
 .tf__seg__btn--on,
 .tf__seg__btn--on:hover {
   background: var(--accent);
   color: var(--bg);
+  transform: translateY(0);
+  box-shadow: 0 0 0 0 var(--text);
 }
 
 .tf__seg__count {
