@@ -5,13 +5,11 @@ const tfTabPreview = document.getElementById('tf-tab-preview');
 const tfFontSelect = document.getElementById('tf-font');
 const tfChipsDeco = document.getElementById('tf-chips-deco');
 const tfCaseBtn = document.getElementById('tf-case-btn');
-const tfSortBtn = document.getElementById('tf-sort-btn');
 
 let originalText = '';
 let formattedText = '';
 let activeTab = 'edit';
 let caseIndex = -1;
-let sortIndex = -1;
 
 const FONT_RANGES = {
   bold: { upper: 0x1d400, lower: 0x1d41a, digits: 0x1d7ce },
@@ -90,9 +88,6 @@ function zalgoText(text, maxMarks) {
 }
 
 const TRANSFORMS = {
-  sortLines(text, dir) {
-    return text.split('\n').sort((a, b) => (dir === 'desc' ? b.localeCompare(a) : a.localeCompare(b))).join('\n');
-  },
   convertCase(text, type) {
     if (type === 'upper') return text.toUpperCase();
     if (type === 'lower') return text.toLowerCase();
@@ -103,8 +98,8 @@ const TRANSFORMS = {
       return text.replace(/(^|[.!?]\s+)([a-z])/g, (m, s, l) => s + l.toUpperCase());
     }
     if (type === 'camel') {
-      const words = text.toLowerCase().split(/\s+/);
-      return words[0] || words.slice(1).map((w) => w.charAt(0).toUpperCase() + w.substr(1)).join('');
+      const words = text.toLowerCase().split(/\s+/).filter(Boolean);
+      return words.map((w, i) => (i === 0 ? w : w.charAt(0).toUpperCase() + w.slice(1))).join('');
     }
     if (type === 'snake') return text.toLowerCase().replace(/\s+/g, '_').replace(/[^a-z0-9_]/g, '');
     if (type === 'kebab') return text.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '');
@@ -163,7 +158,6 @@ function buildChips() {
 function computeFormatted() {
   let text = originalText;
   if (caseIndex >= 0) text = TRANSFORMS.convertCase(text, CASE_MODES[caseIndex]);
-  if (sortIndex >= 0) text = TRANSFORMS.sortLines(text, SORT_DIRS[sortIndex]);
   OPERATIONS.forEach((op) => {
     let param = null;
     if (op.ui === 'chip') {
@@ -292,29 +286,16 @@ const CASE_LABELS = {
   snake: 'snake',
   kebab: 'kebab'
 };
-const SORT_DIRS = ['asc', 'desc'];
-
 function syncActionButtons() {
-  if (!tfCaseBtn || !tfSortBtn) return;
+  if (!tfCaseBtn) return;
   const mode = CASE_MODES[caseIndex];
   tfCaseBtn.textContent = mode ? `Case: ${CASE_LABELS[mode]}` : 'Case';
   tfCaseBtn.classList.toggle('push-btn--in', Boolean(mode));
-  const dir = SORT_DIRS[sortIndex];
-  tfSortBtn.textContent = dir === 'asc' ? 'Sort A\u2192Z' : dir === 'desc' ? 'Sort Z\u2192A' : 'Sort';
-  tfSortBtn.classList.toggle('push-btn--in', Boolean(dir));
 }
 
 if (tfCaseBtn) {
   tfCaseBtn.addEventListener('click', () => {
     caseIndex = caseIndex + 1 >= CASE_MODES.length ? -1 : caseIndex + 1;
-    syncActionButtons();
-    autoFormat();
-  });
-}
-
-if (tfSortBtn) {
-  tfSortBtn.addEventListener('click', () => {
-    sortIndex = sortIndex + 1 >= SORT_DIRS.length ? -1 : sortIndex + 1;
     syncActionButtons();
     autoFormat();
   });
