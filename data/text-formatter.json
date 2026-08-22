@@ -28,6 +28,7 @@
       "icon": "bi-virus",
       "control": "cycle",
       "levels": [3, 6, 10, 15],
+      "counts": [2, 4, 6, 8],
       "levelLabels": ["Light", "Medium", "Heavy", "Chaos"],
       "fn": "zalgoText"
     }

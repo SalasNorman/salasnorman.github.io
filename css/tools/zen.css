@@ -32,19 +32,9 @@
 }
 
 .zen__select {
-  background: var(--card-bg);
-  color: var(--text);
-  border: 1px solid var(--divider);
-  border-radius: 6px;
   padding: 0.4rem 0.6rem;
-  font-family: inherit;
-  font-size: 0.8rem;
+  color: var(--text);
   cursor: pointer;
-}
-
-.zen__select:focus {
-  outline: 2px solid var(--accent);
-  outline-offset: 1px;
 }
 
 .zen__btn {

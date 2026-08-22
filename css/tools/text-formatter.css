@@ -180,9 +180,10 @@
   font-size: 0.8rem;
 }
 
-/* Shared input styles */
-.tf__select,
+/* Inputs */
 .tf__num-input {
+  width: 50px;
+  text-align: center;
   background: var(--card-bg);
   color: var(--text);
   border: 1px solid var(--divider);
@@ -193,21 +194,24 @@
   cursor: pointer;
 }
 
-.tf__select:focus,
 .tf__num-input:focus {
   outline: 2px solid var(--accent);
   outline-offset: 1px;
 }
 
-.tf__select:disabled,
 .tf__num-input:disabled {
   opacity: 0.4;
   cursor: not-allowed;
 }
 
-.tf__num-input {
-  width: 50px;
-  text-align: center;
+.tf__select {
+  color: var(--text);
+  cursor: pointer;
+}
+
+.tf__case {
+  padding: 0.5rem 1.25rem;
+  font-size: 0.8rem;
 }
 
 /* Mobile */

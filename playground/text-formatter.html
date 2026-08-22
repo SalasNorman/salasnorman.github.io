@@ -31,9 +31,18 @@
           </div>
 
           <div class="tf__actions">
-            <select id="tf-font" class="tf__select tf__font" aria-label="Font style"></select>
+            <select id="tf-font" class="tf__select tf__font push-btn" aria-label="Font style"></select>
+            <select id="tf-case" class="tf__select tf__case push-btn" aria-label="Case style">
+              <option value="">Case</option>
+              <option value="upper">UPPER</option>
+              <option value="lower">lower</option>
+              <option value="title">Title</option>
+              <option value="sentence">Sentence</option>
+              <option value="camel">camel</option>
+              <option value="snake">snake</option>
+              <option value="kebab">kebab</option>
+            </select>
             <div id="tf-chips-deco" class="tf__chips"></div>
-            <button id="tf-case-btn" class="tf__btn push-btn" type="button">Case</button>
             <button id="tf-copy" class="tf__btn tf__btn--icon tf__btn--copy push-btn" title="Copy to clipboard" aria-label="Copy to clipboard">
               <i class="bi bi-copy"></i>
             </button>

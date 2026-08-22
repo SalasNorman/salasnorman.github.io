@@ -4,7 +4,7 @@ const tfTabEdit = document.getElementById('tf-tab-edit');
 const tfTabPreview = document.getElementById('tf-tab-preview');
 const tfFontSelect = document.getElementById('tf-font');
 const tfChipsDeco = document.getElementById('tf-chips-deco');
-const tfCaseBtn = document.getElementById('tf-case-btn');
+const tfCaseSelect = document.getElementById('tf-case');
 
 let originalText = '';
 let formattedText = '';
@@ -238,12 +238,12 @@ function syncChipUI() {
     el.classList.toggle('tf__seg__btn--on', !!op.active);
     el.setAttribute('aria-pressed', op.active ? 'true' : 'false');
     if (op.control === 'cycle') {
-      el.innerHTML = op.active ? `<span class="tf__seg__count">\u00d7${op.levels[op.levelIndex]}</span>` : chipInner(op);
+      el.innerHTML = op.active ? `<span class="tf__seg__count">x${(op.counts && op.counts[op.levelIndex]) || op.levels[op.levelIndex]}</span>` : chipInner(op);
     }
     let tip = op.label;
     if (op.control === 'cycle' && op.active) {
       const word = (op.levelLabels && op.levelLabels[op.levelIndex]) || `level ${op.levelIndex + 1}`;
-      tip = `${op.label}: ${word} \u00d7${op.levels[op.levelIndex]}`;
+      tip = `${op.label}: ${word} x${(op.counts && op.counts[op.levelIndex]) || op.levels[op.levelIndex]}`;
     }
     el.title = tip;
     el.setAttribute('aria-label', tip);
@@ -293,26 +293,15 @@ if (tfFontSelect) {
 bindChipEvents(tfChipsDeco);
 
 const CASE_MODES = ['upper', 'lower', 'title', 'sentence', 'camel', 'snake', 'kebab'];
-const CASE_LABELS = {
-  upper: 'UPPER',
-  lower: 'lower',
-  title: 'Title',
-  sentence: 'Sentence',
-  camel: 'camel',
-  snake: 'snake',
-  kebab: 'kebab'
-};
+
 function syncActionButtons() {
-  if (!tfCaseBtn) return;
-  const mode = CASE_MODES[caseIndex];
-  tfCaseBtn.textContent = mode ? `Case: ${CASE_LABELS[mode]}` : 'Case';
-  tfCaseBtn.classList.toggle('push-btn--in', Boolean(mode));
+  if (!tfCaseSelect) return;
+  tfCaseSelect.value = CASE_MODES[caseIndex] || '';
 }
 
-if (tfCaseBtn) {
-  tfCaseBtn.addEventListener('click', () => {
-    caseIndex = caseIndex + 1 >= CASE_MODES.length ? -1 : caseIndex + 1;
-    syncActionButtons();
+if (tfCaseSelect) {
+  tfCaseSelect.addEventListener('change', () => {
+    caseIndex = tfCaseSelect.value ? CASE_MODES.indexOf(tfCaseSelect.value) : -1;
     autoFormat();
   });
 }
