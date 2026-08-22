@@ -163,6 +163,10 @@
   color: var(--bg);
 }
 
+.tf__seg__count {
+  font-size: 0.85rem;
+}
+
 .tf__font {
   padding: 0.45rem 0.6rem;
   font-size: 0.8rem;

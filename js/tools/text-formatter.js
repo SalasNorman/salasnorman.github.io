@@ -139,12 +139,16 @@ function buildFontSelect() {
     .join('');
 }
 
+function chipInner(op) {
+  return op.glyph || `<i class="bi ${op.icon}"></i>`;
+}
+
 function buildChips() {
   if (!tfChipsDeco) return;
   let decoHtml = '<div class="tf__seg" role="group" aria-label="Decoration">';
   OPERATIONS.forEach((op) => {
     if (op.ui !== 'chip' || op.kind !== 'deco') return;
-    const inner = op.glyph || `<i class="bi ${op.icon}"></i>`;
+    const inner = chipInner(op);
     decoHtml += `<button type="button" id="${op.id}" class="tf__seg__btn" aria-pressed="false" aria-label="${op.label}" title="${op.label}">${inner}</button>`;
   });
   decoHtml += '</div>';
@@ -233,6 +237,9 @@ function syncChipUI() {
     if (!el) return;
     el.classList.toggle('tf__seg__btn--on', !!op.active);
     el.setAttribute('aria-pressed', op.active ? 'true' : 'false');
+    if (op.control === 'cycle') {
+      el.innerHTML = op.active ? `<span class="tf__seg__count">\u00d7${op.levels[op.levelIndex]}</span>` : chipInner(op);
+    }
     let tip = op.label;
     if (op.control === 'cycle' && op.active) {
       const word = (op.levelLabels && op.levelLabels[op.levelIndex]) || `level ${op.levelIndex + 1}`;
