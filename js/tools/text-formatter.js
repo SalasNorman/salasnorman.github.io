@@ -7,7 +7,7 @@ const tfDrawerClose = document.getElementById('tf-drawer-close');
 const tfBackdrop = document.getElementById('tf-backdrop');
 const tfDrawer = document.getElementById('tf-drawer');
 const tfDrawerBody = document.getElementById('tf-drawer-body');
-const tfChipsFonts = document.getElementById('tf-chips-fonts');
+const tfFontSelect = document.getElementById('tf-font');
 const tfChipsDeco = document.getElementById('tf-chips-deco');
 
 let originalText = '';
@@ -277,26 +277,27 @@ function buildDrawer() {
   tfDrawerBody.innerHTML = rows.join('');
 }
 
+function buildFontSelect() {
+  if (!tfFontSelect) return;
+  const fonts = OPERATIONS.filter((op) => op.kind === 'font');
+  tfFontSelect.innerHTML = ['<option value="">None</option>']
+    .concat(fonts.map((op) => `<option value="${op.id}">${op.glyph} ${op.label}</option>`))
+    .join('');
+}
+
 function buildChips() {
-  if (!tfChipsFonts || !tfChipsDeco) return;
-  let fontsHtml = '';
+  if (!tfChipsDeco) return;
   let decoHtml = '';
   OPERATIONS.forEach((op) => {
-    if (op.ui !== 'chip') return;
+    if (op.ui !== 'chip' || op.kind !== 'deco') return;
     const inner = op.glyph || `<i class="bi ${op.icon}"></i>`;
-    const chip =
+    decoHtml +=
       `<button type="button" id="${op.id}" class="tf__chip" aria-pressed="false" aria-label="${op.label}" title="${op.label}">${inner}</button>`;
-    if (op.kind === 'font') {
-      fontsHtml += chip;
-    } else {
-      decoHtml += chip;
-      if (op.control === 'range') {
-        decoHtml +=
-          `<input type="range" id="${op.id}-range" class="tf__range" min="${op.rangeMin}" max="${op.rangeMax}" value="${op.rangeValue}" hidden />`;
-      }
+    if (op.control === 'range') {
+      decoHtml +=
+        `<input type="range" id="${op.id}-range" class="tf__range" min="${op.rangeMin}" max="${op.rangeMax}" value="${op.rangeValue}" hidden />`;
     }
   });
-  tfChipsFonts.innerHTML = fontsHtml;
   tfChipsDeco.innerHTML = decoHtml;
 }
 
@@ -438,6 +439,7 @@ function setupTooltipRow(row) {
 }
 
 buildDrawer();
+buildFontSelect();
 buildChips();
 
 if (tfDrawerBody) {
@@ -452,6 +454,10 @@ if (tfDrawerBody) {
 }
 
 function syncChipUI() {
+  if (tfFontSelect) {
+    const activeFont = OPERATIONS.find((op) => op.kind === 'font' && op.active);
+    tfFontSelect.value = activeFont ? activeFont.id : '';
+  }
   OPERATIONS.forEach((op) => {
     if (op.ui !== 'chip') return;
     const el = document.getElementById(op.id);
@@ -468,15 +474,7 @@ function syncChipUI() {
 function toggleChip(chipId) {
   const target = OPERATIONS.find((op) => op.id === chipId && op.ui === 'chip');
   if (!target) return;
-  if (target.kind === 'font') {
-    const wasActive = !!target.active;
-    OPERATIONS.forEach((op) => {
-      if (op.kind === 'font') op.active = false;
-    });
-    target.active = !wasActive;
-  } else {
-    target.active = !target.active;
-  }
+  target.active = !target.active;
   syncChipUI();
   autoFormat();
 }
@@ -491,7 +489,17 @@ function bindChipEvents(chipsContainer) {
   chipsContainer.addEventListener('change', () => autoFormat());
 }
 
-bindChipEvents(tfChipsFonts);
+if (tfFontSelect) {
+  tfFontSelect.addEventListener('change', () => {
+    OPERATIONS.forEach((op) => {
+      if (op.kind === 'font') op.active = false;
+    });
+    const chosen = OPERATIONS.find((op) => op.id === tfFontSelect.value);
+    if (chosen) chosen.active = true;
+    syncChipUI();
+    autoFormat();
+  });
+}
 bindChipEvents(tfChipsDeco);
 
 if (tfEditor) {
