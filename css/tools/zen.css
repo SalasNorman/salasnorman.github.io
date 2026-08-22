@@ -244,8 +244,9 @@
   transition: color 0.2s, background 0.2s, border-color 0.2s;
 }
 
-.zen__tab:hover {
+.zen__tab:hover:not(.zen__tab--active) {
   color: var(--text);
+  background: var(--divider);
 }
 
 .zen__tab--active {

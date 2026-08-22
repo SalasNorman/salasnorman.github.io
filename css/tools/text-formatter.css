@@ -67,8 +67,9 @@
   transition: color 0.2s, background 0.2s, border-color 0.2s;
 }
 
-.tf__tab:hover {
+.tf__tab:hover:not(.tf__tab--active) {
   color: var(--text);
+  background: var(--divider);
 }
 
 .tf__tab--active {
@@ -149,9 +150,10 @@
   border-bottom-right-radius: 0;
 }
 
-.tf__seg__btn:hover {
+.tf__seg__btn:hover:not(.tf__seg__btn--on) {
   transform: translateY(-0.1em);
   box-shadow: 0 0.35em 0 0 var(--text);
+  background: var(--divider);
 }
 
 .tf__seg__btn:active {

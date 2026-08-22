@@ -110,6 +110,10 @@ body.light {
   box-shadow: 0 0.35em 0 0 var(--text);
 }
 
+.push-btn:hover:not(.push-btn--in):not(.active):not(.zen__btn--active) {
+  background: var(--divider);
+}
+
 .push-btn:active {
   transform: translateY(0);
   box-shadow: 0 0 0 0 var(--text);
