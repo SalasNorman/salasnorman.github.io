@@ -150,9 +150,12 @@
   border-bottom-right-radius: 0;
 }
 
-.tf__seg__btn:hover:not(.tf__seg__btn--on) {
+.tf__seg__btn:hover {
   transform: translateY(-0.1em);
   box-shadow: 0 0.35em 0 0 var(--text);
+}
+
+.tf__seg__btn:hover:not(.tf__seg__btn--on) {
   background: var(--divider);
 }
 
@@ -161,8 +164,7 @@
   box-shadow: 0 0 0 0 var(--text);
 }
 
-.tf__seg__btn--on,
-.tf__seg__btn--on:hover {
+.tf__seg__btn--on {
   background: var(--accent);
   color: var(--bg);
   transform: translateY(0);
