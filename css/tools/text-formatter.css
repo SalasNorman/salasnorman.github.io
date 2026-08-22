@@ -106,45 +106,61 @@
   font-size: 0.8rem;
 }
 
-/* Decoration chips & font select */
+/* Decoration segmented group & font select */
 .tf__chips {
   display: flex;
   align-items: center;
-  flex-wrap: wrap;
 }
 
-.tf__chip {
+.tf__seg {
+  display: inline-flex;
+  border: 2px solid var(--text);
+  border-radius: 6px;
+  background: var(--card-bg);
+  box-shadow: 0 0.25em 0 0 var(--text);
+  overflow: hidden;
+  transition: transform 0.1s ease, box-shadow 0.1s ease;
+}
+
+.tf__seg:hover {
+  transform: translateY(-0.1em);
+  box-shadow: 0 0.35em 0 0 var(--text);
+}
+
+.tf__seg:active {
+  transform: translateY(0);
+  box-shadow: 0 0 0 0 var(--text);
+}
+
+.tf__seg__btn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 34px;
+  min-width: 44px;
   height: 34px;
-  padding: 0;
-  border: 1px solid var(--accent);
-  border-radius: 6px;
+  padding: 0 0.75rem;
+  border: none;
+  border-left: 1px solid var(--divider);
   background: none;
   color: var(--text);
   font-family: inherit;
   font-size: 1rem;
   cursor: pointer;
-  transition: background 0.2s, color 0.2s, border-color 0.2s;
+  transition: background 0.2s, color 0.2s;
 }
 
-.tf__chip:hover {
+.tf__seg__btn:first-child {
+  border-left: none;
+}
+
+.tf__seg__btn:hover {
   background: var(--divider);
 }
 
-.tf__chip--on {
-  color: var(--bg);
-  border-color: var(--accent);
+.tf__seg__btn--on,
+.tf__seg__btn--on:hover {
   background: var(--accent);
-}
-
-.tf__range {
-  flex: 1;
-  min-width: 80px;
-  accent-color: var(--accent);
-  cursor: pointer;
+  color: var(--bg);
 }
 
 .tf__font {

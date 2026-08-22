@@ -26,10 +26,9 @@
       "kind": "deco",
       "exclusive": true,
       "icon": "bi-virus",
-      "control": "range",
-      "rangeMin": 1,
-      "rangeMax": 15,
-      "rangeValue": 6,
+      "control": "cycle",
+      "levels": [3, 6, 10, 15],
+      "levelLabels": ["Light", "Medium", "Heavy", "Chaos"],
       "fn": "zalgoText"
     }
   ]

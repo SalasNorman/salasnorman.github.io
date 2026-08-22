@@ -141,17 +141,13 @@ function buildFontSelect() {
 
 function buildChips() {
   if (!tfChipsDeco) return;
-  let decoHtml = '';
+  let decoHtml = '<div class="tf__seg" role="group" aria-label="Decoration">';
   OPERATIONS.forEach((op) => {
     if (op.ui !== 'chip' || op.kind !== 'deco') return;
     const inner = op.glyph || `<i class="bi ${op.icon}"></i>`;
-    decoHtml +=
-      `<button type="button" id="${op.id}" class="tf__chip" aria-pressed="false" aria-label="${op.label}" title="${op.label}">${inner}</button>`;
-    if (op.control === 'range') {
-      decoHtml +=
-        `<input type="range" id="${op.id}-range" class="tf__range" min="${op.rangeMin}" max="${op.rangeMax}" value="${op.rangeValue}" hidden />`;
-    }
+    decoHtml += `<button type="button" id="${op.id}" class="tf__seg__btn" aria-pressed="false" aria-label="${op.label}" title="${op.label}">${inner}</button>`;
   });
+  decoHtml += '</div>';
   tfChipsDeco.innerHTML = decoHtml;
 }
 
@@ -162,9 +158,8 @@ function computeFormatted() {
     let param = null;
     if (op.ui === 'chip') {
       if (!op.active) return;
-      if (op.control === 'range') {
-        const slider = document.getElementById(`${op.id}-range`);
-        param = slider ? parseInt(slider.value, 10) || op.rangeValue : op.rangeValue;
+      if (op.control === 'cycle') {
+        param = op.levels[op.levelIndex];
       }
       text = op.fn(text, param);
       return;
@@ -236,19 +231,28 @@ function syncChipUI() {
     if (op.ui !== 'chip') return;
     const el = document.getElementById(op.id);
     if (!el) return;
-    el.classList.toggle('tf__chip--on', !!op.active);
+    el.classList.toggle('tf__seg__btn--on', !!op.active);
     el.setAttribute('aria-pressed', op.active ? 'true' : 'false');
-    if (op.control === 'range') {
-      const slider = document.getElementById(`${op.id}-range`);
-      if (slider) slider.hidden = !op.active;
+    let tip = op.label;
+    if (op.control === 'cycle' && op.active) {
+      const word = (op.levelLabels && op.levelLabels[op.levelIndex]) || `level ${op.levelIndex + 1}`;
+      tip = `${op.label}: ${word} \u00d7${op.levels[op.levelIndex]}`;
     }
+    el.title = tip;
+    el.setAttribute('aria-label', tip);
   });
 }
 
 function toggleChip(chipId) {
   const target = OPERATIONS.find((op) => op.id === chipId && op.ui === 'chip');
   if (!target) return;
-  target.active = !target.active;
+  if (target.control === 'cycle') {
+    const next = (target.levelIndex ?? -1) + 1;
+    target.levelIndex = next < (target.levels || []).length ? next : -1;
+    target.active = target.levelIndex >= 0;
+  } else {
+    target.active = !target.active;
+  }
   if (target.active && target.kind === 'deco') {
     OPERATIONS.forEach((op) => {
       if (op.ui !== 'chip' || op.kind !== 'deco' || op === target) return;
@@ -262,11 +266,10 @@ function toggleChip(chipId) {
 function bindChipEvents(chipsContainer) {
   if (!chipsContainer) return;
   chipsContainer.addEventListener('click', (e) => {
-    const chip = e.target.closest ? e.target.closest('.tf__chip') : null;
-    if (!chip) return;
-    toggleChip(chip.id);
+    const btn = e.target.closest ? e.target.closest('.tf__seg__btn') : null;
+    if (!btn) return;
+    toggleChip(btn.id);
   });
-  chipsContainer.addEventListener('change', () => autoFormat());
 }
 
 if (tfFontSelect) {
