@@ -247,7 +247,7 @@
 }
 
 .zen__seg__btn + .zen__seg__btn {
-  margin-left: -2px;
+  margin-left: -1px;
   border-top-left-radius: 0;
   border-bottom-left-radius: 0;
 }
