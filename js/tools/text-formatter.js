@@ -6,7 +6,6 @@ const tfChipsDeco = document.getElementById('tf-chips-deco');
 const tfCaseSelect = document.getElementById('tf-case');
 
 let originalText = '';
-let formattedText = '';
 let caseIndex = -1;
 
 const FONT_RANGES = {
@@ -183,8 +182,7 @@ function computeFormatted() {
 function renderPreview() {
   if (!tfInput || !tfOutput) return;
   originalText = tfInput.value;
-  formattedText = computeFormatted();
-  tfOutput.value = formattedText;
+  tfOutput.value = computeFormatted();
 }
 
 function copyToClipboard() {
@@ -287,11 +285,6 @@ if (tfCaseSelect) {
 
 syncActionButtons();
 
-if (tfInput) {
-  tfInput.addEventListener('input', () => {
-    originalText = tfInput.value;
-    renderPreview();
-  });
-}
+if (tfInput) tfInput.addEventListener('input', renderPreview);
 
 if (tfCopy) tfCopy.addEventListener('click', copyToClipboard);
