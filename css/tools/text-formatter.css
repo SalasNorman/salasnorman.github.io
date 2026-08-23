@@ -48,7 +48,7 @@
   flex-direction: column;
   flex: 1;
   min-height: 0;
-  gap: 0.4rem;
+  gap: 0;
 }
 
 .tf__pane + .tf__pane {
@@ -56,12 +56,31 @@
 }
 
 .tf__pane__head {
+  position: relative;
+  z-index: 0;
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  padding: 0.4rem 0.75rem;
-  border: 1px solid var(--divider);
-  border-radius: 6px;
+  padding: 0.35rem 0.75rem;
+  border: 2px solid var(--text);
+  border-bottom: none;
+  border-radius: 6px 6px 0 0;
+  background: var(--divider);
+  margin-bottom: -2px;
+}
+
+.tf__pane__body {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-height: 0;
+}
+
+.tf__btn--float {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
 }
 
 .tf__pane__title {
@@ -78,6 +97,8 @@
   width: 100%;
   flex: 1;
   min-height: 0;
+  position: relative;
+  z-index: 1;
   padding: 1rem;
   background: var(--bg);
   color: var(--text);
