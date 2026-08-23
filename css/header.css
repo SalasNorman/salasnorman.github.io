@@ -38,7 +38,8 @@
 
 .header__nav-links a {
   font-size: 0.85rem;
-  color: var(--text-subtle);
+  color: var(--text);
+  font-weight: 700;
 }
 
 .header__nav-links a.active {
