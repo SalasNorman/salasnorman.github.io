@@ -22,11 +22,16 @@ const zenTabs = document.getElementById('zen-tabs');
 const zenTabEdit = document.getElementById('zen-tab-edit');
 const zenTabPreview = document.getElementById('zen-tab-preview');
 const zenFontSize = document.getElementById('zen-font-size');
+const zenNotes = document.getElementById('zen-notes');
 
-const STORAGE_KEY = 'zen-editor-content';
+const NOTES_KEY = 'zen-editor-notes';
+const LEGACY_CONTENT_KEY = 'zen-editor-content';
 const FONT_KEY = 'zen-editor-font';
 const FONT_SIZE_KEY = 'zen-editor-font-size';
 const MARKDOWN_KEY = 'zen-editor-markdown';
+const MAX_NOTES = 4;
+let notes = [''];
+let activeNote = 0;
 let markdownMode = false;
 let converter = null;
 
@@ -49,17 +54,33 @@ function updateStats() {
 
 function saveContent() {
   if (!zenContent) return;
+  notes[activeNote] = zenContent.innerHTML;
+  saveNotes();
+}
+
+function saveNotes() {
   try {
-    localStorage.setItem(STORAGE_KEY, zenContent.innerHTML);
+    localStorage.setItem(NOTES_KEY, JSON.stringify({ active: activeNote, notes }));
   } catch (e) {}
 }
 
-function loadContent() {
-  if (!zenContent) return;
+function loadNotes() {
   try {
-    const saved = localStorage.getItem(STORAGE_KEY);
+    const saved = localStorage.getItem(NOTES_KEY);
     if (saved) {
-      zenContent.innerHTML = saved;
+      const parsed = JSON.parse(saved);
+      if (Array.isArray(parsed.notes) && parsed.notes.length > 0) {
+        notes = parsed.notes.slice(0, MAX_NOTES);
+        activeNote = Math.min(Math.max(parsed.active || 0, 0), notes.length - 1);
+        return;
+      }
+    }
+    const legacy = localStorage.getItem(LEGACY_CONTENT_KEY);
+    if (legacy) {
+      notes = [legacy];
+      activeNote = 0;
+      saveNotes();
+      localStorage.removeItem(LEGACY_CONTENT_KEY);
     }
   } catch (e) {}
 }
@@ -99,6 +120,78 @@ function loadFontSize() {
   } catch (e) {}
 }
 
+function noteLabel(index) {
+  return `Note ${index + 1}`;
+}
+
+function refreshPreviewIfVisible() {
+  if (markdownMode && zenTabPreview && zenTabPreview.classList.contains('zen__tab--active')) {
+    updatePreview();
+  }
+}
+
+function renderNotes() {
+  if (!zenNotes) return;
+  const showX = notes.length > 1 ? '' : ' hidden';
+  const tabs = notes
+    .map((_, i) => {
+      const activeCls = i === activeNote ? ' zen__note--active' : '';
+      return (
+        `<div class="zen__note${activeCls}">` +
+        `<button type="button" class="zen__note-name">${noteLabel(i)}</button>` +
+        `<button type="button" class="zen__note-x"${showX} aria-label="Close ${noteLabel(i)}"><i class="bi bi-x"></i></button>` +
+        '</div>'
+      );
+    })
+    .join('');
+  const addHtml =
+    notes.length < MAX_NOTES
+      ? '<button type="button" id="zen-note-add" class="zen__note-add push-btn" title="New note" aria-label="New note"><i class="bi bi-plus-lg"></i></button>'
+      : '';
+  zenNotes.innerHTML = tabs + addHtml;
+}
+
+function switchNote(index) {
+  if (!zenContent || index === activeNote || index < 0 || index >= notes.length) return;
+  clearHighlights();
+  saveContent();
+  activeNote = index;
+  zenContent.innerHTML = notes[activeNote];
+  updateStats();
+  saveNotes();
+  renderNotes();
+  refreshPreviewIfVisible();
+}
+
+function addNote() {
+  if (!zenContent || notes.length >= MAX_NOTES) return;
+  clearHighlights();
+  saveContent();
+  notes.push('');
+  activeNote = notes.length - 1;
+  zenContent.innerHTML = '';
+  updateStats();
+  saveNotes();
+  renderNotes();
+  refreshPreviewIfVisible();
+  zenContent.focus();
+}
+
+function deleteNote(index) {
+  if (!zenContent || notes.length <= 1) return;
+  notes.splice(index, 1);
+  if (index < activeNote) {
+    activeNote -= 1;
+  } else if (index === activeNote) {
+    activeNote = index < notes.length ? index : notes.length - 1;
+  }
+  zenContent.innerHTML = notes[activeNote];
+  updateStats();
+  saveNotes();
+  renderNotes();
+  refreshPreviewIfVisible();
+}
+
 function showTab(tab) {
   if (!zenTabEdit || !zenTabPreview || !zenContent || !zenPreview) return;
   if (tab === 'edit') {
@@ -128,7 +221,11 @@ function loadMarkdownMode() {
 }
 
 if (zenContent) {
-  loadContent();
+  loadNotes();
+  if (notes[activeNote]) {
+    zenContent.innerHTML = notes[activeNote];
+  }
+  renderNotes();
   loadFont();
   loadFontSize();
   loadMarkdownMode();
@@ -203,6 +300,25 @@ if (zenTabEdit) {
 
 if (zenTabPreview) {
   zenTabPreview.addEventListener('click', () => showTab('preview'));
+}
+
+if (zenNotes) {
+  zenNotes.addEventListener('click', (e) => {
+    const tabEls = Array.from(zenNotes.querySelectorAll('.zen__note'));
+    const xBtn = e.target.closest('.zen__note-x');
+    if (xBtn) {
+      deleteNote(tabEls.indexOf(xBtn.closest('.zen__note')));
+      return;
+    }
+    const nameBtn = e.target.closest('.zen__note-name');
+    if (nameBtn) {
+      switchNote(tabEls.indexOf(nameBtn.closest('.zen__note')));
+      return;
+    }
+    if (e.target.closest('#zen-note-add')) {
+      addNote();
+    }
+  });
 }
 
 function downloadFile(filename, type) {

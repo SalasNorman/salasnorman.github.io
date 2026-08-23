@@ -248,6 +248,70 @@
   color: var(--accent);
 }
 
+.zen__notes {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  min-width: 0;
+  margin-bottom: 0.4rem;
+}
+
+.zen__note {
+  display: inline-flex;
+  align-items: center;
+  min-width: 0;
+  border: 1px solid var(--divider);
+  border-radius: 6px;
+}
+
+.zen__note--active {
+  border-color: var(--accent);
+}
+
+.zen__note--active .zen__note-name {
+  color: var(--accent);
+}
+
+.zen__note-name {
+  background: none;
+  border: none;
+  padding: 0.35rem 0.6rem;
+  font-family: inherit;
+  font-size: 0.8rem;
+  color: var(--text-subtle);
+  cursor: pointer;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  min-width: 0;
+}
+
+.zen__note-name:hover {
+  color: var(--text);
+}
+
+.zen__note-x {
+  display: inline-flex;
+  align-items: center;
+  background: none;
+  border: none;
+  padding: 0.35rem 0.45rem;
+  font-size: 0.7rem;
+  color: var(--text-subtle);
+  cursor: pointer;
+}
+
+.zen__note-x:hover {
+  color: var(--text);
+}
+
+.zen__note-add {
+  width: 24px;
+  height: 24px;
+  font-size: 0.75rem;
+  flex-shrink: 0;
+}
+
 @media (max-width: 600px) {
   .zen {
     height: calc(100vh - 100px);
@@ -255,5 +319,13 @@
 
   .zen__find-input {
     width: 100px;
+  }
+
+  .zen__notes {
+    overflow-x: auto;
+  }
+
+  .zen__note-name {
+    flex-shrink: 1;
   }
 }
