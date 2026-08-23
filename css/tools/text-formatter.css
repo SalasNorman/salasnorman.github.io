@@ -156,14 +156,14 @@
 }
 
 .tf__seg__btn:active {
-  transform: translateY(0.25em);
+  transform: translateY(0.26em);
   box-shadow: 0 0 0 0 var(--text);
 }
 
 .tf__seg__btn--on {
   background: var(--accent);
   color: var(--bg);
-  transform: translateY(0.25em);
+  transform: translateY(0.26em);
   box-shadow: 0 0 0 0 var(--text);
 }
 
