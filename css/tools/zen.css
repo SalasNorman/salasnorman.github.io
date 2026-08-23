@@ -127,7 +127,8 @@
 .zen__content {
   flex: 1;
   outline: none;
-  border: 1px solid var(--divider);
+  border: 2px solid var(--text);
+  box-shadow: inset 0 3px 0 var(--well-band), inset 0 8px 8px -4px var(--well-fade);
   color: var(--text);
   font-family: "IBM Plex Mono", monospace;
   font-size: 0.85rem;
@@ -135,7 +136,7 @@
   overflow-y: auto;
   padding: 1rem;
   background: var(--card-bg);
-  border-radius: 0 8px 8px 8px;
+  border-radius: 8px;
   min-height: 200px;
 }
 
@@ -153,8 +154,9 @@
   font-size: 0.85rem;
   line-height: 1.6;
   background: var(--card-bg);
-  border: 1px solid var(--divider);
-  border-radius: 0 8px 8px 8px;
+  border: 2px solid var(--text);
+  box-shadow: inset 0 3px 0 var(--well-band), inset 0 8px 8px -4px var(--well-fade);
+  border-radius: 8px;
 }
 
 .zen__preview h1,
@@ -219,19 +221,18 @@
 .zen__tabs {
   display: flex;
   gap: 0;
+  margin-bottom: 0.4rem;
 }
 
 .zen__tab {
   background: none;
   border: 1px solid var(--divider);
-  border-bottom: none;
-  border-radius: 6px 6px 0 0;
+  border-radius: 6px;
   padding: 0.5rem 1rem;
   font-family: inherit;
   font-size: 0.8rem;
   color: var(--text-subtle);
   cursor: pointer;
-  margin-bottom: -1px;
   transition: color 0.2s, background 0.2s, border-color 0.2s;
 }
 
