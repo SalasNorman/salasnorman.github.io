@@ -59,6 +59,8 @@ a:hover {
   --card-bg: #111111;
   --shadow: 0 2px 12px rgba(255, 255, 255, 0.06);
   --shadow-hover: 0 4px 20px rgba(255, 255, 255, 0.2);
+  --well-band: rgba(224, 224, 224, 0.75);
+  --well-fade: rgba(224, 224, 224, 0.42);
 }
 
 body.light {
@@ -71,6 +73,8 @@ body.light {
   --card-bg: #f8f8f8;
   --shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
   --shadow-hover: 0 4px 20px rgba(0, 0, 0, 0.15);
+  --well-band: rgba(0, 0, 0, 0.62);
+  --well-fade: rgba(0, 0, 0, 0.40);
 }
 
 .card {
