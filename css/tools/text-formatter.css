@@ -65,7 +65,7 @@
   border-bottom: none;
   border-radius: 6px 6px 0 0;
   background: var(--divider);
-  margin-bottom: -2px;
+  margin-bottom: -3px;
 }
 
 .tf__pane__body {
@@ -98,8 +98,6 @@
   width: 100%;
   flex: 1;
   min-height: 0;
-  position: relative;
-  z-index: 1;
   padding: 1rem;
   background: var(--bg);
   color: var(--text);
