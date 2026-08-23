@@ -46,7 +46,7 @@
 .zen__btn--active {
   background: var(--accent);
   color: var(--bg);
-  transform: translateY(0);
+  transform: translateY(0.25em);
   box-shadow: 0 0 0 0 var(--accent);
 }
 
@@ -267,14 +267,14 @@
 }
 
 .zen__seg__btn:active {
-  transform: translateY(0);
+  transform: translateY(0.25em);
   box-shadow: 0 0 0 0 var(--text);
 }
 
 .zen__seg__btn--active {
   background: var(--accent);
   color: var(--bg);
-  transform: translateY(0);
+  transform: translateY(0.25em);
   box-shadow: 0 0 0 0 var(--text);
 }
 
