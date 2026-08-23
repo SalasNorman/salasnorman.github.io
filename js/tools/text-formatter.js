@@ -98,6 +98,10 @@ const TRANSFORMS = {
       const words = text.toLowerCase().split(/\s+/).filter(Boolean);
       return words.map((w, i) => (i === 0 ? w : w.charAt(0).toUpperCase() + w.slice(1))).join('');
     }
+    if (type === 'pascal') {
+      const words = text.toLowerCase().split(/\s+/).filter(Boolean);
+      return words.map((w) => w.charAt(0).toUpperCase() + w.slice(1)).join('');
+    }
     if (type === 'snake') return text.toLowerCase().replace(/\s+/g, '_').replace(/[^a-z0-9_]/g, '');
     if (type === 'kebab') return text.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '');
     return text;
@@ -269,7 +273,7 @@ if (tfFontSelect) {
 }
 bindChipEvents(tfChipsDeco);
 
-const CASE_MODES = ['upper', 'lower', 'title', 'sentence', 'camel', 'snake', 'kebab'];
+const CASE_MODES = ['upper', 'lower', 'title', 'sentence', 'camel', 'pascal', 'snake', 'kebab'];
 
 function syncActionButtons() {
   if (!tfCaseSelect) return;
