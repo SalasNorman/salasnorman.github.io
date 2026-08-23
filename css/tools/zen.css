@@ -31,6 +31,10 @@
   margin-left: auto;
 }
 
+.zen__credit a {
+  color: var(--accent);
+}
+
 .zen__select {
   padding: 0.4rem 0.6rem;
   color: var(--text);
