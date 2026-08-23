@@ -132,7 +132,7 @@ function buildFontSelect() {
   if (!tfFontSelect) return;
   const fonts = OPERATIONS.filter((op) => op.kind === 'font');
   tfFontSelect.innerHTML = ['<option value="">None</option>']
-    .concat(fonts.map((op) => `<option value="${op.id}">${op.glyph} ${op.label}</option>`))
+    .concat(fonts.map((op) => `<option value="${op.id}">${op.fn(op.label)}</option>`))
     .join('');
 }
 
