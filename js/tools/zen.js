@@ -18,9 +18,9 @@ const zenFindNext = document.getElementById('zen-find-next');
 const zenReplaceOne = document.getElementById('zen-replace-one');
 const zenReplaceAll = document.getElementById('zen-replace-all');
 const zenFindClose = document.getElementById('zen-find-close');
-const zenTabs = document.getElementById('zen-tabs');
-const zenTabEdit = document.getElementById('zen-tab-edit');
-const zenTabPreview = document.getElementById('zen-tab-preview');
+const zenSeg = document.getElementById('zen-seg');
+const zenSegEdit = document.getElementById('zen-seg-edit');
+const zenSegPreview = document.getElementById('zen-seg-preview');
 const zenFontSize = document.getElementById('zen-font-size');
 const zenNotes = document.getElementById('zen-notes');
 
@@ -125,7 +125,7 @@ function noteLabel(index) {
 }
 
 function refreshPreviewIfVisible() {
-  if (markdownMode && zenTabPreview && zenTabPreview.classList.contains('zen__tab--active')) {
+  if (markdownMode && zenSegPreview && zenSegPreview.classList.contains('zen__seg__btn--active')) {
     updatePreview();
   }
 }
@@ -193,15 +193,15 @@ function deleteNote(index) {
 }
 
 function showTab(tab) {
-  if (!zenTabEdit || !zenTabPreview || !zenContent || !zenPreview) return;
+  if (!zenSegEdit || !zenSegPreview || !zenContent || !zenPreview) return;
   if (tab === 'edit') {
-    zenTabEdit.classList.add('zen__tab--active');
-    zenTabPreview.classList.remove('zen__tab--active');
+    zenSegEdit.classList.add('zen__seg__btn--active');
+    zenSegPreview.classList.remove('zen__seg__btn--active');
     zenContent.hidden = false;
     zenPreview.hidden = true;
   } else {
-    zenTabPreview.classList.add('zen__tab--active');
-    zenTabEdit.classList.remove('zen__tab--active');
+    zenSegPreview.classList.add('zen__seg__btn--active');
+    zenSegEdit.classList.remove('zen__seg__btn--active');
     zenContent.hidden = true;
     zenPreview.hidden = false;
     updatePreview();
@@ -213,7 +213,7 @@ function loadMarkdownMode() {
     const saved = localStorage.getItem(MARKDOWN_KEY);
     if (saved === 'true') {
       markdownMode = true;
-      if (zenTabs) zenTabs.hidden = false;
+      if (zenSeg) zenSeg.hidden = false;
       if (zenMarkdown) zenMarkdown.classList.add('zen__btn--active');
       showTab('edit');
     }
@@ -234,9 +234,7 @@ if (zenContent) {
   zenContent.addEventListener('input', () => {
     updateStats();
     saveContent();
-    if (markdownMode && zenTabPreview && zenTabPreview.classList.contains('zen__tab--active')) {
-      updatePreview();
-    }
+    refreshPreviewIfVisible();
   });
 
   zenContent.addEventListener('paste', (e) => {
@@ -278,8 +276,8 @@ if (zenFullscreen) {
 if (zenMarkdown) {
   zenMarkdown.addEventListener('click', (e) => {
     markdownMode = !markdownMode;
-    if (zenTabs) {
-      zenTabs.hidden = !markdownMode;
+    if (zenSeg) {
+      zenSeg.hidden = !markdownMode;
     }
     e.currentTarget.classList.toggle('zen__btn--active', markdownMode);
     try {
@@ -294,12 +292,12 @@ if (zenMarkdown) {
   });
 }
 
-if (zenTabEdit) {
-  zenTabEdit.addEventListener('click', () => showTab('edit'));
+if (zenSegEdit) {
+  zenSegEdit.addEventListener('click', () => showTab('edit'));
 }
 
-if (zenTabPreview) {
-  zenTabPreview.addEventListener('click', () => showTab('preview'));
+if (zenSegPreview) {
+  zenSegPreview.addEventListener('click', () => showTab('preview'));
 }
 
 if (zenNotes) {
@@ -406,9 +404,7 @@ function replaceOne(query, replacement) {
   const regex = new RegExp(`(${escapeRegExp(query)})`, 'i');
   zenContent.innerHTML = html.replace(regex, replacement);
   saveContent();
-  if (markdownMode && zenTabPreview && zenTabPreview.classList.contains('zen__tab--active')) {
-    updatePreview();
-  }
+  refreshPreviewIfVisible();
 }
 
 function replaceAll(query, replacement) {
@@ -418,9 +414,7 @@ function replaceAll(query, replacement) {
   const regex = new RegExp(escapeRegExp(query), 'gi');
   zenContent.innerHTML = html.replace(regex, replacement);
   saveContent();
-  if (markdownMode && zenTabPreview && zenTabPreview.classList.contains('zen__tab--active')) {
-    updatePreview();
-  }
+  refreshPreviewIfVisible();
 }
 
 if (zenFindInput) {

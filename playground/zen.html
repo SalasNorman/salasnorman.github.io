@@ -86,14 +86,13 @@
         </button>
       </div>
 
-      <div id="zen-tabs" class="zen__tabs" hidden>
-        <button id="zen-tab-edit" class="zen__tab zen__tab--active">Edit</button>
-        <button id="zen-tab-preview" class="zen__tab">Preview</button>
-      </div>
-
       <div id="zen-notes" class="zen__notes"></div>
 
       <div class="zen__editor">
+        <div id="zen-seg" class="zen__seg" hidden role="group" aria-label="View mode">
+          <button type="button" id="zen-seg-edit" class="zen__seg__btn zen__seg__btn--active">Edit</button>
+          <button type="button" id="zen-seg-preview" class="zen__seg__btn">Preview</button>
+        </div>
         <div id="zen-content" class="zen__content" contenteditable="true" data-placeholder="Start writing..."></div>
         <div id="zen-preview" class="zen__preview" hidden></div>
       </div>
