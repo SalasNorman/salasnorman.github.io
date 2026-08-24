@@ -279,6 +279,7 @@ if (zenThemeFloat || zenFullscreen) {
     const active = !!document.fullscreenElement;
     if (zenThemeFloat) zenThemeFloat.hidden = !active;
     if (zenFullscreen) {
+      zenFullscreen.classList.toggle('zen__btn--active', active);
       const icon = zenFullscreen.querySelector('i');
       if (icon) icon.className = active ? 'bi bi-fullscreen-exit' : 'bi bi-arrows-fullscreen';
       zenFullscreen.title = active ? 'Exit fullscreen' : 'Fullscreen';
