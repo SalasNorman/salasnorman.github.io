@@ -235,4 +235,9 @@
   .tf {
     height: calc(100vh - 180px);
   }
+
+  .tf__select {
+    flex: 1 1 auto;
+    min-width: 0;
+  }
 }
