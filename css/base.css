@@ -95,13 +95,15 @@ body.light {
     color 0.2s;
 }
 
-.push-btn:hover {
-  transform: translateY(-0.1em);
-  box-shadow: 0 0.35em 0 0 var(--text);
-}
+@media (hover: hover) {
+  .push-btn:hover {
+    transform: translateY(-0.1em);
+    box-shadow: 0 0.35em 0 0 var(--text);
+  }
 
-.push-btn:hover:not(.push-btn--in):not(.active):not(.zen__btn--active) {
-  background: var(--divider);
+  .push-btn:hover:not(.push-btn--in):not(.active):not(.zen__btn--active) {
+    background: var(--divider);
+  }
 }
 
 .push-btn:active {
@@ -114,8 +116,10 @@ body.light {
   outline-offset: 3px;
 }
 
-a.push-btn:hover {
-  text-decoration: none;
+@media (hover: hover) {
+  a.push-btn:hover {
+    text-decoration: none;
+  }
 }
 
 .push-btn--in {
