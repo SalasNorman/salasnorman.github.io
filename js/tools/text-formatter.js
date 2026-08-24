@@ -150,7 +150,7 @@ function buildChips() {
   OPERATIONS.forEach((op) => {
     if (op.ui !== 'chip' || op.kind !== 'deco') return;
     const inner = chipInner(op);
-    decoHtml += `<button type="button" id="${op.id}" class="tf__seg__btn" aria-pressed="false" aria-label="${op.label}" title="${op.label}">${inner}</button>`;
+    decoHtml += `<button type="button" id="${op.id}" class="tf__seg__btn${op.control === 'cycle' ? ' tf__seg__btn--cycle' : ''}" aria-pressed="false" aria-label="${op.label}" title="${op.label}">${inner}</button>`;
   });
   decoHtml += '</div>';
   tfChipsDeco.innerHTML = decoHtml;
