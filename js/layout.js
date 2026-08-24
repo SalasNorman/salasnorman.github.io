@@ -42,8 +42,8 @@ function buildHeader() {
     '</a>' +
     '<nav class="header__nav">' +
     `<div class="header__nav-links">${links}</div>` +
-    '<button id="theme-toggle" class="theme-toggle push-btn" aria-label="Toggle theme">' +
-    '<i id="toggle-icon" class="bi bi-sun"></i>' +
+    '<button id="theme-toggle" class="theme-toggle push-btn" data-theme-toggle aria-label="Toggle theme">' +
+    '<i class="bi bi-sun theme-toggle-icon"></i>' +
     '</button>' +
     '<button class="hamburger push-btn" id="hamburger" aria-label="Menu">' +
     '<i class="bi bi-list"></i>' +

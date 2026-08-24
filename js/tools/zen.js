@@ -272,6 +272,20 @@ if (zenFullscreen) {
   });
 }
 
+const zenThemeFloat = document.getElementById('zen-theme');
+
+if (zenThemeFloat || zenFullscreen) {
+  document.addEventListener('fullscreenchange', () => {
+    const active = !!document.fullscreenElement;
+    if (zenThemeFloat) zenThemeFloat.hidden = !active;
+    if (zenFullscreen) {
+      const icon = zenFullscreen.querySelector('i');
+      if (icon) icon.className = active ? 'bi bi-fullscreen-exit' : 'bi bi-arrows-fullscreen';
+      zenFullscreen.title = active ? 'Exit fullscreen' : 'Fullscreen';
+    }
+  });
+}
+
 if (zenMarkdown) {
   zenMarkdown.addEventListener('click', (e) => {
     markdownMode = !markdownMode;

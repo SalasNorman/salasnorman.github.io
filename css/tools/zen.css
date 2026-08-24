@@ -4,6 +4,28 @@
   height: calc(100vh - 120px);
 }
 
+/* Immersive fullscreen: hide site chrome, float the theme toggle */
+html:fullscreen #site-header,
+html:fullscreen #site-footer {
+  display: none;
+}
+
+html:fullscreen .layout {
+  position: relative;
+  padding: 3rem 1.5rem 0.75rem;
+}
+
+html:fullscreen .zen {
+  height: calc(100vh - 60px);
+}
+
+.zen__theme-float {
+  position: absolute;
+  top: 0.75rem;
+  right: 1.5rem;
+  z-index: 5;
+}
+
 .zen__toolbar {
   display: flex;
   flex-direction: column;

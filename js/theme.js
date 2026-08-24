@@ -1,9 +1,8 @@
 function setTheme(theme) {
   document.body.classList.toggle('light', theme === 'light');
-  const toggleIcon = document.getElementById('toggle-icon');
-  if (toggleIcon) {
-    toggleIcon.className = theme === 'light' ? 'bi bi-moon' : 'bi bi-sun';
-  }
+  document.querySelectorAll('.theme-toggle-icon').forEach((icon) => {
+    icon.className = theme === 'light' ? 'bi bi-moon theme-toggle-icon' : 'bi bi-sun theme-toggle-icon';
+  });
   localStorage.setItem('theme', theme);
 }
 
@@ -13,11 +12,11 @@ function getPreferredTheme() {
   return window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
 }
 
-const themeToggle = document.getElementById('theme-toggle');
+const themeToggles = document.querySelectorAll('[data-theme-toggle]');
 setTheme(getPreferredTheme());
 
-if (themeToggle) {
-  themeToggle.addEventListener('click', () => {
+themeToggles.forEach((btn) => {
+  btn.addEventListener('click', () => {
     setTheme(document.body.classList.contains('light') ? 'dark' : 'light');
   });
-}
+});
