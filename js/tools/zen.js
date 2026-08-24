@@ -17,7 +17,6 @@ const zenFindPrev = document.getElementById('zen-find-prev');
 const zenFindNext = document.getElementById('zen-find-next');
 const zenReplaceOne = document.getElementById('zen-replace-one');
 const zenReplaceAll = document.getElementById('zen-replace-all');
-const zenFindClose = document.getElementById('zen-find-close');
 const zenSeg = document.getElementById('zen-seg');
 const zenSegEdit = document.getElementById('zen-seg-edit');
 const zenSegPreview = document.getElementById('zen-seg-preview');
@@ -357,16 +356,12 @@ if (zenFind) {
     if (!zenFindBar) return;
     const willShow = zenFindBar.hidden;
     zenFindBar.hidden = !willShow;
+    zenFind.classList.toggle('zen__btn--active', willShow);
     if (willShow && zenFindInput) {
       zenFindInput.focus();
+    } else {
+      clearHighlights();
     }
-  });
-}
-
-if (zenFindClose) {
-  zenFindClose.addEventListener('click', () => {
-    if (zenFindBar) zenFindBar.hidden = true;
-    clearHighlights();
   });
 }
 

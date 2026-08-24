@@ -60,6 +60,12 @@
   font-size: 0.8rem;
 }
 
+.zen__btn--text {
+  width: auto;
+  padding: 0 0.6rem;
+  font-size: 0.7rem;
+}
+
 .zen__download-wrap {
   position: relative;
 }
@@ -96,9 +102,10 @@
 }
 
 .zen__find-bar {
-  display: flex;
-  align-items: center;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto auto;
   gap: 0.4rem;
+  align-items: center;
   padding: 0.5rem 0;
   border-bottom: 1px solid var(--divider);
 }
@@ -112,7 +119,8 @@
   padding: 0.35rem 0.6rem;
   font-family: inherit;
   font-size: 0.8rem;
-  width: 160px;
+  width: 100%;
+  min-width: 0;
 }
 
 .zen__find-input:focus {
@@ -365,10 +373,6 @@
 @media (max-width: 600px) {
   .zen {
     height: calc(100vh - 100px);
-  }
-
-  .zen__find-input {
-    width: 100px;
   }
 
   .zen__notes {

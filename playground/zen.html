@@ -67,23 +67,16 @@
       </div>
 
       <div id="zen-find-bar" class="zen__find-bar" hidden>
-        <input id="zen-find-input" class="zen__find-input" type="text" placeholder="Find..." />
-        <input id="zen-replace-input" class="zen__find-input" type="text" placeholder="Replace..." />
-        <button id="zen-find-prev" class="zen__btn zen__btn--small push-btn" title="Previous">
-          <i class="bi bi-chevron-up"></i>
-        </button>
+        <input id="zen-find-input" class="zen__find-input" type="text" placeholder="Find..." aria-label="Find" />
         <button id="zen-find-next" class="zen__btn zen__btn--small push-btn" title="Next">
           <i class="bi bi-chevron-down"></i>
         </button>
-        <button id="zen-replace-one" class="zen__btn zen__btn--small push-btn" title="Replace">
-          <i class="bi bi-arrow-left-right"></i>
+        <button id="zen-replace-one" class="zen__btn zen__btn--small zen__btn--text push-btn" title="Replace">Replace</button>
+        <input id="zen-replace-input" class="zen__find-input" type="text" placeholder="Replace..." aria-label="Replace with" />
+        <button id="zen-find-prev" class="zen__btn zen__btn--small push-btn" title="Previous">
+          <i class="bi bi-chevron-up"></i>
         </button>
-        <button id="zen-replace-all" class="zen__btn zen__btn--small push-btn" title="Replace all">
-          <i class="bi bi-arrow-repeat"></i>
-        </button>
-        <button id="zen-find-close" class="zen__btn zen__btn--small push-btn" title="Close">
-          <i class="bi bi-x"></i>
-        </button>
+        <button id="zen-replace-all" class="zen__btn zen__btn--small zen__btn--text push-btn" title="Replace all">Replace all</button>
       </div>
 
       <div id="zen-notes" class="zen__notes"></div>
