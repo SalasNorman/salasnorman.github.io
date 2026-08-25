@@ -18,6 +18,29 @@ const FONT_RANGES = {
   mono: { upper: 0x1d670, lower: 0x1d68a, digits: 0x1d7f6 }
 };
 
+const DEMAPPING = new Map();
+for (const range of Object.values(FONT_RANGES)) {
+  for (let n = 0; n < 26; n++) {
+    DEMAPPING.set(range.upper + n, String.fromCharCode(65 + n));
+    DEMAPPING.set(range.lower + n, String.fromCharCode(97 + n));
+  }
+  if (range.digits) {
+    for (let n = 0; n < 10; n++) {
+      DEMAPPING.set(range.digits + n, String.fromCharCode(48 + n));
+    }
+  }
+}
+DEMAPPING.set(0x210e, 'h');
+
+function demapStyled(text) {
+  let out = '';
+  for (const ch of text) {
+    const mapped = DEMAPPING.get(ch.codePointAt(0));
+    out += mapped === undefined ? ch : mapped;
+  }
+  return out;
+}
+
 function makeFontFn(style) {
   return (text) => {
     const range = FONT_RANGES[style];
@@ -157,7 +180,7 @@ function buildChips() {
 }
 
 function computeFormatted() {
-  let text = originalText;
+  let text = demapStyled(originalText);
   if (caseIndex >= 0) text = TRANSFORMS.convertCase(text, CASE_MODES[caseIndex]);
   OPERATIONS.forEach((op) => {
     let param = null;
