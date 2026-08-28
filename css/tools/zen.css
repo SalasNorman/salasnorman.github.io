@@ -358,7 +358,7 @@ html:fullscreen .zen {
 .zen__note-name {
   background: none;
   border: none;
-  padding: 0.35rem 0.6rem;
+  padding: 0.35rem 0.3rem 0.35rem 0.6rem;
   font-family: inherit;
   font-size: 0.8rem;
   color: var(--text-subtle);
@@ -376,7 +376,7 @@ html:fullscreen .zen {
   align-items: center;
   background: none;
   border: none;
-  padding: 0.35rem 0.45rem;
+  padding: 0.35rem 0.45rem 0.35rem 0.25rem;
   font-size: 0.7rem;
   color: var(--text-subtle);
   cursor: pointer;
