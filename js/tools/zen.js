@@ -17,9 +17,6 @@ const zenFindPrev = document.getElementById('zen-find-prev');
 const zenFindNext = document.getElementById('zen-find-next');
 const zenReplaceOne = document.getElementById('zen-replace-one');
 const zenReplaceAll = document.getElementById('zen-replace-all');
-const zenSeg = document.getElementById('zen-seg');
-const zenSegEdit = document.getElementById('zen-seg-edit');
-const zenSegPreview = document.getElementById('zen-seg-preview');
 const zenFontSize = document.getElementById('zen-font-size');
 const zenNotes = document.getElementById('zen-notes');
 const zenNotesTabs = document.getElementById('zen-notes-tabs');
@@ -125,7 +122,7 @@ function noteLabel(index) {
 }
 
 function refreshPreviewIfVisible() {
-  if (markdownMode && zenSegPreview && zenSegPreview.classList.contains('zen__seg__btn--active')) {
+  if (markdownMode) {
     updatePreview();
   }
 }
@@ -192,20 +189,11 @@ function deleteNote(index) {
   refreshPreviewIfVisible();
 }
 
-function showTab(tab) {
-  if (!zenSegEdit || !zenSegPreview || !zenContent || !zenPreview) return;
-  if (tab === 'edit') {
-    zenSegEdit.classList.add('zen__seg__btn--active');
-    zenSegPreview.classList.remove('zen__seg__btn--active');
-    zenContent.hidden = false;
-    zenPreview.hidden = true;
-  } else {
-    zenSegPreview.classList.add('zen__seg__btn--active');
-    zenSegEdit.classList.remove('zen__seg__btn--active');
-    zenContent.hidden = true;
-    zenPreview.hidden = false;
-    updatePreview();
-  }
+function setPreview(active) {
+  if (!zenContent || !zenPreview) return;
+  zenContent.hidden = active;
+  zenPreview.hidden = !active;
+  if (active) updatePreview();
 }
 
 function loadMarkdownMode() {
@@ -213,9 +201,8 @@ function loadMarkdownMode() {
     const saved = localStorage.getItem(MARKDOWN_KEY);
     if (saved === 'true') {
       markdownMode = true;
-      if (zenSeg) zenSeg.hidden = false;
       if (zenMarkdown) zenMarkdown.classList.add('zen__btn--active');
-      showTab('edit');
+      setPreview(true);
     }
   } catch (e) {}
 }
@@ -291,28 +278,12 @@ if (zenThemeFloat || zenFullscreen) {
 if (zenMarkdown) {
   zenMarkdown.addEventListener('click', (e) => {
     markdownMode = !markdownMode;
-    if (zenSeg) {
-      zenSeg.hidden = !markdownMode;
-    }
     e.currentTarget.classList.toggle('zen__btn--active', markdownMode);
     try {
       localStorage.setItem(MARKDOWN_KEY, markdownMode);
     } catch (err) {}
-    if (markdownMode) {
-      showTab('edit');
-    } else {
-      if (zenContent) zenContent.hidden = false;
-      if (zenPreview) zenPreview.hidden = true;
-    }
+    setPreview(markdownMode);
   });
-}
-
-if (zenSegEdit) {
-  zenSegEdit.addEventListener('click', () => showTab('edit'));
-}
-
-if (zenSegPreview) {
-  zenSegPreview.addEventListener('click', () => showTab('preview'));
 }
 
 if (zenNotes) {

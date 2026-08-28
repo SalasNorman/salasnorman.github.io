@@ -255,67 +255,6 @@ html:fullscreen .zen {
   color: var(--text-subtle);
 }
 
-.zen__seg {
-  display: inline-flex;
-  align-items: center;
-  height: 20px;
-  flex-shrink: 0;
-  margin-left: auto;
-  margin-bottom: 8px;
-  z-index: 1;
-}
-
-.zen__seg__btn {
-  border: 2px solid var(--text);
-  border-radius: 6px;
-  background: var(--bg);
-  color: var(--text);
-  padding: 0.05rem 0.75rem;
-  font-family: inherit;
-  font-size: 0.7rem;
-  cursor: pointer;
-  box-shadow: 0 0.25em 0 0 var(--text);
-  transition:
-    transform 0.1s ease,
-    box-shadow 0.1s ease,
-    background 0.2s,
-    color 0.2s;
-}
-
-.zen__seg__btn + .zen__seg__btn {
-  margin-left: -1px;
-  border-top-left-radius: 0;
-  border-bottom-left-radius: 0;
-}
-
-.zen__seg__btn:not(:last-child) {
-  border-top-right-radius: 0;
-  border-bottom-right-radius: 0;
-}
-
-@media (hover: hover) {
-  .zen__seg__btn:hover {
-    transform: translateY(-0.1em);
-    box-shadow: 0 0.35em 0 0 var(--text);
-  }
-
-  .zen__seg__btn:hover:not(.zen__seg__btn--active) {
-    background: var(--divider);
-  }
-}
-
-.zen__seg__btn:active {
-  transform: translateY(0.26em);
-  box-shadow: 0 0 0 0 var(--text);
-}
-
-.zen__seg__btn--active {
-  background: var(--accent);
-  color: var(--bg);
-  transform: translateY(0.26em);
-  box-shadow: 0 0 0 0 var(--text);
-}
-
 .zen__notes {
   position: relative;
   display: flex;
@@ -330,8 +269,6 @@ html:fullscreen .zen {
   align-items: flex-end;
   flex: 1;
   min-width: 0;
-  overflow-x: auto;
-  overflow-y: hidden;
 }
 
 .zen__note {
