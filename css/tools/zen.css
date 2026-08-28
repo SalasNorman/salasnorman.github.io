@@ -257,8 +257,12 @@ html:fullscreen .zen {
 
 .zen__seg {
   display: inline-flex;
+  align-items: center;
+  height: 20px;
   flex-shrink: 0;
   margin-left: auto;
+  margin-bottom: 8px;
+  z-index: 1;
 }
 
 .zen__seg__btn {
@@ -266,7 +270,7 @@ html:fullscreen .zen {
   border-radius: 6px;
   background: var(--bg);
   color: var(--text);
-  padding: 0.2rem 0.75rem;
+  padding: 0.05rem 0.75rem;
   font-family: inherit;
   font-size: 0.7rem;
   cursor: pointer;
@@ -391,11 +395,12 @@ html:fullscreen .zen {
 
 .zen__note-add {
   width: 26px;
-  height: 24px;
+  height: 20px;
   font-size: 0.75rem;
   flex-shrink: 0;
-  margin-bottom: 4px;
+  margin-bottom: 8px;
   margin-left: 5px;
+  z-index: 1;
 }
 
 @media (max-width: 600px) {
