@@ -22,6 +22,7 @@ const zenSegEdit = document.getElementById('zen-seg-edit');
 const zenSegPreview = document.getElementById('zen-seg-preview');
 const zenFontSize = document.getElementById('zen-font-size');
 const zenNotes = document.getElementById('zen-notes');
+const zenNotesTabs = document.getElementById('zen-notes-tabs');
 
 const NOTES_KEY = 'zen-editor-notes';
 const LEGACY_CONTENT_KEY = 'zen-editor-content';
@@ -130,7 +131,7 @@ function refreshPreviewIfVisible() {
 }
 
 function renderNotes() {
-  if (!zenNotes) return;
+  if (!zenNotesTabs) return;
   const showX = notes.length > 1 ? '' : ' hidden';
   const tabs = notes
     .map((_, i) => {
@@ -147,7 +148,7 @@ function renderNotes() {
     notes.length < MAX_NOTES
       ? '<button type="button" id="zen-note-add" class="zen__note-add push-btn" title="New note" aria-label="New note"><i class="bi bi-plus-lg"></i></button>'
       : '';
-  zenNotes.innerHTML = tabs + addHtml;
+  zenNotesTabs.innerHTML = tabs + addHtml;
 }
 
 function switchNote(index) {

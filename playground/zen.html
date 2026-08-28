@@ -82,13 +82,15 @@
         <button id="zen-replace-all" class="zen__btn zen__btn--small zen__btn--text push-btn" title="Replace all">Replace all</button>
       </div>
 
-      <div id="zen-notes" class="zen__notes"></div>
-
-      <div class="zen__editor">
+      <div id="zen-notes" class="zen__notes">
+        <div id="zen-notes-tabs" class="zen__notes-tabs"></div>
         <div id="zen-seg" class="zen__seg" hidden role="group" aria-label="View mode">
           <button type="button" id="zen-seg-edit" class="zen__seg__btn zen__seg__btn--active">Edit</button>
           <button type="button" id="zen-seg-preview" class="zen__seg__btn">Preview</button>
         </div>
+      </div>
+
+      <div class="zen__editor">
         <div id="zen-content" class="zen__content" contenteditable="true" data-placeholder="Start writing..."></div>
         <div id="zen-preview" class="zen__preview" hidden></div>
       </div>
