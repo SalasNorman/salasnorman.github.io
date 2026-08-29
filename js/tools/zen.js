@@ -45,8 +45,8 @@ function updateStats() {
   const trimmed = text.trim();
   const wordCount = trimmed === '' ? 0 : trimmed.split(/\s+/).length;
   const charCount = trimmed.length;
-  zenWords.textContent = `${wordCount} word${wordCount !== 1 ? 's' : ''}`;
-  zenChars.textContent = `${charCount} character${charCount !== 1 ? 's' : ''}`;
+  zenWords.textContent = `${wordCount} w`;
+  zenChars.textContent = `${charCount} c`;
 }
 
 function saveContent() {

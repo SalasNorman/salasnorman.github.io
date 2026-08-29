@@ -249,10 +249,13 @@ html:fullscreen .zen {
 
 .zen__stats {
   display: flex;
-  gap: 1.5rem;
-  padding: 0.5rem 0;
-  font-size: 0.75rem;
+  align-items: flex-end;
+  gap: 0.5rem;
+  margin-left: auto;
+  margin-bottom: 8px;
+  font-size: 0.65rem;
   color: var(--text-subtle);
+  white-space: nowrap;
 }
 
 .zen__notes {
