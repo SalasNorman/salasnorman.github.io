@@ -6,10 +6,18 @@
     "years": "2018–2022"
   },
   "experience": [
+        {
+      "company": "FPOSI",
+      "role": "Data Entry Keyer",
+      "dates": "Sept 2026 – Present",
+      "highlights": [
+        "Performed biller data entry with high accuracy while meeting daily quotas under pressure in a rotating shift environment"
+      ]
+    },
     {
       "company": "AI.clife",
       "role": "Research Assistant",
-      "dates": "August 2024 – August 2026",
+      "dates": "August 2024 – Sept 2026",
       "highlights": [
         "Built Python scripts for web scraping using AI coding tools",
         "Performed data annotation for machine learning datasets",
