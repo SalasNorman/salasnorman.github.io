@@ -6,13 +6,16 @@
     "years": "2018–2022"
   },
   "experience": [
-        {
+    {
       "company": "FPOSI",
       "role": "Data Entry Keyer",
       "dates": "Sept 2026 – Present",
       "highlights": [
-        "Performed accurate biller data entry.",
-        "Met daily quotas under pressure.",
+        "Entered biller information accurately.",
+        "Met daily data-entry targets.",
+        "Worked efficiently under time pressure.",
+        "Maintained attention to detail when encoding data.",
+        "Kept up with daily workloads while maintaining accuracy.",
         "Maintained productivity on a rotating shift schedule."
       ]
     },
@@ -91,29 +94,19 @@
     },
     {
       "category": "Programming Languages & Web Technologies",
-      "items": [
-        "Python, JavaScript, C, VB.NET, Ruby",
-        "HTML, CSS"
-      ]
+      "items": ["Python, JavaScript, C, VB.NET, Ruby", "HTML, CSS"]
     },
     {
       "category": "Frameworks & Libraries",
-      "items": [
-        "Flask"
-      ]
+      "items": ["Flask"]
     },
     {
       "category": "Database",
-      "items": [
-        "MySQL, SQLite"
-      ]
+      "items": ["MySQL, SQLite"]
     },
     {
       "category": "Tools & Platform",
-      "items": [
-        "Git",
-        "Visual Studio Code"
-      ]
+      "items": ["Git", "Visual Studio Code"]
     },
     {
       "category": "Other Skills",
