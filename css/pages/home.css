@@ -5,7 +5,6 @@
 .home__id {
   display: flex;
   align-items: center;
-  justify-content: center;
   gap: 1.25rem;
   text-align: left;
   margin-bottom: 1.5rem;
