@@ -42,6 +42,7 @@
   color: var(--text-subtle);
   font-size: 0.9rem;
   line-height: 1.7;
+  text-align: justify;
   margin-bottom: 2rem;
 }
 
