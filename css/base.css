@@ -50,7 +50,7 @@ a:hover {
 }
 
 :root {
-  --bg: #000000;
+  --bg: #0a0a0a;
   --text: #e0e0e0;
   --text-subtle: #888888;
   --accent: #3c7eff;
@@ -60,7 +60,7 @@ a:hover {
 }
 
 body.light {
-  --bg: #ffffff;
+  --bg: #f7f7f7;
   --text: #000000;
   --text-subtle: #555555;
   --accent: #3c7eff;
