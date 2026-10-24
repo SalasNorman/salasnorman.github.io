@@ -284,6 +284,8 @@ html:fullscreen .zen {
   border-radius: 6px 6px 0 0;
   overflow: hidden;
   background: var(--divider);
+  margin-bottom: -5px;
+  padding: 0.05rem 0.45rem 0.45rem 0.25rem;
 }
 
 .zen__note + .zen__note {
